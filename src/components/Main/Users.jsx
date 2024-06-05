@@ -25,7 +25,7 @@ import UserService from '../../Service/UserService';
 
         const getAllUser = async () => {
             try {
-                const response = await fetch(`http://localhost:8081/api/users/page/${currentPage}`)
+                const response = await fetch(`http://192.168.1.94:3308/api/users/page/${currentPage}`)
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
                 }

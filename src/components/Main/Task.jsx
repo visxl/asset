@@ -26,7 +26,7 @@ import TaskService from '../../Service/TaskService';
         const getAllTask = async () => {
             
             try {
-                const response = await fetch(`http://localhost:8081/api/task/page/${currentPage}`)
+                const response = await fetch(`http://192.168.1.94:3308/api/task/page/${currentPage}`)
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
                 }

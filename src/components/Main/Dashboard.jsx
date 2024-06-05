@@ -33,10 +33,10 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-    fetchData(`http://localhost:8081/api/asset/page/${currentPage}`, setAssets, setTotalItems);
-    fetchData(`http://localhost:8081/api/asset250/page/${currentPage}`, setAsset250, setTotalItems250);
-    fetchData(`http://localhost:8081/api/customer/page/${currentPage}`, setCustomer, setTotalItemsCustomer);
-    fetchData(`http://localhost:8081/api/users/page/${currentPage}`, setUser, setTotalItemsUser);
+    fetchData(`http://192.168.1.94:3308/api/asset/page/${currentPage}`, setAssets, setTotalItems);
+    fetchData(`http://192.168.1.94:3308/api/asset250/page/${currentPage}`, setAsset250, setTotalItems250);
+    fetchData(`http://192.168.1.94:3308/api/customer/page/${currentPage}`, setCustomer, setTotalItemsCustomer);
+    fetchData(`http://192.168.1.94:3308/api/users/page/${currentPage}`, setUser, setTotalItemsUser);
   }, [currentPage, fetchData]);
 
   const renderCard = (title, list, totalItems, link) => (

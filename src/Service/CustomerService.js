@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
 
-const CUSTOMER_BASE_REST_API_URL = 'http://localhost:8081/api/customer'
+const CUSTOMER_BASE_REST_API_URL = 'http://192.168.1.94:3308/api/customer'
 
 class CustomerService {
     

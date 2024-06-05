@@ -24,7 +24,7 @@ const Customer = () => {
 
     const getAllCustomer = async () => {
         try {
-            const response = await fetch(`http://localhost:8081/api/customer/page/${currentPage}`)
+            const response = await fetch(`http://192.168.1.94:3308/api/customer/page/${currentPage}`)
             if (!response.ok) {
                 throw new Error('Failed to fetch data');
             }
@@ -100,7 +100,7 @@ const Customer = () => {
 
     const handleSearch = async () => {
         try {
-            const response = await fetch(`http://localhost:8081/api/customer/filter?fullName=${search}`);
+            const response = await fetch(`http://192.168.1.94:3308/api/customer/filter?fullName=${search}`);
             if (!response.ok) {
                 throw new Error('Failed to search Customer');
             }
