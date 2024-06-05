@@ -1,7 +1,8 @@
-import { ChevronLast, ChevronFirst } from "lucide-react"
+
 import { createContext, useState } from "react"
 import { DASHBOARD_SIDEBAR_BOTTOM_LINKS, DASHBOARD_SIDEBAR_BOTTOM_LINKS_ICON, DASHBOARD_SIDEBAR_LINKS, DASHBOARD_SIDEBAR_LINKS_ICON } from "../../lib/const/navigation"
 import { Link } from "react-router-dom"
+import { HiOutlineMenuAlt3 } from "react-icons/hi"
 
 const SidebarContext = createContext()
 
@@ -22,7 +23,7 @@ export default function AppSidebar() {
                         onClick={() => setExpanded((curr) => !curr)}
                         className="p-3 rounded-lg bg-gray-50 hover:bg-gray-200"
                     >
-                        {expanded ? <ChevronFirst /> : <ChevronLast />}
+                        {expanded ? <HiOutlineMenuAlt3 /> : <HiOutlineMenuAlt3 />}
                     </button>
                 </div>
 
