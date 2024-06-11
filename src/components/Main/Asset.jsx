@@ -27,13 +27,13 @@ const Asset = () => {
 
     const getAllAsset = async () => {
         try {
-            let url = `http://192.168.1.94:3308/api/asset/page/${currentPage}`;
+            let url = `http://localhost:8081/api/asset/page/${currentPage}`;
             if (searchCode) {
-                url = `http://192.168.1.94:3308/api/asset/code?code=${searchCode}`;
+                url = `http://localhost:8081/api/asset/code?code=${searchCode}`;
             } else if (selectOffice) {
-                url = `http://192.168.1.94:3308/api/asset/filter?office=${selectOffice}`;
+                url = `http://localhost:8081/api/asset/office?office=${selectOffice}`;
             } else if (priceFilter) {
-                url = `http://192.168.1.94:3308/api/asset/${priceFilter}`;
+                url = `http://localhost:8081/api/asset/${priceFilter}`;
             }
 
             const response = await fetch(url);
@@ -148,7 +148,7 @@ const Asset = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                    {assets
+                                    {assets && assets
                                     .map(assets => {
                                         return ( 
                                             <tr key={assets.id} className={classes}>

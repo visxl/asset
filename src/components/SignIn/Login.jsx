@@ -12,7 +12,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8081/api/users');
+      const response = await fetch('http://localhost:8080/api/user');
       if (!response.ok) {
         throw new Error('Failed to fetch user data');
       }

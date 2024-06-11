@@ -1,13 +1,13 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
 
-const ASSET_BASE_REST_API_URL = 'http://192.168.1.94:3308/api/asset'
+const ASSET_BASE_REST_API_URL = 'http://localhost:8081/api/asset'
 
 class AssetService {
     
     // Asset
     getAllAsset() {
-        return axios.get(ASSET_BASE_REST_API_URL)
+        return axios.get('http://localhost:8081/api/asset/report')
     }
 
     createAsset(asset) {
@@ -16,6 +16,10 @@ class AssetService {
 
     getAssetById(assetId) {
         return axios.get(ASSET_BASE_REST_API_URL + '/' + assetId)
+    }
+
+    getAssetDetailById(assetId) {
+        return axios.get('http://localhost:8081/api/asset/detail/' + assetId)
     }
 
     updateAsset(assetId, asset) {
@@ -27,7 +31,7 @@ class AssetService {
     }
 
     getAssetsByOffice(office) {
-        return axios.get(ASSET_BASE_REST_API_URL + '/filter?office=' + office)
+        return axios.get(ASSET_BASE_REST_API_URL + '/office?office=' + office)
     }
 }
 

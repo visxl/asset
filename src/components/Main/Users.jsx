@@ -74,9 +74,9 @@ import UserService from '../../Service/UserService';
                 <Link to={'/add-users'} className='w-28 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 '>
                     Add User
                 </Link>
-                {/* <Link to={'/asset/report'} className='w-28 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 '>
+                <Link to={'/user/report'} className='w-28 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 '>
                     Report
-                </Link> */}
+                </Link>
             </div>
             
             <div className="relative">

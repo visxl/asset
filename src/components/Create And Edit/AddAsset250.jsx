@@ -15,13 +15,14 @@ const AddAsset250 = () => {
     const [ condition, setCondition ] = useState()
     const [ user, setUser ] = useState()
     const [ office, setOffice ] = useState()
+    const [ department, setDepartment ] = useState()
 
     const navigate = useNavigate();
-    const { id } = useParams();
+    const { asset250id } = useParams();
 
     useEffect(() => {
-        if (id) {
-            Asset250Service.getAsset250ById(id)
+        if (asset250id) {
+            Asset250Service.getAsset250ById(asset250id)
                 .then((response) => {
                     setName(response.data.name);
                     setAssetname(response.data.assetname);
@@ -34,19 +35,20 @@ const AddAsset250 = () => {
                     setCondition(response.data.condition);
                     setUser(response.data.user);
                     setOffice(response.data.office);
+                    setDepartment(response.data.department);
                 })
                 .catch(error => {
                     console.error('Error fetching asset by ID:', error);
                 });
         }
-    }, [id]);
+    }, [asset250id]);
 
     const saveAndupdateAsset250 = (e) => {
         e.preventDefault();
-        const asset250 = { name, assetname, model, brand, code, price, value, date, condition, user, office };
+        const asset250 = { name, assetname, model, brand, code, price, value, date, condition, user, office, department };
 
-        if (id) {
-            Asset250Service.updateAsset250(id, asset250)
+        if (asset250id) {
+            Asset250Service.updateAsset250(asset250id, asset250)
                 .then((response) => {
                     console.log(response.data);
                     navigate('/asset250');
@@ -69,10 +71,10 @@ const AddAsset250 = () => {
     return (
         <Card className='w-full h-screen rounded-xl p-5 pb-32 shadow-lg'>
             <Typography className="text-xl font-bold mb-6">
-                {id ? 'Update Asset 250' : 'Create New Asset 250'}
+                {asset250id ? 'Update Asset 250' : 'Create New Asset 250'}
             </Typography>
             <div className="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50" role="alert">
-                <span className="font-medium">{id ? 'Update Form!' : 'Add New Asset Under 250!'}</span>
+                <span className="font-medium">{asset250id ? 'Update Form!' : 'Add New Asset Under 250!'}</span>
             </div>
             <form className="max-w-screen-lg grid grid-cols-1 sm:grid-cols-2 gap-6 p-5">
             <div className="sm:col-span-1">
@@ -206,7 +208,7 @@ const AddAsset250 = () => {
             </div>
             <div className="sm:col-span-1">
                 <Typography className="text-lg mb-1">
-                    Office/Department:
+                    Office:
                 </Typography>
                 <input
                 type="text"
@@ -215,6 +217,19 @@ const AddAsset250 = () => {
                 name="office"
                 value={office}
                 onChange={(e) => setOffice(e.target.value)}
+            />
+            </div>
+            <div className="sm:col-span-1">
+                <Typography className="text-lg mb-1">
+                    Department:
+                </Typography>
+                <input
+                type="text"
+                placeholder='Ex: រដ្ឋបាល...'
+                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                name="department"
+                value={department}
+                onChange={(e) => setDepartment(e.target.value)}
             />
             </div>
             <div className="sm:col-span-1 py-3">

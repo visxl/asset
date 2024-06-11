@@ -18,6 +18,7 @@ import Login from './components/SignIn/Login';
 import AddUsers from './components/Create And Edit/AddUser';
 import Task from './components/Main/Task';
 import AddTask from './components/Create And Edit/AddTask';
+import UserReport from './components/Report/UserReport';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path='/login' element={<Login />}/>
         <Route path='asset/report' element={<AssetReport/>}/>
         <Route path='asset250/report' element={<Asset250Report/>}/>
+        <Route path='user/report' element={<UserReport/>}/>
         
         <Route path='/' element={<Layout />}>
           <Route index element={<Dashboard />}/>

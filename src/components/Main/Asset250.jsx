@@ -10,24 +10,6 @@ import { ExportAsset250 } from '../Export Function/ExportAsset250';
 const TABLE_HEAD = ["Name", "Asset Name", "Model", "Brand", "Code", "Price", "Value", "Purchase Date", "Condition", "User", "Office", "Action"];
 const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
 
-// const Asset250 = () => {
-//     const [currentPage, setCurrentPage] = useState(1);
-//     const [totalPages, setTotalPages] = useState(0);
-//     const [totalItems, setTotalItems] = useState(0);
-//     const [asset250, setAsset250] = useState([]);
-//     const [searchOffice, setSearchOffice] = useState('');
-//     const [searchCode, setSearchCode] = useState('');
-//     const [priceFilter, setPriceFilter] = useState('');
-//     const [selectOffice, setSelectOffice] = useState('')
-//     // eslint-disable-next-line no-unused-vars
-//     const [officeFilter, setOfficeFilter] = useState('')
-
-//     const [error, setError] = useState()
-
-//     useEffect(() => {
-//         getAllAsset250();
-//     }, [currentPage, searchOffice, searchCode, priceFilter, selectOffice]);
-
     const Asset250 = () => {
         const [currentPage, setCurrentPage] = useState(1);
         const [totalPages, setTotalPages] = useState(0);
@@ -45,13 +27,13 @@ const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
     
         const getAllAsset250 = async () => {
             try {
-                let url = `http://192.168.1.94:3308/api/asset250/page/${currentPage}`;
+                let url = `http://localhost:8081/api/asset250/page/${currentPage}`;
                 if (searchCode) {
-                    url = `http://192.168.1.94:3308/api/asset250/code?code=${searchCode}`;
+                    url = `http://localhost:8081/api/asset250/code?code=${searchCode}`;
                 } else if (selectOffice) {
-                    url = `http://192.168.1.94:3308/api/asset250/filter?office=${selectOffice}`;
+                    url = `http://localhost:8081/api/asset250/office?office=${selectOffice}`;
                 } else if (priceFilter) {
-                    url = `http://192.168.1.94:3308/api/asset250/${priceFilter}`;
+                    url = `http://localhost:8081/api/asset250/${priceFilter}`;
                 }
     
                 const response = await fetch(url);
@@ -167,7 +149,7 @@ const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {asset250
+                                    {asset250 && asset250
                                     .map(asset250 => {
                                         return ( 
                                             <tr key={asset250.id} className={classes}>

@@ -11,7 +11,7 @@ const AssetDetail = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    AssetService.getAssetById(id)
+    AssetService.getAssetDetailById(id)
       .then((response) => {
         setAsset(response.data);
         setLoading(false);
@@ -37,11 +37,11 @@ const AssetDetail = () => {
     }
   };
 
-  const formatDate = (dateString) => {
-    if (!dateString) return 'N/A';
-    const date = new Date(dateString);
-    return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-  };
+  // const formatDate = (dateString) => {
+  //   if (!dateString) return 'N/A';
+  //   const date = new Date(dateString);
+  //   return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+  // };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -68,7 +68,7 @@ const AssetDetail = () => {
 
   const auditDetails = [
     { label: 'Last Modified By', value: asset.lastModifiedBy },
-    { label: 'Last Modified Date', value: formatDate(asset.lastModifiedDate) },
+    { label: 'Last Modified Date', value: asset.updated_at },
   ];
 
   return (

@@ -5,7 +5,13 @@ const USER_BASE_REST_API_URL = 'http://192.168.1.94:3308/api/users'
 
 const USER_DTO_REST_API_URL = 'http://192.168.1.94:3308/api/user'
 
+const USER_REACTIVE = 'http://localhost:8080/api/user'
+
 class UserService {
+
+    getUser() {
+        return axios.get(USER_REACTIVE)
+    }
 
     getUserDto() {
         return axios.get(USER_DTO_REST_API_URL)
