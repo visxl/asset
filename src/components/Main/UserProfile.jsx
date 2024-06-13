@@ -5,7 +5,7 @@ import UserService from '../../Service/UserService';
 
 const UserProfile = () => {
   const [userData, setUserData] = useState({
-    name: '',
+    engName: '',
     role: '',
     phoneNo: '',
     email: '',
@@ -63,7 +63,7 @@ const UserProfile = () => {
                 {/* User Profile */}
                 <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" className="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0" alt="User profile" />
                 {/* User name */}
-                <span className="text-center mt-5 text-xl font-bold bg-white">{userData.name}</span>
+                <span className="text-center mt-5 text-xl font-bold bg-white">{userData.engName}</span>
                 {/* User role  */}
                 <span className="text-center mt-5 bg-white">{userData.role}</span>
                 <span className="text-center mt-5 bg-white">{userData.phoneNo}</span>

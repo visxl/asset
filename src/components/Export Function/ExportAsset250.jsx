@@ -14,7 +14,7 @@ export const ExportAsset250 = ({ fileName }) => {
 
   const fetchExcelData = async () => {
     try {
-      const response = await fetch('http://localhost:8081/api/asset250/export');
+      const response = await fetch('http://localhost:8081/api/asset250/report');
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }

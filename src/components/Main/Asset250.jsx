@@ -7,7 +7,7 @@ import { ExportAsset250 } from '../Export Function/ExportAsset250';
 
 
 // Table thead
-const TABLE_HEAD = ["Name", "Asset Name", "Model", "Brand", "Code", "Price", "Value", "Purchase Date", "Condition", "User", "Office", "Action"];
+const TABLE_HEAD = ["Name", "Asset Name", "Model", "Brand", "Code", "Price($)", "Value", "Purchase Date", "Condition", "User", "Office", "Action"];
 const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
 
     const Asset250 = () => {
@@ -200,7 +200,7 @@ const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
                                                 </td>
                                                 <td className={classes}>
                                                     <Typography variant="small" color="blue-gray" className="font-normal">
-                                                        {asset250.condition}
+                                                        {asset250.assetcondition}
                                                     </Typography>
                                                 </td>
                                                 <td className={classes}>

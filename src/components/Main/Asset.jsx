@@ -7,23 +7,23 @@ import { ExportAsset } from '../Export Function/ExportAsset';
 
 
 // Table thead
-const TABLE_HEAD = [ "Name", "Asset Name", "Model", "Brand", "Code", "Price", "Value", "Purchase Date", "Condition", "User", "Other", "Office", "Action"];
+const TABLE_HEAD = [ "Name", "Asset Name", "Model", "Brand", "Code", "Price($)", "Value", "Purchase Date", "Condition", "User", "Other", "Office", "Action"];
 const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
 
 const Asset = () => {
     const [currentPage, setCurrentPage] = useState(1);
-        const [totalPages, setTotalPages] = useState(0);
-        const [totalItems, setTotalItems] = useState(0);
-        const [assets, setAsset] = useState([]);
+    const [totalPages, setTotalPages] = useState(0);
+    const [totalItems, setTotalItems] = useState(0);
+    const [assets, setAsset] = useState([]);
 
-        const [searchCode, setSearchCode] = useState('');
-        const [priceFilter, setPriceFilter] = useState('');
-        const [selectOffice, setSelectOffice] = useState('');
-        const [error, setError] = useState('');
+    const [searchCode, setSearchCode] = useState('');
+    const [priceFilter, setPriceFilter] = useState('');
+    const [selectOffice, setSelectOffice] = useState('');
+    const [error, setError] = useState('');
     
-        useEffect(() => {
-            getAllAsset();
-        }, [currentPage, searchCode, priceFilter, selectOffice]);
+    useEffect(() => {
+        getAllAsset();
+    }, [currentPage, searchCode, priceFilter, selectOffice]);
 
     const getAllAsset = async () => {
         try {
@@ -114,6 +114,7 @@ const Asset = () => {
                             <option value='InternalAudit'>InternalAudit</option>
                             <option value='Technical'>Technical</option>
                             <option value='MarketingAndSale'>MarketingAndSale</option>
+                            <option value='InformationTechnology'>InformationTechnology</option>
                             <option value='KampongCham'>KampongCham</option>
                             <option value='Takeo'>Takeo</option>
                             <option value='BanteayMeanchey'>BanteayMeanchey</option>
@@ -121,7 +122,6 @@ const Asset = () => {
                             <option value='Preyveng'>Preyveng</option>
                             <option value='ShianoukVille'>ShianoukVille</option>
                             <option value='Siemreap'>Siemreap</option>
-                            <option value='InformationTechnology'>InformationTechnology</option>
                         </select>
                         <input className='w-full md:w-64 focus:outline-none text-black border font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2'
                             type="text" value={searchCode} 
@@ -199,7 +199,7 @@ const Asset = () => {
                                                 </td>
                                                 <td className={classes}>
                                                     <Typography variant="small" color="blue-gray" className="font-normal">
-                                                        {assets.condition}
+                                                        {assets.assetcondition}
                                                     </Typography>
                                                 </td>
                                                 <td className={classes}>

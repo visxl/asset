@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import UserService from '../../Service/UserService';
 
     // Table thead
-    const TABLE_HEAD = ["ID", "Name", "Email", "Phone Number", "Role", "Action"];
+    const TABLE_HEAD = ["ID", "English Name", "Khmer Name","National ID", "Email", "Phone Number", "Role", "Action"];
     const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
 
     // Fetch data from backend
@@ -16,6 +16,7 @@ import UserService from '../../Service/UserService';
         const [totalItems, setTotalItems] = useState(0);
         const [user, setUser] = useState([]);
 
+        const [searchEngName, setSearchEngName] = useState('')
         const [error, setError] = useState()
         const navigate = useNavigate();
 
@@ -23,24 +24,41 @@ import UserService from '../../Service/UserService';
             getAllUser();
             },[currentPage]);
 
-        const getAllUser = async () => {
-            try {
-                const response = await fetch(`http://192.168.1.94:3308/api/users/page/${currentPage}`)
-                if (!response.ok) {
-                    throw new Error('Failed to fetch data');
+            const getAllUser = async () => {
+                try {
+                    const response = await fetch(`http://localhost:8081/api/users/page/${currentPage}`)
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch data');
+                    }
+                    const data = await response.json();
+        
+                    console.log(data);
+        
+                    setTotalPages(data.totalPages);
+                    setTotalItems(data.totalItems);
+                    setUser(data.user);
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                    setError("Failed to fetch data", error)
                 }
-                const data = await response.json();
-
-                console.log(data);
-
-                setTotalPages(data.totalPages);
-                setTotalItems(data.totalItems);
-                setUser(data.user);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                setError("Failed to fetch data", error)
             }
-        };
+
+            const handleSearch = async () => {
+                try {
+                    const response = await fetch(`http://localhost:8081/api/users/engName?engName=${searchEngName}`);
+                    if (!response.ok) {
+                        throw new Error('Failed to search Customer');
+                    }
+                    const data = await response.json();
+                    setUser(data);
+                } catch (error) {
+                    console.error('Error searching Customer:', error);
+                }
+            };
+        
+            const handleSearchInputChange = (event) => {
+                setSearchEngName(event.target.value);
+            };
 
     const handleNextPage = () => setCurrentPage(prev => prev + 1);
     const handlePrevPage = () => setCurrentPage(prev => prev - 1);
@@ -77,6 +95,12 @@ import UserService from '../../Service/UserService';
                 <Link to={'/user/report'} className='w-28 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 '>
                     Report
                 </Link>
+                <input className='w-64 focus:outline-none text-black border font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 '
+                    type="text" value={searchEngName} 
+                    onChange={handleSearchInputChange} 
+                    placeholder="Search by English Name" 
+                />
+                <button onClick={handleSearch}>Search</button>
             </div>
             
             <div className="relative">
@@ -108,7 +132,17 @@ import UserService from '../../Service/UserService';
                                     </td>
                                     <td className={classes}>
                                         <Typography variant="small" color="blue-gray" className="font-normal">
-                                            {user.name}
+                                            {user.engName}
+                                        </Typography>
+                                    </td>
+                                    <td className={classes}>
+                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                            {user.khName}
+                                        </Typography>
+                                    </td>
+                                    <td className={classes}>
+                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                            {user.natId}
                                         </Typography>
                                     </td>
                                     <td className={classes}>

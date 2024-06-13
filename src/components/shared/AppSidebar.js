@@ -1,23 +1,29 @@
-
 import { createContext, useState } from "react"
 import { DASHBOARD_SIDEBAR_BOTTOM_LINKS, DASHBOARD_SIDEBAR_BOTTOM_LINKS_ICON, DASHBOARD_SIDEBAR_LINKS, DASHBOARD_SIDEBAR_LINKS_ICON } from "../../lib/const/navigation"
 import { Link } from "react-router-dom"
 import { ChevronFirst, ChevronLast } from "lucide-react"
+import CAMINCO_LOGO from '../asset/Banner.jpg'
 
 const SidebarContext = createContext()
 
 export default function AppSidebar() {
     const [expanded, setExpanded] = useState(true)
+    // const [isOpen,setIsOpen] = useState('')
+
+    // const toggleDropdown = () => {
+    //     setIsOpen(!isOpen);
+    //   };
+
     return (
         <aside className="h-screen relative">
             <nav className="h-full flex flex-col bg-white border-r shadow-sm">
                 <div className="p-4 pb-2 flex justify-between items-center">
                     <img
-                        src="https://img.logoipsum.com/243.svg"
+                        src={CAMINCO_LOGO}
                         className={`overflow-hidden transition-all ${
                         expanded ? "w-44" : "w-0"
                         }`}
-                        alt=""
+                        alt="Logo"
                     />
                     <button
                         onClick={() => setExpanded((curr) => !curr)}

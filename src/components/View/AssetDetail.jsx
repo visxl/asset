@@ -13,14 +13,19 @@ const AssetDetail = () => {
   useEffect(() => {
     AssetService.getAssetDetailById(id)
       .then((response) => {
-        setAsset(response.data);
+        if (response.data) {
+          setAsset(response.data);
+        } else {
+          navigate('/asset');
+        }
         setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching asset by ID:', error);
         setLoading(false);
+        navigate('/asset');
       });
-  }, [id]);
+  }, [id, navigate]);
 
   const deleteAsset = async (id) => {
     if (window.confirm('Are you sure you want to delete this?')) {
@@ -58,7 +63,7 @@ const AssetDetail = () => {
     { label: 'Price', value: asset.price },
     { label: 'Value', value: asset.value },
     { label: 'Date', value: asset.date },
-    { label: 'Condition', value: asset.condition },
+    { label: 'Condition', value: asset.assetcondition },
     { label: 'User', value: asset.user },
     { label: 'Other', value: asset.other },
     { label: 'Office', value: asset.office },

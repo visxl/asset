@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [engName, setEngName] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
@@ -12,12 +12,12 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8080/api/user');
+      const response = await fetch('http://localhost:8081/api/user');
       if (!response.ok) {
         throw new Error('Failed to fetch user data');
       }
       const users = await response.json();
-      const user = users.find((u) => u.email === email && u.password === password);
+      const user = users.find((u) => u.engName === engName && u.password === password);
 
       if (user) {
         Swal.fire({
@@ -60,14 +60,14 @@ const Login = () => {
     <div className="">
       <form className="max-w-sm mx-auto" onSubmit={handleLogin}>
         <div className="mb-5">
-          <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+          <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Username</label>
           <input
-            type="email"
+            type="text"
             id="email"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="name@flowbite.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            placeholder="name"
+            value={engName}
+            onChange={(e) => setEngName(e.target.value)}
             required
           />
         </div>

@@ -8,7 +8,7 @@ import LOGOJPG from '../asset/Banner.jpg'
 import AssetService from '../../Service/AssetService';
 
     // Table thead
-    const TABLE_HEAD = ["ID", "Name", "Asset Name", "Model", "Brand", "Code", "Price", "Value", "Purchase Date", "Condition", "User", "Other","Office","PC Name"];
+    const TABLE_HEAD = ["ID", "Name", "Asset Name", "Model", "Brand", "Code", "Price($)", "Value", "Purchase Date", "Condition", "User", "Other","Office","PC Name"];
     const classes = "border border-solid text-sm p-1";
 
     // Fetch data from backend

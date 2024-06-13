@@ -6,7 +6,7 @@ import LOGOJPG from '../asset/Banner.jpg'
 import Asset250Service from '../../Service/Asset250Service';
 
     // Table thead
-    const TABLE_HEAD = ["ID", "Name", "Asset Name", "Model", "Brand", "Code", "Price", "Value", "Purchase Date", "Condition", "User", "Office","Department"];
+    const TABLE_HEAD = ["ID", "Name", "Asset Name", "Model", "Brand", "Code", "Price($)", "Value", "Purchase Date", "Condition", "User", "Office","Department"];
     const classes = "border border-solid text-sm p-1";
 
     // Fetch data from backend

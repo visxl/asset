@@ -57,7 +57,7 @@ function App() {
           <Route path='edit-task/:id' element={<AddTask/>}/>
 
         </Route>
-        <Route path='login' element={<div>login </div>}/>
+        <Route path='login' element={<div>Login</div>}/>
       </Routes>
     </Router>
   );

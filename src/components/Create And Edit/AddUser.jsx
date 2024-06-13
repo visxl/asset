@@ -4,7 +4,7 @@ import UserService from '../../Service/UserService';
 import { Card, Typography } from '@material-tailwind/react';
 
 const AddUsers = () => {
-  const [name, setName] = useState('');
+  const [engName, setEngName] = useState('');
   const [role, setRole] = useState('');
   const [phoneNo, setPhoneNo] = useState('');
   const [email, setEmail] = useState('');
@@ -16,7 +16,7 @@ const AddUsers = () => {
   const saveUser = (e) => {
     e.preventDefault();
 
-    const user = { name, role, phoneNo, email, password};
+    const user = { engName, role, phoneNo, email, password};
 
     console.log('User data to be sent:', user);
 
@@ -43,7 +43,7 @@ const AddUsers = () => {
         </Typography>
       )}
 
-      <form className="max-w-screen-2xl grid grid-cols-3 sm:grid-cols-8 gap-6 p-5" onSubmit={saveUser}>
+      <form className="max-w-screen-2xl grid grid-cols-4 gap-6 p-5" onSubmit={saveUser}>
         <div className="sm:col-span-2">
           <Typography className="text-lg mb-1">
             Name:
@@ -51,8 +51,8 @@ const AddUsers = () => {
           <input
             type="text"
             className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={engName}
+            onChange={(e) => setEngName(e.target.value)}
           />
         </div>
         <div className="sm:col-span-2">
