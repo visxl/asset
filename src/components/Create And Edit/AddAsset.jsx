@@ -21,6 +21,7 @@ export const AddAsset = () => {
   const [ other, setOther ] = useState()
   const [ pcname, setPcname ] = useState()
   const [ type, setType ] = useState()
+  const [ status, setStatus] = useState()
   
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ export const AddAsset = () => {
 const saveAndupdateAsset = (e) => {
     e.preventDefault();
   
-    const asset = { name, assetname, model, brand, code, price, value, date, assetcondition, user, office, department, type , other, pcname};
+    const asset = { name, assetname, model, brand, code, price, value, date, assetcondition, user, office, department, type , other, pcname, status};
   
     // Handle FindById Request
     if (id) {
@@ -58,7 +59,7 @@ const saveAndupdateAsset = (e) => {
 
 //   Handle Update Asset Request Put Method
   useEffect(() => {
-    AssetService.getAssetById(id)
+    AssetService.getAssetDetailById(id)
         .then((response) => {
             setName(response.data.name);
             setAssetname(response.data.assetname);
@@ -75,6 +76,7 @@ const saveAndupdateAsset = (e) => {
             setDepartment(response.data.department);
             setType(response.data.type);
             setPcname(response.data.pcname);
+            setStatus(response.data.status)
         })
         .catch(error => {
             console.error('Error fetching asset by ID:', error);
@@ -276,7 +278,7 @@ const saveAndupdateAsset = (e) => {
                     <option value='New'>New</option>
                     <option value='Mid'>Mid</option>
                     <option value='Old'>Old</option>
-                    <option value=''>...</option>
+                    {/* <option value=''>...</option> */}
                 </select>
             </div>
 
@@ -292,11 +294,9 @@ const saveAndupdateAsset = (e) => {
                     <option value='OE'>OE</option>
                     <option value='OT'>OT</option>
                     <option value='TR'>TR</option>
-                    <option value=''>...</option>
+                    {/* <option value=''>...</option> */}
                 </select>
             </div>
-
-            
 
             <div className="col-span-1">
                 <Typography className="text-lg mb-1">
@@ -344,6 +344,21 @@ const saveAndupdateAsset = (e) => {
                     <option value='Technical'>Technical</option>
                     <option value='MarketingAndSale'>MarketingAndSale</option>
                     <option value='InformationTechnology'>InformationTechnology</option>
+                </select>
+            </div>
+
+            <div className="col-span-1">
+                <Typography className="text-lg mb-1">
+                    Status:
+                </Typography>
+                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg text-md'
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                >
+                    <option value='' className='text-gray-400' selected>Select Asset Status</option>
+                    <option value='true' >Active</option>
+                    <option value='false'>Inactive</option>
+                    {/* <option value=''>...</option> */}
                 </select>
             </div>
             

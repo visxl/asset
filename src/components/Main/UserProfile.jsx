@@ -6,30 +6,20 @@ import UserService from '../../Service/UserService';
 const UserProfile = () => {
   const [userData, setUserData] = useState({
     engName: '',
+    khName:'',
     role: '',
+    gender:'',
+    startDate:'',
+    natId:'',
     phoneNo: '',
     email: '',
-    skill1: '',
-    skill2: '',
-    skill3: '',
-    skill4: '',
-    description1: '',
-    description2: '', 
-    description3: '',
-    description4: '',
-    description5: '',
-    experience1: '',
-    experience2: '',
-    experience3: '',
-    experience4: '',
-    workplace1: '',
-    workplace2: '',
-    workplace3: '',
-    workplace4: '',
-    year1: '',
-    year2: '',
-    year3: '',
-    year4: '',
+
+    skill: '',
+    description: '',
+    experience: '',
+    workplace: '',
+    year: '',
+
   });
 
   const [error, setError] = useState();
@@ -63,7 +53,9 @@ const UserProfile = () => {
                 {/* User Profile */}
                 <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" className="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0" alt="User profile" />
                 {/* User name */}
+                <span className="text-center mt-5 text-xl font-bold bg-white">{userData.khName}</span>
                 <span className="text-center mt-5 text-xl font-bold bg-white">{userData.engName}</span>
+                
                 {/* User role  */}
                 <span className="text-center mt-5 bg-white">{userData.role}</span>
                 <span className="text-center mt-5 bg-white">{userData.phoneNo}</span>
@@ -94,7 +86,7 @@ const UserProfile = () => {
                         {/* User Description  */}
                         <div class="bg-white shadow rounded-lg p-6">
                             <h2 class="text-xl font-bold mb-4">About Me</h2>
-                            <span className='text-center mt-5 bg-white'>{userData.description1}</span>
+                            <span className='text-center mt-5 bg-white'>{userData.aboutMe}</span>
                             {/* User Social Link  */}
                             <h3 class="font-semibold text-center mt-6 -mb-2">
                                 Find me on
@@ -147,17 +139,17 @@ const UserProfile = () => {
                             <div class="mb-6">
                                 <div class="flex justify-between flex-wrap gap-2 w-full">
                                     {/* Main */}
-                                    <input value={userData.experience1} readOnly disabled className='bg-white'/>
+                                    <input value={userData.experience} readOnly disabled className='bg-white'/>
                                     {/* Description  */}
                                     <p>
                                         {/* Last work place  */}
-                                        <span class="text-gray-700 mr-2">{userData.workplace1}</span>
+                                        <span class="text-gray-700 mr-2">{userData.workPlace}</span>
                                         {/* Year  */}
-                                        <span class="text-gray-700">{userData.year1}</span>
+                                        <span class="text-gray-700">{userData.year}</span>
                                     </p>
                                 </div>
                                 <p class="mt-2">
-                                    {userData.description2}
+                                    {userData.description}
                                 </p>
                             </div>
 

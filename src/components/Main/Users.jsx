@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import UserService from '../../Service/UserService';
 
     // Table thead
-    const TABLE_HEAD = ["ID", "English Name", "Khmer Name","National ID", "Email", "Phone Number", "Role", "Action"];
+    const TABLE_HEAD = ["ID", "English Name", "Khmer Name", "Gender", "National ID", "Email", "Phone Number", "Role", "Action"];
     const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
 
     // Fetch data from backend
@@ -138,6 +138,11 @@ import UserService from '../../Service/UserService';
                                     <td className={classes}>
                                         <Typography variant="small" color="blue-gray" className="font-normal">
                                             {user.khName}
+                                        </Typography>
+                                    </td>
+                                    <td className={classes}>
+                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                            {user.gender}
                                         </Typography>
                                     </td>
                                     <td className={classes}>

@@ -37,13 +37,13 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		key: 'asset',
 		label: 'Asset',
 		path: '/asset',
-		icon: <HiOutlineCube className={icon} />
-	},
-	{
-		key: 'asset-under-250',
-		label: 'Asset Under 250',
-		path: '/asset250',
-		icon: <HiOutlineCube className={icon} />
+		icon: <HiOutlineCube className={icon} />,
+		child: {
+			key: 'asset-under-250',
+			label: 'Asset Under 250',
+			path: '/asset/asset250',
+			icon: <HiOutlineCube className={icon} />
+		}
 	},
 	{
 		key: 'customer',
