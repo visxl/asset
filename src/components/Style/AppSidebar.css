@@ -1,0 +1,9 @@
+/* sidebar.css */
+.no-arrow .flex.items-center > svg:last-child {
+    display: none;
+}
+
+.no-padding {
+    padding: 0 !important;
+  }
+  

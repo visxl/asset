@@ -40,7 +40,7 @@ export default function Dashboard() {
   }, [currentPage, fetchData]);
 
   const renderCard = (title, list, totalItems, link) => (
-    <Card className="w-60 p-5 flex flex-col justify-center mr-5 shadow-lg">
+    <Card className="w-60 p-5 flex flex-wrap justify-center mr-5 shadow-lg">
       <CardBody className='text-center'>
         <Typography variant="h5" color="blue-gray" className="mb-2">
           {title}

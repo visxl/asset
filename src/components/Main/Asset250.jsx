@@ -7,7 +7,7 @@ import { ExportAsset250 } from '../Export Function/ExportAsset250';
 
 
 // Table thead
-const TABLE_HEAD = ["Name", "Asset Name", "Model", "Brand", "Code", "Price($)", "Value", "Purchase Date", "Condition", "User", "Office", "Action"];
+const TABLE_HEAD = ["Id", "Name", "Asset Name", "Model", "Brand", "Code", "Price($)", "Value", "Purchase Date", "Condition", "User", "Office", "Status", "Action"];
 const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
 
     const Asset250 = () => {
@@ -61,7 +61,7 @@ const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
         const handleLastPage = () => setCurrentPage(totalPages);
     
         const deleteAsset250 = async (asset250Id) => {
-            if (window.confirm('Are you sure you want to delete this?')) {
+            if (asset250Id != null) {
                 try {
                     const response = await Asset250Service.deleteAsset250(asset250Id);
                     if (response.ok) {
@@ -153,11 +153,11 @@ const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
                                     .map(asset250 => {
                                         return ( 
                                             <tr key={asset250.id} className={classes}>
-                                                {/* <td className={classes}>
+                                                <td className={classes}>
                                                     <Typography variant="small" color="blue-gray" className="font-normal">
                                                         {asset250.id}
                                                     </Typography>
-                                                </td> */}
+                                                </td>
                                                 <td className={classes}>
                                                     <Typography variant="small" color="blue-gray" className="font-normal">
                                                         {asset250.name}
@@ -211,6 +211,21 @@ const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
                                                 <td className={classes}>
                                                     <Typography variant="small" color="blue-gray" className="font-normal">
                                                         {asset250.office}
+                                                    </Typography>
+                                                </td>
+                                                <td className={classes}>
+                                                    <Typography
+                                                        variant="small"
+                                                        color="blue-gray"
+                                                        className="font-normal"
+                                                        style={{
+                                                            backgroundColor: asset250.status ? 'green' : 'red',
+                                                            padding: '5px',
+                                                            borderRadius: '4px',
+                                                            color: 'white', 
+                                                        }}
+                                                    >
+                                                        {asset250.status ? 'Active' : 'Inactive'}
                                                     </Typography>
                                                 </td>
                                                 <td className="py-3">

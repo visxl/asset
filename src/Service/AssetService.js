@@ -19,7 +19,7 @@ class AssetService {
     }
 
     getAssetDetailById(assetId) {
-        return axios.get('http://localhost:8081/api/asset/detail/' + assetId)
+        return axios.get('http://localhost:8081/api/asset/supplier')
     }
 
     updateAsset(assetId, asset) {

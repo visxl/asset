@@ -7,19 +7,19 @@ import { useEffect } from 'react'
 export const AddAsset = () => {
   
   const [ name, setName ] = useState()
-  const [ assetname, setAssetname ] = useState()
+  const [ assetName, setAssetName ] = useState()
   const [ model, setModel ] = useState()
   const [ brand, setBrand ] = useState()
   const [ code, setCode ] = useState()
   const [ price, setPrice ] = useState()
   const [ value, setValue ] = useState()
   const [ date, setDate ] = useState()
-  const [ assetcondition, setAssetCondition ] = useState()
+  const [ condition, setCondition ] = useState()
   const [ user, setUser ] = useState()
   const [ office, setOffice ] = useState()
   const [ department, setDepartment ] = useState()
   const [ other, setOther ] = useState()
-  const [ pcname, setPcname ] = useState()
+  const [ pcName, setPcName ] = useState()
   const [ type, setType ] = useState()
   const [ status, setStatus] = useState()
   
@@ -31,7 +31,7 @@ export const AddAsset = () => {
 const saveAndupdateAsset = (e) => {
     e.preventDefault();
   
-    const asset = { name, assetname, model, brand, code, price, value, date, assetcondition, user, office, department, type , other, pcname, status};
+    const asset = { name, assetName, model, brand, code, price, value, date, condition, user, office, department, type , other, pcName, status};
   
     // Handle FindById Request
     if (id) {
@@ -57,25 +57,24 @@ const saveAndupdateAsset = (e) => {
     }
   };
 
-//   Handle Update Asset Request Put Method
   useEffect(() => {
     AssetService.getAssetDetailById(id)
         .then((response) => {
             setName(response.data.name);
-            setAssetname(response.data.assetname);
+            setAssetName(response.data.assetname);
             setModel(response.data.model);
             setBrand(response.data.brand);
             setCode(response.data.code);
             setPrice(response.data.price);
             setValue(response.data.value);
             setDate(response.data.date);
-            setAssetCondition(response.data.assetcondition);
+            setCondition(response.data.assetcondition);
             setUser(response.data.user);
             setOther(response.data.other);
             setOffice(response.data.office);
             setDepartment(response.data.department);
             setType(response.data.type);
-            setPcname(response.data.pcname);
+            setPcName(response.data.pcname);
             setStatus(response.data.status)
         })
         .catch(error => {
@@ -99,7 +98,7 @@ const saveAndupdateAsset = (e) => {
     }
 
     return (
-    <Card className='w-full h-full rounded-xl p-5 pb-32 shadow-lg'>
+    <Card className='w-full h-screen rounded-xl p-5 mb-5 shadow-lg'>
         {error && (
         <Typography className="text-red-500 mb-4">
           {error}
@@ -111,19 +110,19 @@ const saveAndupdateAsset = (e) => {
             {
                 title()
             }
-        <form className="max-w-screen-lg grid sm:grid-cols-2 gap-6 p-5">
+        <form className="w-full h-screen grid sm:grid-cols-3 gap-3 p-2">
             <div className="sm:col-span-1">
                 <Typography className="text-lg mb-1">
                     Name:
                 </Typography>
                 <input
-                type="text"
-                placeholder='Ex: ម៉ូនីទ័រ...'
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="name"
-                value={name} required
-                onChange={(e) => setName(e.target.value)}
-            />
+                    type="text"
+                    placeholder='Ex: ម៉ូនីទ័រ...'
+                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    name="name"
+                    value={name} required
+                    onChange={(e) => setName(e.target.value)}
+                />
             </div>
 
             <div className="col-span-1">
@@ -131,8 +130,8 @@ const saveAndupdateAsset = (e) => {
                     Asset Name:
                 </Typography>
                 <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg text-md'
-                    value={assetname}
-                    onChange={(e) => setAssetname(e.target.value)}
+                    value={assetName}
+                    onChange={(e) => setAssetName(e.target.value)}
                 >
                     <option value='' className='text-gray-400' selected>Select Assetname</option>
                     <option value='Monitor'>Monitor</option>
@@ -151,39 +150,39 @@ const saveAndupdateAsset = (e) => {
                     Model:
                 </Typography>
                 <input
-                type="text"
-                placeholder='Ex: HP, Dell...'
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="model"
-                value={model} required
-                onChange={(e) => setModel(e.target.value)}
-            />
+                    type="text"
+                    placeholder='Ex: HP, Dell...'
+                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    name="model"
+                    value={model} required
+                    onChange={(e) => setModel(e.target.value)}
+                />
             </div>
             <div className="sm:col-span-1">
                 <Typography className="text-lg mb-1">
                     Brand:
                 </Typography>
                 <input
-                type="text"
-                placeholder='Ex: E1910c...'
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="brand"
-                value={brand} required
-                onChange={(e) => setBrand(e.target.value)}
-            />
+                    type="text"
+                    placeholder='Ex: E1910c...'
+                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    name="brand"
+                    value={brand} required
+                    onChange={(e) => setBrand(e.target.value)}
+                />
             </div>
             <div className="sm:col-span-1">
                 <Typography className="text-lg mb-1">
                     Code:
                 </Typography>
                 <input
-                type="text"
-                placeholder='Ex: ADM FA 00000...'
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="code"
-                value={code} 
-                onChange={(e) => setCode(e.target.value)}
-            />
+                    type="text"
+                    placeholder='Ex: ADM FA 00000...'
+                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    name="code"
+                    value={code} 
+                    onChange={(e) => setCode(e.target.value)}
+                />
             </div>
             <div className="sm:col-span-1">
                 <Typography className="text-lg mb-1">
@@ -247,8 +246,8 @@ const saveAndupdateAsset = (e) => {
                 placeholder='Ex: PC21'
                 className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 name="pcname"
-                value={pcname}
-                onChange={(e) => setPcname(e.target.value)}
+                value={pcName}
+                onChange={(e) => setPcName(e.target.value)}
             />
             </div>
 
@@ -271,14 +270,13 @@ const saveAndupdateAsset = (e) => {
                     Condition:
                 </Typography>
                 <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg text-md'
-                    value={assetcondition}
-                    onChange={(e) => setAssetCondition(e.target.value)}
+                    value={condition}
+                    onChange={(e) => setCondition(e.target.value)}
                 >
                     <option value='' className='text-gray-400' selected>Select Condition</option>
                     <option value='New'>New</option>
                     <option value='Mid'>Mid</option>
                     <option value='Old'>Old</option>
-                    {/* <option value=''>...</option> */}
                 </select>
             </div>
 
@@ -294,7 +292,6 @@ const saveAndupdateAsset = (e) => {
                     <option value='OE'>OE</option>
                     <option value='OT'>OT</option>
                     <option value='TR'>TR</option>
-                    {/* <option value=''>...</option> */}
                 </select>
             </div>
 

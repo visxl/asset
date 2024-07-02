@@ -19,6 +19,7 @@ import AddUsers from './components/Create And Edit/AddUser';
 import Task from './components/Main/Task';
 import AddTask from './components/Create And Edit/AddTask';
 import UserReport from './components/Report/UserReport';
+import Supplier from './components/Main/Supplier';
 
 function App() {
   return (
@@ -41,6 +42,8 @@ function App() {
           <Route path='add-asset' element={<AddAsset/>}/>
           <Route path='edit-asset/:id' element={<AddAsset/>}/>
           <Route path='asset/view/:id' element={<AssetDetail/>}/>
+
+            <Route path='supplier' element={<Supplier />}/>
 
           <Route path='asset250' element={<Asset250 />}/>
           <Route path='add-asset250' element={<AddAsset250 />}/>

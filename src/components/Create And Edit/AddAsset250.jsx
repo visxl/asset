@@ -1,146 +1,204 @@
-import React, { useState, useEffect } from 'react';
 import { Card, Typography } from '@material-tailwind/react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Asset250Service from '../../Service/Asset250Service';
 
 const AddAsset250 = () => {
-    const [ name, setName ] = useState()
-    const [ assetname, setAssetname ] = useState()
-    const [ model, setModel ] = useState()
-    const [ brand, setBrand ] = useState()
-    const [ code, setCode ] = useState()
-    const [ price, setPrice ] = useState()
-    const [ value, setValue ] = useState()
-    const [ date, setDate ] = useState()
-    const [ condition, setCondition ] = useState()
-    const [ user, setUser ] = useState()
-    const [ office, setOffice ] = useState()
-    const [ department, setDepartment ] = useState()
+  const [name, setName] = useState('');
+  const [assetname, setAssetname] = useState('');
+  const [model, setModel] = useState('');
+  const [brand, setBrand] = useState('');
+  const [code, setCode] = useState('');
+  const [price, setPrice] = useState('');
+  const [value, setValue] = useState('');
+  const [date, setDate] = useState('');
+  const [assetcondition, setAssetCondition] = useState('');
+  const [user, setUser] = useState('');
+  const [office, setOffice] = useState('');
+  const [department, setDepartment] = useState('');
+  const [other, setOther] = useState('');
+  const [pcname, setPcname] = useState('');
+  const [type, setType] = useState('');
+  const [status, setStatus] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-    const navigate = useNavigate();
-    const { asset250id } = useParams();
+  const saveAndUpdateAsset250 = (e) => {
+    e.preventDefault();
 
-    useEffect(() => {
-        if (asset250id) {
-            Asset250Service.getAsset250ById(asset250id)
-                .then((response) => {
-                    setName(response.data.name);
-                    setAssetname(response.data.assetname);
-                    setModel(response.data.model);
-                    setBrand(response.data.brand);
-                    setCode(response.data.code);
-                    setPrice(response.data.price);
-                    setValue(response.data.value);
-                    setDate(response.data.date);
-                    setCondition(response.data.condition);
-                    setUser(response.data.user);
-                    setOffice(response.data.office);
-                    setDepartment(response.data.department);
-                })
-                .catch(error => {
-                    console.error('Error fetching asset by ID:', error);
-                });
-        }
-    }, [asset250id]);
-
-    const saveAndupdateAsset250 = (e) => {
-        e.preventDefault();
-        const asset250 = { name, assetname, model, brand, code, price, value, date, condition, user, office, department };
-
-        if (asset250id) {
-            Asset250Service.updateAsset250(asset250id, asset250)
-                .then((response) => {
-                    console.log(response.data);
-                    navigate('/asset250');
-                })
-                .catch((error) => {
-                    console.log('Error updating asset by ID:', error);
-                });
-        } else {
-            Asset250Service.createAsset250(asset250)
-                .then((response) => {
-                    console.log(response.data);
-                    navigate('/asset250');
-                })
-                .catch((error) => {
-                    console.log('Error creating asset', error);
-                });
-        }
+    const asset250 = {
+      name,
+      assetname,
+      model,
+      brand,
+      code,
+      price,
+      value,
+      date,
+      assetcondition,
+      user,
+      office,
+      department,
+      type,
+      other,
+      pcname,
+      status: status === 'true',
     };
 
+    if (id) {
+      Asset250Service.updateAsset250(id, asset250)
+        .then((response) => {
+          console.log(response.data);
+          navigate('/asset250');
+        })
+        .catch((error) => {
+          console.log('Error updating asset by ID:', error);
+          setError('Failed to update asset');
+        });
+    } else {
+      Asset250Service.createAsset250(asset250)
+        .then((response) => {
+          console.log(response.data);
+          navigate('/asset250');
+        })
+        .catch((error) => {
+          console.log('Error creating asset', error);
+          setError('Failed to create asset');
+        });
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      Asset250Service.getAsset250DetailById(id)
+        .then((response) => {
+          const data = response.data;
+          setName(data.name);
+          setAssetname(data.assetname);
+          setModel(data.model);
+          setBrand(data.brand);
+          setCode(data.code);
+          setPrice(data.price);
+          setValue(data.value);
+          setDate(data.date);
+          setAssetCondition(data.assetcondition);
+          setUser(data.user);
+          setOther(data.other);
+          setOffice(data.office);
+          setDepartment(data.department);
+          setType(data.type);
+          setPcname(data.pcname);
+          setStatus(data.status ? 'true' : 'false');
+        })
+        .catch((error) => {
+          console.error('Error fetching asset by ID:', error);
+          setError('Failed to fetch asset details');
+        });
+    }
+  }, [id]);
+
+    // Alert msg
+    const title = () => {
+        if(id) {
+            return (
+            <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50" role="alert">
+                <span class="font-medium">Update Form!</span>
+            </div>) 
+        }else {
+            return (
+            <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50" role="alert">
+                <span class="font-medium">Add New Asset!</span>
+            </div>) 
+        }
+    }
+
     return (
-        <Card className='w-full h-screen rounded-xl p-5 pb-32 shadow-lg'>
-            <Typography className="text-xl font-bold mb-6">
-                {asset250id ? 'Update Asset 250' : 'Create New Asset 250'}
-            </Typography>
-            <div className="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50" role="alert">
-                <span className="font-medium">{asset250id ? 'Update Form!' : 'Add New Asset Under 250!'}</span>
-            </div>
-            <form className="max-w-screen-lg grid grid-cols-1 sm:grid-cols-2 gap-6 p-5">
+    <Card className='w-full h-full rounded-xl p-5 pb-32 shadow-lg'>
+        {error && (
+        <Typography className="text-red-500 mb-4">
+          {error}
+        </Typography>
+      )}
+        <Typography className="text-xl font-bold mb-6">
+            Create New Asset
+        </Typography>
+            {
+                title()
+            }
+        <form className="max-w-screen-lg grid sm:grid-cols-2 gap-6 p-5">
             <div className="sm:col-span-1">
                 <Typography className="text-lg mb-1">
                     Name:
                 </Typography>
                 <input
-                type="text"
-                placeholder='Ex: ម៉ូនីទ័រ...'
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-            />
+                    type="text"
+                    placeholder='Ex: ម៉ូនីទ័រ...'
+                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    name="name"
+                    value={name} required
+                    onChange={(e) => setName(e.target.value)}
+                />
             </div>
-            <div className="sm:col-span-1">
+
+            <div className="col-span-1">
                 <Typography className="text-lg mb-1">
-                    Assetname:
+                    Asset Name:
                 </Typography>
-                <input
-                type="text"
-                placeholder='Ex: Monitor...'
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="Assetname"
-                value={assetname}
-                onChange={(e) => setAssetname(e.target.value)}
-            />
+                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg text-md'
+                    value={assetname}
+                    onChange={(e) => setAssetname(e.target.value)}
+                >
+                    <option value='' className='text-gray-400' selected>Select Assetname</option>
+                    <option value='Monitor'>Monitor</option>
+                    <option value='System Unit'>System Unit</option>
+                    <option value='Printer'>Printer</option>
+                    <option value='Laptop'>Laptop</option>
+                    <option value='UPS'>UPS</option>
+                    <option value='Switch'>Switch</option>
+                    <option value='Server'>Server</option>
+                    <option value='AllInOne'>All in one</option>
+                </select>
             </div>
+
             <div className="sm:col-span-1">
                 <Typography className="text-lg mb-1">
                     Model:
                 </Typography>
                 <input
-                type="text"
-                placeholder='Ex: HP, Dell...'
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="model"
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
-            />
+                    type="text"
+                    placeholder='Ex: HP, Dell...'
+                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    name="model"
+                    value={model} required
+                    onChange={(e) => setModel(e.target.value)}
+                />
             </div>
             <div className="sm:col-span-1">
                 <Typography className="text-lg mb-1">
                     Brand:
                 </Typography>
                 <input
-                type="text"
-                placeholder='Ex: E1910c...'
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="brand"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
-            />
+                    type="text"
+                    placeholder='Ex: E1910c...'
+                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    name="brand"
+                    value={brand} required
+                    onChange={(e) => setBrand(e.target.value)}
+                />
             </div>
             <div className="sm:col-span-1">
                 <Typography className="text-lg mb-1">
                     Code:
                 </Typography>
                 <input
-                type="text"
-                placeholder='Ex: ADM FA 00000...'
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="code"
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-            />
+                    type="text"
+                    placeholder='Ex: ADM FA 00000...'
+                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    name="code"
+                    value={code} 
+                    onChange={(e) => setCode(e.target.value)}
+                />
             </div>
             <div className="sm:col-span-1">
                 <Typography className="text-lg mb-1">
@@ -176,23 +234,11 @@ const AddAsset250 = () => {
                 type="date"
                 className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 name="date"
-                value={date}
+                value={date} required
                 onChange={(e) => setDate(e.target.value)}
             />
             </div>
-            <div className="sm:col-span-1">
-                <Typography className="text-lg mb-1">
-                    Condition:
-                </Typography>
-                <input
-                type="text"
-                placeholder='Ex: ថ្មី, ចាស់, ខូច...'
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="condition"
-                value={condition}
-                onChange={(e) => setCondition(e.target.value)}
-            />
-            </div>
+
             <div className="sm:col-span-1">
                 <Typography className="text-lg mb-1">
                     User:
@@ -202,45 +248,142 @@ const AddAsset250 = () => {
                 placeholder='Ex: ប្រើរួម...'
                 className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 name="user"
-                value={user}
+                value={user} 
                 onChange={(e) => setUser(e.target.value)}
             />
             </div>
+
             <div className="sm:col-span-1">
+                <Typography className="text-lg mb-1">
+                    PC Name:
+                </Typography>
+                <input
+                type="text"
+                placeholder='Ex: PC21'
+                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                name="pcname"
+                value={pcname}
+                onChange={(e) => setPcname(e.target.value)}
+            />
+            </div>
+
+            <div className="col-span-2">
+                <Typography className="text-lg mb-1">
+                    Other:
+                </Typography>
+                <input
+                type="text"
+                placeholder='Ex: ប្រើរួម...'
+                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                name="other"
+                value={other}
+                onChange={(e) => setOther(e.target.value)}
+            />
+            </div>
+
+            <div className="col-span-1">
+                <Typography className="text-lg mb-1">
+                    Condition:
+                </Typography>
+                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg text-md'
+                    value={assetcondition}
+                    onChange={(e) => setAssetCondition(e.target.value)}
+                >
+                    <option value='' className='text-gray-400' selected>Select Condition</option>
+                    <option value='New'>New</option>
+                    <option value='Mid'>Mid</option>
+                    <option value='Old'>Old</option>
+                </select>
+            </div>
+
+            <div className="col-span-1">
+                <Typography className="text-lg mb-1">
+                    Type:
+                </Typography>
+                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg text-md'
+                    value={type}
+                    onChange={(e) => setType(e.target.value)}
+                >
+                    <option value='' className='text-gray-400' selected>Select Type</option>
+                    <option value='OE'>OE</option>
+                    <option value='OT'>OT</option>
+                    <option value='TR'>TR</option>
+                </select>
+            </div>
+
+            <div className="col-span-1">
                 <Typography className="text-lg mb-1">
                     Office:
                 </Typography>
-                <input
-                type="text"
-                placeholder='Ex: រដ្ឋបាល...'
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="office"
-                value={office}
-                onChange={(e) => setOffice(e.target.value)}
-            />
+                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg text-md'
+                    value={office}
+                    onChange={(e) => setOffice(e.target.value)}
+                >
+                    <option value='' className='text-gray-400' selected disabled>Select Office</option>
+                    <option value='Administrator'>Administrator</option>
+                    <option value='Cashier'>Cashier</option>
+                    <option value='CustomerService'>CustomerService</option>
+                    <option value='Claim'>Claim</option>
+                    <option value='AccountingAndFinance'>AccountingAndFinance</option>
+                    <option value='InternalAudit'>InternalAudit</option>
+                    <option value='Technical'>Technical</option>
+                    <option value='MarketingAndSale'>MarketingAndSale</option>
+                    <option value='InformationTechnology'>InformationTechnology</option>
+                    <option value='KampongCham'>KampongCham</option>
+                    <option value='Takeo'>Takeo</option>
+                    <option value='BanteayMeanchey'>BanteayMeanchey</option>
+                    <option value='Battambang'>Battambang</option>
+                    <option value='Preyveng'>Preyveng</option>
+                    <option value='ShianoukVille'>ShianoukVille</option>
+                    <option value='Siemreap'>Siemreap</option>
+                </select>
             </div>
-            <div className="sm:col-span-1">
+
+            <div className="col-span-1">
                 <Typography className="text-lg mb-1">
                     Department:
                 </Typography>
-                <input
-                type="text"
-                placeholder='Ex: រដ្ឋបាល...'
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="department"
-                value={department}
-                onChange={(e) => setDepartment(e.target.value)}
-            />
+                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg text-md'
+                    value={department}
+                    onChange={(e) => setDepartment(e.target.value)}
+                >
+                    <option value='' className='text-gray-400' selected disabled>Select Department</option>
+                    <option value='Administrator'>Administrator</option>
+                    <option value='Cashier'>Cashier</option>
+                    <option value='CustomerService'>CustomerService</option>
+                    <option value='Claim'>Claim</option>
+                    <option value='AccountingAndFinance'>AccountingAndFinance</option>
+                    <option value='InternalAudit'>InternalAudit</option>
+                    <option value='Technical'>Technical</option>
+                    <option value='MarketingAndSale'>MarketingAndSale</option>
+                    <option value='InformationTechnology'>InformationTechnology</option>
+                </select>
             </div>
+
+            <div className="col-span-1">
+                <Typography className="text-lg mb-1">
+                    Status:
+                </Typography>
+                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg text-md'
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                >
+                    <option value='' className='text-gray-400' selected>Select Asset Status</option>
+                    <option value='true' >Active</option>
+                    <option value='false'>Inactive</option>
+                    {/* <option value=''>...</option> */}
+                </select>
+            </div>
+            
             <div className="sm:col-span-1 py-3">
-                <button onClick= {(e) => saveAndupdateAsset250(e)} className='w-28 mt-6 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 rounded-lg  text-sm px-5 py-2.5 me-2 mb-2 '>
+                <button onClick= {(e) => saveAndUpdateAsset250(e)} className='w-28 mt-6 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 rounded-lg  text-sm px-5 py-2.5 me-2 mb-2 '>
                     Save
                 </button>
                 <Link to={`/asset250`} className='w-16 mt-5 focus:outline-none text-white bg-red-500 hover:bg-red-800 font-medium rounded-lg text-sm px-8 py-3'>Cancel</Link>
             </div>
-            </form>
-        </Card>
-    );
-};
+        </form>
+    </Card>
+  )
+}
 
-export default AddAsset250;
+export default AddAsset250

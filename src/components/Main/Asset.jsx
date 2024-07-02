@@ -7,7 +7,7 @@ import { ExportAsset } from '../Export Function/ExportAsset';
 
 
 // Table thead
-const TABLE_HEAD = ["Id", "Name", "Asset Name", "Model", "Brand", "Code", "Price($)", "Value", "Purchase Date", "Condition", "User", "Other", "Office", "Status", "Action"];
+const TABLE_HEAD = ["Id", "Asset Name", "Model", "Brand", "Code", "Price($)",  "Purchase Date", "Condition", "User", "Other", "Office", "Status", "Action"];
 const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
 
 const Asset = () => {
@@ -60,6 +60,7 @@ const Asset = () => {
     const handlePrevPage = () => setCurrentPage(prev => prev - 1);
     const handleFirstPage = () => setCurrentPage(1);
     const handleLastPage = () => setCurrentPage(totalPages);
+    
     const deleteAsset = async (assetId) => {
         if (assetId != null) {
             try {
@@ -157,11 +158,11 @@ const Asset = () => {
                                                         {assets.id}
                                                     </Typography>
                                                 </td>
-                                                <td className={classes}>
+                                                {/* <td className={classes}>
                                                     <Typography variant="small" color="blue-gray" className="font-normal">
                                                         {assets.name}
                                                     </Typography>
-                                                </td>
+                                                </td> */}
                                                 <td className={classes}>
                                                     <Typography variant="small" color="blue-gray" className="font-normal">
                                                         {assets.assetname}
@@ -187,11 +188,11 @@ const Asset = () => {
                                                         {assets.price}
                                                     </Typography>
                                                 </td>
-                                                <td className={classes}>
+                                                {/* <td className={classes}>
                                                     <Typography variant="small" color="blue-gray" className="font-normal">
                                                         {assets.value}
                                                     </Typography>
-                                                </td>
+                                                </td> */}
                                                 <td className={classes}>
                                                     <Typography variant="small" color="blue-gray" className="font-normal">
                                                         {assets.date}
@@ -233,12 +234,12 @@ const Asset = () => {
                                                     </Typography>
                                                 </td>
                                                 <td className="py-3">
-                                                <Link className='w-28 mt-4 focus:outline-none text-white bg-green-500 hover:bg-green-300 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 '
-                                                    to={`/asset/view/${assets.id}`}>View</Link>
-                                                <Link className='w-28 mt-4 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 '
-                                                    to={`/edit-asset/${assets.id}`}>Edit</Link>
-                                                <Link  className='w-20 mt-4 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 '
-                                                    onClick={() => deleteAsset(assets.id)}>Delete</Link>
+                                                    <Link className='w-28 mt-4 focus:outline-none text-white bg-green-500 hover:bg-green-300 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 '
+                                                        to={`/asset/view/${assets.id}`}>View</Link>
+                                                    <Link className='w-28 mt-4 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 '
+                                                        to={`/edit-asset/${assets.id}`}>Edit</Link>
+                                                    <Link  className='w-20 mt-4 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 '
+                                                        onClick={() => deleteAsset(assets.id)}>Delete</Link>
                                                 </td>
                                             </tr>
                                             
