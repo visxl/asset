@@ -17,13 +17,24 @@ class SupplierService {
     }
 
 
-
     getAllSupplierAsset() {
         return axios.get(SUPPLIER_ASSET_BASE_REST_API_URL)
     }
 
     getSupplierAssetById(id) {
         return axios.get(SUPPLIER_ASSET_BASE_REST_API_URL + '/' + id)
+    }
+
+    saveSupplierAsset() {
+        return axios.post(SUPPLIER_BASE_REST_API_URL)
+    }
+
+    updateSupplierAsset(supId, supplier) {
+        return axios.put(SUPPLIER_ASSET_BASE_REST_API_URL + "/" + supId, supplier)
+    }
+
+    deleteSupplierAsset(id) {
+        return axios.delete(SUPPLIER_ASSET_BASE_REST_API_URL + '/' + id)
     }
 
 

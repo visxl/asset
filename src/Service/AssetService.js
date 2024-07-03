@@ -19,7 +19,7 @@ class AssetService {
     }
 
     getAssetDetailById(assetId) {
-        return axios.get('http://localhost:8081/api/asset/supplier')
+        return axios.get(ASSET_BASE_REST_API_URL + '/detail/' + assetId)
     }
 
     updateAsset(assetId, asset) {
@@ -32,6 +32,10 @@ class AssetService {
 
     getAssetsByOffice(office) {
         return axios.get(ASSET_BASE_REST_API_URL + '/office?office=' + office)
+    }
+
+    getActiveAsset(status) {
+        return axios.get(ASSET_BASE_REST_API_URL + 'status?status=' + status)
     }
 }
 

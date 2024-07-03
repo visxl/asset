@@ -61,20 +61,20 @@ const saveAndupdateAsset = (e) => {
     AssetService.getAssetDetailById(id)
         .then((response) => {
             setName(response.data.name);
-            setAssetName(response.data.assetname);
+            setAssetName(response.data.assetName);
             setModel(response.data.model);
             setBrand(response.data.brand);
             setCode(response.data.code);
             setPrice(response.data.price);
             setValue(response.data.value);
             setDate(response.data.date);
-            setCondition(response.data.assetcondition);
+            setCondition(response.data.condition);
             setUser(response.data.user);
             setOther(response.data.other);
             setOffice(response.data.office);
             setDepartment(response.data.department);
             setType(response.data.type);
-            setPcName(response.data.pcname);
+            setPcName(response.data.pcName);
             setStatus(response.data.status)
         })
         .catch(error => {

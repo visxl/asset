@@ -20,6 +20,7 @@ import Task from './components/Main/Task';
 import AddTask from './components/Create And Edit/AddTask';
 import UserReport from './components/Report/UserReport';
 import Supplier from './components/Main/Supplier';
+import SupplierDetail from './components/View/SupplierDetail';
 
 function App() {
   return (
@@ -43,7 +44,8 @@ function App() {
           <Route path='edit-asset/:id' element={<AddAsset/>}/>
           <Route path='asset/view/:id' element={<AssetDetail/>}/>
 
-            <Route path='supplier' element={<Supplier />}/>
+          <Route path='supplier' element={<Supplier />}/>
+          <Route path='supplier/view/:id' element={<SupplierDetail/>}/>
 
           <Route path='asset250' element={<Asset250 />}/>
           <Route path='add-asset250' element={<AddAsset250 />}/>

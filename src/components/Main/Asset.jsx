@@ -16,6 +16,7 @@ const Asset = () => {
     const [totalItems, setTotalItems] = useState(0);
     const [assets, setAsset] = useState([]);
 
+    const [selectStatus, setSelectStatus] = useState('');
     const [searchCode, setSearchCode] = useState('');
     const [priceFilter, setPriceFilter] = useState('');
     const [selectOffice, setSelectOffice] = useState('');
@@ -24,7 +25,7 @@ const Asset = () => {
 
     useEffect(() => {
         getAllAsset();
-    }, [currentPage, searchCode, priceFilter, selectOffice]);
+    }, [currentPage, selectStatus, searchCode, priceFilter, selectOffice]);
 
     const getAllAsset = async () => {
         try {
@@ -35,6 +36,8 @@ const Asset = () => {
                 url = `http://localhost:8081/api/asset/office?office=${selectOffice}`;
             } else if (priceFilter) {
                 url = `http://localhost:8081/api/asset/${priceFilter}`;
+            } else if (selectStatus) {
+                url = `http://localhost:8081/api/asset/status?status=${selectStatus}`
             }
 
             const response = await fetch(url);
@@ -43,7 +46,7 @@ const Asset = () => {
             }
             const data = await response.json();
 
-            if (searchCode || priceFilter || selectOffice) {
+            if (searchCode || priceFilter || selectOffice || selectStatus) {
                 setAsset(data);
             } else {
                 setTotalPages(data.totalPages);
@@ -76,6 +79,7 @@ const Asset = () => {
         }
     };
 
+    const handlerSelectStatusChange = (event) => setSelectStatus(event.target.value);
     const handlerSelectOfficeChange = (event) => setSelectOffice(event.target.value);
     const handleSearchCodeInputChange = (event) => setSearchCode(event.target.value);
     const handlePriceFilterChange = (event) => setPriceFilter(event.target.value);
@@ -129,10 +133,18 @@ const Asset = () => {
                             onChange={handleSearchCodeInputChange} 
                             placeholder="Search by Code" 
                         />
+                        <select className='w-full md:w-64 text-black border font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2'
+                            value={selectStatus}
+                            onChange={handlerSelectStatusChange}
+                        >
+                            <option value=''>Select Status</option>
+                            <option value='1'>Active</option>
+                            <option value='0'>Inactive</option>
+                        </select>
                     </div>
 
                     <div className="relative">
-                        <table className="w-full text-black table-auto">
+                        <table className="w-full text-black dark:text-white table-auto">
                             <thead>
                                 <tr>
                                     {TABLE_HEAD.map((head, index) => (
