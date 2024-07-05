@@ -1,4 +1,4 @@
-import { Card, Typography } from '@material-tailwind/react';
+import { Typography } from '@material-tailwind/react';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Asset250Service from '../../Service/Asset250Service';
@@ -43,7 +43,7 @@ const AddAsset250 = () => {
       type,
       other,
       pcname,
-      status: status === 'true',
+      status,
     };
 
     if (id) {
@@ -73,23 +73,22 @@ const AddAsset250 = () => {
     if (id) {
       Asset250Service.getAsset250DetailById(id)
         .then((response) => {
-          const data = response.data;
-          setName(data.name);
-          setAssetname(data.assetname);
-          setModel(data.model);
-          setBrand(data.brand);
-          setCode(data.code);
-          setPrice(data.price);
-          setValue(data.value);
-          setDate(data.date);
-          setAssetCondition(data.assetcondition);
-          setUser(data.user);
-          setOther(data.other);
-          setOffice(data.office);
-          setDepartment(data.department);
-          setType(data.type);
-          setPcname(data.pcname);
-          setStatus(data.status ? 'true' : 'false');
+          setName(response.data.name);
+          setAssetname(response.data.assetname);
+          setModel(response.data.model);
+          setBrand(response.data.brand);
+          setCode(response.data.code);
+          setPrice(response.data.price);
+          setValue(response.data.value);
+          setDate(response.data.date);
+          setAssetCondition(response.data.assetcondition);
+          setUser(response.data.user);
+          setOther(response.data.other);
+          setOffice(response.data.office);
+          setDepartment(response.data.department);
+          setType(response.data.type);
+          setPcname(response.data.pcname);
+          setStatus(response.data.status);
         })
         .catch((error) => {
           console.error('Error fetching asset by ID:', error);
@@ -114,20 +113,20 @@ const AddAsset250 = () => {
     }
 
     return (
-    <Card className='w-full h-full rounded-xl p-5 pb-32 shadow-lg'>
+        <div className='p-4 xxs:w-full md:w-full mt-5'>
         {error && (
         <Typography className="text-red-500 mb-4">
           {error}
         </Typography>
       )}
         <Typography className="text-xl font-bold mb-6">
-            Create New Asset
+            Asset under 250
         </Typography>
             {
                 title()
             }
-        <form className="max-w-screen-lg grid sm:grid-cols-2 gap-6 p-5">
-            <div className="sm:col-span-1">
+        <form className="xxs:w-80 md:p-5 md:w-screen h-full grid xxs:grid-cols-1 md:grid-cols-3 gap-3">
+            <div className="xxs:col-span-3 md:col-span-1">
                 <Typography className="text-lg mb-1">
                     Name:
                 </Typography>
@@ -141,11 +140,11 @@ const AddAsset250 = () => {
                 />
             </div>
 
-            <div className="col-span-1">
+            <div className="xxs:col-span-3 md:col-span-1">
                 <Typography className="text-lg mb-1">
                     Asset Name:
                 </Typography>
-                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg text-md'
+                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                     value={assetname}
                     onChange={(e) => setAssetname(e.target.value)}
                 >
@@ -161,7 +160,7 @@ const AddAsset250 = () => {
                 </select>
             </div>
 
-            <div className="sm:col-span-1">
+            <div className="xxs:col-span-3 md:col-span-1">
                 <Typography className="text-lg mb-1">
                     Model:
                 </Typography>
@@ -174,7 +173,7 @@ const AddAsset250 = () => {
                     onChange={(e) => setModel(e.target.value)}
                 />
             </div>
-            <div className="sm:col-span-1">
+            <div className="xxs:col-span-3 md:col-span-1">
                 <Typography className="text-lg mb-1">
                     Brand:
                 </Typography>
@@ -187,7 +186,7 @@ const AddAsset250 = () => {
                     onChange={(e) => setBrand(e.target.value)}
                 />
             </div>
-            <div className="sm:col-span-1">
+            <div className="xxs:col-span-3 md:col-span-1">
                 <Typography className="text-lg mb-1">
                     Code:
                 </Typography>
@@ -200,7 +199,7 @@ const AddAsset250 = () => {
                     onChange={(e) => setCode(e.target.value)}
                 />
             </div>
-            <div className="sm:col-span-1">
+            <div className="xxs:col-span-3 md:col-span-1">
                 <Typography className="text-lg mb-1">
                     Price:
                 </Typography>
@@ -213,7 +212,7 @@ const AddAsset250 = () => {
                 onChange={(e) => setPrice(e.target.value)}
             />
             </div>
-            <div className="sm:col-span-1">
+            <div className="xxs:col-span-3 md:col-span-1">
                 <Typography className="text-lg mb-1">
                     Value:
                 </Typography>
@@ -226,7 +225,7 @@ const AddAsset250 = () => {
                 onChange={(e) => setValue(e.target.value)}
             />
             </div>
-            <div className="sm:col-span-1">
+            <div className="xxs:col-span-3 md:col-span-1">
                 <Typography className="text-lg mb-1">
                     Purchase Date:
                 </Typography>
@@ -239,7 +238,7 @@ const AddAsset250 = () => {
             />
             </div>
 
-            <div className="sm:col-span-1">
+            <div className="xxs:col-span-3 md:col-span-1">
                 <Typography className="text-lg mb-1">
                     User:
                 </Typography>
@@ -253,7 +252,7 @@ const AddAsset250 = () => {
             />
             </div>
 
-            <div className="sm:col-span-1">
+            <div className="xxs:col-span-3 md:col-span-1">
                 <Typography className="text-lg mb-1">
                     PC Name:
                 </Typography>
@@ -281,11 +280,11 @@ const AddAsset250 = () => {
             />
             </div>
 
-            <div className="col-span-1">
+            <div className="xxs:col-span-3 md:col-span-1">
                 <Typography className="text-lg mb-1">
                     Condition:
                 </Typography>
-                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg text-md'
+                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                     value={assetcondition}
                     onChange={(e) => setAssetCondition(e.target.value)}
                 >
@@ -296,11 +295,11 @@ const AddAsset250 = () => {
                 </select>
             </div>
 
-            <div className="col-span-1">
+            <div className="xxs:col-span-3 md:col-span-1">
                 <Typography className="text-lg mb-1">
                     Type:
                 </Typography>
-                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg text-md'
+                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                     value={type}
                     onChange={(e) => setType(e.target.value)}
                 >
@@ -311,11 +310,11 @@ const AddAsset250 = () => {
                 </select>
             </div>
 
-            <div className="col-span-1">
+            <div className="xxs:col-span-3 md:col-span-1">
                 <Typography className="text-lg mb-1">
                     Office:
                 </Typography>
-                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg text-md'
+                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                     value={office}
                     onChange={(e) => setOffice(e.target.value)}
                 >
@@ -339,11 +338,11 @@ const AddAsset250 = () => {
                 </select>
             </div>
 
-            <div className="col-span-1">
+            <div className="xxs:col-span-3 md:col-span-1">
                 <Typography className="text-lg mb-1">
                     Department:
                 </Typography>
-                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg text-md'
+                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                     value={department}
                     onChange={(e) => setDepartment(e.target.value)}
                 >
@@ -360,11 +359,11 @@ const AddAsset250 = () => {
                 </select>
             </div>
 
-            <div className="col-span-1">
+            <div className="xxs:col-span-3 md:col-span-1">
                 <Typography className="text-lg mb-1">
                     Status:
                 </Typography>
-                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg text-md'
+                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}
                 >
@@ -375,14 +374,14 @@ const AddAsset250 = () => {
                 </select>
             </div>
             
-            <div className="sm:col-span-1 py-3">
-                <button onClick= {(e) => saveAndUpdateAsset250(e)} className='w-28 mt-6 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 rounded-lg  text-sm px-5 py-2.5 me-2 mb-2 '>
+            <div className="flex xxs:justify-between md:justify-start align-middle col-span-3">
+                <button onClick= {(e) => saveAndUpdateAsset250(e)} className='w-28 mt-7 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 rounded-lg  text-sm px-5 py-2.5 me-2 mb-2 '>
                     Save
                 </button>
-                <Link to={`/asset250`} className='w-16 mt-5 focus:outline-none text-white bg-red-500 hover:bg-red-800 font-medium rounded-lg text-sm px-8 py-3'>Cancel</Link>
+                <Link to={`/asset250`} className='w-28 mt-5 focus:outline-none text-white bg-red-500 hover:bg-red-800 font-medium rounded-lg text-center self-center text-sm px-5 py-2.5'>Cancel</Link>
             </div>
         </form>
-    </Card>
+    </div>
   )
 }
 

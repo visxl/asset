@@ -1,13 +1,13 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
 
-const ASSET_BASE_REST_API_URL = 'http://localhost:8081/api/asset'
+const ASSET_BASE_REST_API_URL = 'http://192.168.137.14:3308/api/asset'
 
 class AssetService {
     
     // Asset
     getAllAsset() {
-        return axios.get('http://localhost:8081/api/asset/report')
+        return axios.get('http://192.168.137.14:3308/api/asset/report')
     }
 
     createAsset(asset) {

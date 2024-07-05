@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import { Card } from '@material-tailwind/react';
-import  SU  from '../asset/SystemUnit.png'
+// import  SU  from '../asset/SystemUnit.png'
 import SupplierService from '../../Service/SupplierService';
 
 const SupplierDetail = () => {
-    const [asset, setAsset] = useState({})
+    const [asset] = useState({})
     const [supplier, setSupplier] = useState({})
     const [loading, setLoading] = useState(true)
     // const navigate = useNavigate()

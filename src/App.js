@@ -21,11 +21,13 @@ import AddTask from './components/Create And Edit/AddTask';
 import UserReport from './components/Report/UserReport';
 import Supplier from './components/Main/Supplier';
 import SupplierDetail from './components/View/SupplierDetail';
+import Sidebar from './components/shared/Sidebar'
 
 function App() {
   return (
     <Router>
       <Routes >
+        <Route path='test' element={<Sidebar />} />
         <Route path='/login' element={<Login />}/>
         <Route path='asset/report' element={<AssetReport/>}/>
         <Route path='asset250/report' element={<Asset250Report/>}/>

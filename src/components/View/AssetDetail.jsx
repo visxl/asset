@@ -1,4 +1,3 @@
-import { Card } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import AssetService from '../../Service/AssetService';
@@ -70,9 +69,28 @@ const AssetDetail = () => {
   ];
 return (
   <>
-  <section className='grid grid-cols-2 w-full gap-4'>
-    <Card className='w-auto'>
-      <div className='p-5 self-center'>
+  <section className='grid grid-cols-6 xxs:w-80'>
+    <div className='xxs:w-80 xxs:col-span-6 md:col-span-2 shadow-lg rounded-md'>
+      <div className='p-3 align-middle justify-start'>
+        <h2 className='text-lg font-semibold mb-4'>Asset Details</h2>
+        {assetDetails.map(({ label, value }, index) => (
+          <p key={label} className={`py-2 pl-5 ${index % 2 === 0 ? 'bg-gray-100' : ''}`}>
+            <span>{label} : </span>
+            {value || 'N/A'}
+          </p>
+        ))}
+        <h2 className='text-lg font-semibold mt-8 mb-4'>Audit Information</h2>
+        {auditDetails.map(({ label, value }, index) => (
+          <p key={label} className={`py-2 pl-5 ${index % 2 === 0 ? 'bg-gray-100' : ''}`}>
+            <span>{label} : </span>
+            {value || 'N/A'}
+          </p>
+        ))}
+      </div>
+    </div>
+
+    <div className='xxs:w-80 xxs:col-span-6 md:col-span-2 '>
+      <div className='p-3 self-center'>
         <img src={SU} alt='assetImage' className='h-96' />
       </div>
       <div className='flex self-center mt-32'>
@@ -89,26 +107,7 @@ return (
           Delete
         </button>
       </div>
-    </Card>
-
-    <Card className='w-auto'>
-      <div className='p-5 align-middle justify-center'>
-        <h2 className='text-lg font-semibold mb-4'>Asset Details</h2>
-        {assetDetails.map(({ label, value }, index) => (
-          <p key={label} className={`py-2 pl-5 ${index % 2 === 0 ? 'bg-gray-100' : ''}`}>
-            <span>{label} : </span>
-            {value || 'N/A'}
-          </p>
-        ))}
-        <h2 className='text-lg font-semibold mt-8 mb-4'>Audit Information</h2>
-        {auditDetails.map(({ label, value }, index) => (
-          <p key={label} className={`py-2 pl-5 ${index % 2 === 0 ? 'bg-gray-100' : ''}`}>
-            <span>{label} : </span>
-            {value || 'N/A'}
-          </p>
-        ))}
-      </div>
-    </Card>
+    </div>
   </section>
   </>
 )

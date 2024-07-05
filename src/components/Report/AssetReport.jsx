@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
-import { Card, Typography } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
 
 
 import LOGOJPG from '../asset/Banner.jpg'
@@ -27,7 +27,7 @@ import AssetService from '../../Service/AssetService';
     []);
 
     return (
-        <Card className='w-full rounded-xl p-5 shadow-lg'>
+        // <Card className='w-screen rounded-xl p-5 shadow-lg'>
             <div className="relative">
                 <img src={LOGOJPG} alt='logo'/>
                 <Typography className='text-center text-2xl font-semibold ' >
@@ -62,7 +62,7 @@ import AssetService from '../../Service/AssetService';
                                         </td>
                                         <td className={classes}>
                                             <Typography variant="small" color="blue-gray" className="font-normal">
-                                                {asset.assetname}
+                                                {asset.assetName}
                                             </Typography>
                                         </td>
                                         <td className={classes}>
@@ -117,7 +117,7 @@ import AssetService from '../../Service/AssetService';
                                         </td>
                                         <td className={classes}>
                                             <Typography variant="small" color="blue-gray" className="font-normal">
-                                                {asset.pcname}
+                                                {asset.pcName}
                                             </Typography>
                                         </td>
                                     </tr>
@@ -127,7 +127,7 @@ import AssetService from '../../Service/AssetService';
                     </tbody>
                 </table>
             </div>
-        </Card>
+        // </Card>
     );
 }
 

@@ -1,33 +1,33 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
 
-const ASSET250_BASE_REST_API_URL = 'http://localhost:8081/api/asset250'
+const ASSET250_BASE_REST_API_URL = 'http://192.168.137.14:3308/api/asset250'
 
 class Asset250Service {
     
     // Asset
     getAllAsset250() {
-        return axios.get('http://localhost:8081/api/asset250/report')
+        return axios.get('http://192.168.137.14:3308/api/asset250/report')
     }
 
-    createAsset250(asset) {
-        return axios.post(ASSET250_BASE_REST_API_URL, asset)
+    createAsset250(asset250) {
+        return axios.post(ASSET250_BASE_REST_API_URL, asset250)
     }
 
-    getAsset250ById(assetId) {
-        return axios.get(ASSET250_BASE_REST_API_URL + '/' + assetId)
+    getAsset250ById(asset250Id) {
+        return axios.get(ASSET250_BASE_REST_API_URL + '/' + asset250Id)
     }
 
-    getAsset250DetailById(assetId) {
-        return axios.get('http://localhost:8081/api/asset250/detail/' + assetId)
+    getAsset250DetailById(asset250Id) {
+        return axios.get('http://192.168.137.14:3308/api/asset250/detail/' + asset250Id)
     }
 
-    updateAsset250(assetId, asset) {
-        return axios.put(ASSET250_BASE_REST_API_URL + "/" + assetId, asset)
+    updateAsset250(asset250Id, asset250) {
+        return axios.put(ASSET250_BASE_REST_API_URL + "/" + asset250Id, asset250)
     }
 
-    deleteAsset250(assetId) {
-        return axios.delete(ASSET250_BASE_REST_API_URL + "/" + assetId)
+    deleteAsset250(asset250Id) {
+        return axios.delete(ASSET250_BASE_REST_API_URL + "/" + asset250Id)
     }
 
     getAsset250ByOffice(office) {

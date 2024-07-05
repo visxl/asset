@@ -1,73 +1,31 @@
-import { ChevronLast, ChevronFirst } from "lucide-react"
-import { createContext, useState } from "react"
-import { DASHBOARD_SIDEBAR_BOTTOM_LINKS, DASHBOARD_SIDEBAR_BOTTOM_LINKS_ICON, DASHBOARD_SIDEBAR_LINKS, DASHBOARD_SIDEBAR_LINKS_ICON } from "../../lib/const/navigation"
-import { Link } from "react-router-dom"
+import React, { useState } from "react"
+import { Button, Drawer } from "flowbite-react";
 
-const SidebarContext = createContext()
 
 export default function Sidebar() {
-    const [expanded, setExpanded] = useState(true)
-    return (
-        <aside className="h-screen relative">
-            <nav className="h-full flex flex-col bg-white border-r shadow-sm">
-                <div className="p-4 pb-2 flex justify-between items-center">
-                    <img
-                        src="https://img.logoipsum.com/243.svg"
-                        className={`overflow-hidden transition-all ${
-                        expanded ? "w-44" : "w-0"
-                        }`}
-                        alt=""
-                    />
-                    <button
-                        onClick={() => setExpanded((curr) => !curr)}
-                        className="p-3 rounded-lg bg-gray-50 hover:bg-gray-200"
-                    >
-                        {expanded ? <ChevronFirst /> : <ChevronLast />}
-                    </button>
-                </div>
+    const [isOpen, setIsOpen] = useState(true)
 
-                <SidebarContext.Provider value={{ expanded }}>
-                    <ul className={`overflow-hidden transition-all flex-1 border-t`}>
-                        {expanded ? (
-                            DASHBOARD_SIDEBAR_LINKS.map((item) => (
-                                <SidebarItem key={item.key} item={item}/> 
-                            ))
-                        ) : (
-                            DASHBOARD_SIDEBAR_LINKS_ICON.map((item) => (
-                                <SidebarItem key={item.key} item={item}/> 
-                            ))
-                        )}
-                    </ul>
-                    <ul className={`overflow-hidden transition-all flex flex-col border-t`}>
-                        {expanded ? (
-                            DASHBOARD_SIDEBAR_BOTTOM_LINKS.map((item) => (
-                                <SidebarItem key={item.key} item={item}/>
-                              ))
-                        ) : (
-                            DASHBOARD_SIDEBAR_BOTTOM_LINKS_ICON.map((item) => (
-                                <SidebarItem key={item.key} item={item}/>
-                              ))
-                        )}
-                    </ul>
-                </SidebarContext.Provider>
-            </nav>
-        </aside>
+    const handleClose = () =>setIsOpen(false)
+    
+    return (
+        <>
+            <div className="flex min-h-[50vh] items-center justify-center">
+                <Button onClick={() => setIsOpen(true)}>Show navigation</Button>
+            </div>
+
+            <Drawer open={isOpen} onClose={handleClose}>
+                <Drawer.Header title="Menu" titleIcon={() => <></>}/>
+                <Drawer.Items>
+                    <Sidebar aria-label='Sidebar with multi-level dropdown' className='[&>div]:bg-transparent [&>div]:p-0'>
+                        <div className="flex h-full flex-col justify-between py-2">
+                            <Sidebar.Items>
+                                
+                            </Sidebar.Items>
+                        </div>
+                    </Sidebar>
+                </Drawer.Items>
+            </Drawer>
+        </>
     )
 }
 
-export function SidebarItem({ item }) {
-    const [hovered, setHovered] = useState(false);
-
-    return (
-        <li
-            className="flex items-center py-0.5 text-black"
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-        >
-            <Link to={item.path} className="w-full h-10 pl-6 text-md flex items-center text-black hover:bg-gray-200">
-                {item.icon}
-                <span className={hovered ? "transition-all md:inline" : "overflow-hidden transition-all md:inline"}>{item.label}</span>
-            </Link>
-        </li>
-    );
-};

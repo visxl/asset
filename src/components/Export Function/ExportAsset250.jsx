@@ -14,7 +14,7 @@ export const ExportAsset250 = ({ fileName }) => {
 
   const fetchExcelData = async () => {
     try {
-      const response = await fetch('http://localhost:8081/api/asset250/report');
+      const response = await fetch('http://192.168.137.14/api/asset250/report');
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
@@ -39,7 +39,7 @@ export const ExportAsset250 = ({ fileName }) => {
   };
 
   return (
-      <button content="Excel Export" className='w-32 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 '
+      <button content="Excel Export" className='xxs:w-full md:w-32 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 font-medium rounded-lg text-xs px-2 py-2.5 md:me-2 sm:me-2 mb-2 '
         onClick={exportToExcel}
       >
         Export
