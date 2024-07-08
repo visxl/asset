@@ -43,12 +43,13 @@ const UserProfile = () => {
   }, [navigate]);
 
   return (
-    <div className="bg-gray-100 h-screen">
-      <div className="container mx-auto py-8">
-        <div className="grid grid-cols-12 gap-6 px-4">
+    <div className="mt-5 h-full p-4">
+      <div className="mx-auto py-8">
+        <div className="grid grid-cols-12 gap-6">
           {/* Left Container  */}
-          <div className="col-span-4 sm:col-span-3">
-            <div className="bg-white shadow rounded-lg p-6">
+          <div className="col-span-9 xxs:col-span-12">
+
+            <div className="bg-white shadow rounded-lg p-6 xxs:w-80">
               <div className="flex flex-col items-center">
                 {/* User Profile */}
                 <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" className="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0" alt="User profile" />
@@ -82,7 +83,7 @@ const UserProfile = () => {
           </div>
 
           {/* Right Container */}
-                    <div class="col-span-9">
+                    <div class="col-span-9 xxs:col-span-12 ">
                         {/* User Description  */}
                         <div class="bg-white shadow rounded-lg p-6">
                             <h2 class="text-xl font-bold mb-4">About Me</h2>

@@ -8,7 +8,9 @@ import LOGOJPG from '../asset/Banner.jpg'
 import AssetService from '../../Service/AssetService';
 
     // Table thead
-    const TABLE_HEAD = ["ID", "Name", "Asset Name", "Model", "Brand", "Code", "Price($)", "Value", "Purchase Date", "Condition", "User", "Other","Office","PC Name"];
+    const TABLE_HEAD = ["ID", "Name", "Asset Name", "Model", "Brand", "Code", "Price($)", "Value", "Purchase Date", "Condition", "User", "Other","Office",
+        // "PC Name"
+    ];
     const classes = "border border-solid text-sm p-1";
 
     // Fetch data from backend
@@ -31,7 +33,7 @@ import AssetService from '../../Service/AssetService';
             <div className="relative">
                 <img src={LOGOJPG} alt='logo'/>
                 <Typography className='text-center text-2xl font-semibold ' >
-                    បញ្ជីគ្រប់គ្រងទ្រព្យសម្បត្តិក្រុមហ៊ុន ត្រឹមថ្ងៃទី ៣១ - ធ្នូ - ២០២៣
+                    បញ្ជីគ្រប់គ្រងទ្រព្យសម្បត្តិក្រុមហ៊ុន ត្រឹមថ្ងៃទី ៣១ - មិថុនា - ២០២៤
                 </Typography>
                 <table className="w-full text-sm  text-black ">
                     <thead>
@@ -115,11 +117,11 @@ import AssetService from '../../Service/AssetService';
                                                 {asset.office}
                                             </Typography>
                                         </td>
-                                        <td className={classes}>
+                                        {/* <td className={classes}>
                                             <Typography variant="small" color="blue-gray" className="font-normal">
                                                 {asset.pcName}
                                             </Typography>
-                                        </td>
+                                        </td> */}
                                     </tr>
                                 );
                             }

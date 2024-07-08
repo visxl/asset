@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import { Card, Typography } from '@material-tailwind/react';
-import { FloatingLabel } from 'flowbite-react';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -59,7 +58,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-200">
+    <div className="flex items-center justify-center h-screen">
       <Card className="flex">
         <Typography className='text-center text-2xl font-bold text-black mt-5'>
           SignIn

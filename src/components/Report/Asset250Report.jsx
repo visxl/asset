@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
-import { Card, Typography } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
 import LOGOJPG from '../asset/Banner.jpg'
 import Asset250Service from '../../Service/Asset250Service';
 
     // Table thead
-    const TABLE_HEAD = ["ID", "Name", "Asset Name", "Model", "Brand", "Code", "Price($)", "Value", "Purchase Date", "Condition", "User", "Office","Department"];
+    const TABLE_HEAD = ["ID", "Name", "Model", "Brand", "Code", "Price($)", "Value", "Purchase Date", "Condition", "User", "Office","Department"];
     const classes = "border border-solid text-sm p-1";
 
     // Fetch data from backend
@@ -25,8 +25,7 @@ import Asset250Service from '../../Service/Asset250Service';
     []);
 
     return (
-        <Card className='w-full rounded-xl p-5 h-full shadow-lg'>
-            <div className="relative">
+            <div className="relative p-5">
                 <img src={LOGOJPG} alt='logo'/>
                 <Typography className='text-center text-2xl font-semibold ' >
                     បញ្ជីគ្រប់គ្រងទ្រព្យសម្បត្តិក្រុមហ៊ុន ត្រឹមថ្ងៃទី ៣១ - ធ្នូ - ២០២៣
@@ -58,11 +57,11 @@ import Asset250Service from '../../Service/Asset250Service';
                                                 {asset250.name}
                                             </Typography>
                                         </td>
-                                        <td className={classes}>
+                                        {/* <td className={classes}>
                                             <Typography variant="small" color="blue-gray" className="font-normal">
                                                 {asset250.assetname}
                                             </Typography>
-                                        </td>
+                                        </td> */}
                                         <td className={classes}>
                                             <Typography variant="small" color="blue-gray" className="font-normal">
                                                 {asset250.model}
@@ -125,7 +124,6 @@ import Asset250Service from '../../Service/Asset250Service';
                     </tbody>
                 </table>
             </div>
-        </Card>
     );
 }
 

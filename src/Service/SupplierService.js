@@ -1,9 +1,9 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
 
-const SUPPLIER_BASE_REST_API_URL = 'http://localhost:8081/api/supplier'
+const SUPPLIER_BASE_REST_API_URL = 'http://192.168.137.14:3308/api/supplier'
 
-const SUPPLIER_ASSET_BASE_REST_API_URL = 'http://localhost:8081/api/supplier/asset'
+const SUPPLIER_ASSET_BASE_REST_API_URL = 'http://192.168.137.14:3308/api/supplier/asset'
 
 class SupplierService {
     
@@ -16,7 +16,6 @@ class SupplierService {
         return axios.get(SUPPLIER_BASE_REST_API_URL + '/' + id)
     }
 
-
     getAllSupplierAsset() {
         return axios.get(SUPPLIER_ASSET_BASE_REST_API_URL)
     }
@@ -25,7 +24,7 @@ class SupplierService {
         return axios.get(SUPPLIER_ASSET_BASE_REST_API_URL + '/' + id)
     }
 
-    saveSupplierAsset() {
+    createSupplierAsset() {
         return axios.post(SUPPLIER_BASE_REST_API_URL)
     }
 

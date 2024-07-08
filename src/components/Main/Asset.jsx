@@ -39,50 +39,48 @@ const Asset = () => {
     
 
     useEffect(() => {
-        getAllAsset();
+        getAllAsset()
     }, [currentPage, selectStatus, searchCode, priceFilter, selectOffice]);
 
     const getAllAsset = async () => {
         try {
-            let url = `http://192.168.137.14:3308/api/asset/page/${currentPage}`;
+            let url = `http://192.168.137.14:3308/api/asset/page/${currentPage}`
             if (searchCode) {
-                url = `http://192.168.137.14:3308/api/asset/code?code=${searchCode}`;
+                url = `http://192.168.137.14:3308/api/asset/code?code=${searchCode}`
             } else if (selectOffice) {
-                url = `http://192.168.137.14:3308/api/asset/office?office=${selectOffice}`;
+                url = `http://192.168.137.14:3308/api/asset/office?office=${selectOffice}`
             } else if (priceFilter) {
-                url = `http://192.168.137.14:3308/api/asset/${priceFilter}`;
+                url = `http://192.168.137.14:3308/api/asset/${priceFilter}`
             } else if (selectStatus) {
                 url = `http://192.168.137.14:3308/api/asset/status?status=${selectStatus}`
             }
 
-            const response = await fetch(url);
+            const response = await fetch(url)
             if (!response.ok) {
-                throw new Error('Failed to fetch data');
+                throw new Error('Failed to fetch data')
             }
-            const data = await response.json();
+            const data = await response.json()
 
             if (searchCode || priceFilter || selectOffice || selectStatus) {
-                setAsset(data);
+                setAsset(data)
             } else {
-                setTotalPages(data.totalPages);
-                setTotalItems(data.totalItems);
-                setAsset(data.asset);
+                setTotalPages(data.totalPages)
+                setTotalItems(data.totalItems)
+                setAsset(data.asset)
             }
         } catch (error) {
-            console.error('Error fetching data:', error);
-            setError('Failed to fetch data');
+            console.error('Error fetching data:', error)
+            setError('Failed to fetch data')
         }
     };
 
-    const handleNextPage = () => setCurrentPage(prev => prev + 1);
-    const handlePrevPage = () => setCurrentPage(prev => prev - 1);
-    // const handleFirstPage = () => setCurrentPage(1);
-    // const handleLastPage = () => setCurrentPage(totalPages);
-    const handlePageChange = (page) => setCurrentPage(page);
+    const handleNextPage = () => setCurrentPage(prev => prev + 1)
+    const handlePrevPage = () => setCurrentPage(prev => prev - 1)
+    const handlePageChange = (page) => setCurrentPage(page)
 
     const renderPageNumbers = () => {
-        const pageNumbers = [];
-        const visiblePages = 2;
+        const pageNumbers = []
+        const visiblePages = 2
         
         for (let i = 1; i <= visiblePages; i++) {
             pageNumbers.push(i);
@@ -142,8 +140,6 @@ const Asset = () => {
         }
     };
 
-    
-
     const handlerSelectStatusChange = (event) => setSelectStatus(event.target.value);
     const handlerSelectOfficeChange = (event) => setSelectOffice(event.target.value);
     const handleSearchCodeInputChange = (event) => setSearchCode(event.target.value);
@@ -153,7 +149,7 @@ const Asset = () => {
         <div>
             <section>
                 <div>
-                    <div className="bg-white dark:bg-gray-800 relative shadow-xl rounded-2xl overflow-hidden">
+                    <div className="mt-5 bg-white dark:bg-gray-800 relative shadow-xl rounded-2xl overflow-hidden">
                         <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                             <div className='xxs:max-w-80 sm:max-w-full '>
                                 <div className="md:w-full">
@@ -253,7 +249,7 @@ const Asset = () => {
                                                                 </Typography>
                                                             </td>
                                                             <td className={classes}>
-                                                                <Typography variant="small" color="blue-gray" className="font-normal">
+                                                                <Typography variant="small" color="blue-gray" className="font-normal text-xs">
                                                                     {assets.name}
                                                                 </Typography>
                                                             </td>
@@ -283,7 +279,7 @@ const Asset = () => {
                                                                 </Typography>
                                                             </td>
                                                             <td className={classes}>
-                                                                <Typography variant="small" color="blue-gray" className="font-normal">
+                                                                <Typography variant="small" color="blue-gray" className="font-normal text-xs">
                                                                     {assets.value}
                                                                 </Typography>
                                                             </td>

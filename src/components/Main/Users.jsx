@@ -26,7 +26,7 @@ import UserService from '../../Service/UserService';
 
             const getAllUser = async () => {
                 try {
-                    const response = await fetch(`http://localhost:8081/api/users/page/${currentPage}`)
+                    const response = await fetch(`http://192.168.137.14:3308/api/users/page/${currentPage}`)
                     if (!response.ok) {
                         throw new Error('Failed to fetch data');
                     }
@@ -45,7 +45,7 @@ import UserService from '../../Service/UserService';
 
             const handleSearch = async () => {
                 try {
-                    const response = await fetch(`http://localhost:8081/api/users/engName?engName=${searchEngName}`);
+                    const response = await fetch(`http://192.168.137.14:3308/api/users/engName?engName=${searchEngName}`);
                     if (!response.ok) {
                         throw new Error('Failed to search Customer');
                     }
@@ -81,7 +81,7 @@ import UserService from '../../Service/UserService';
     };
 
     return (
-        <Card className='w-full rounded-xl p-3 shadow-lg'>
+        <Card className='mt-5 w-full rounded-xl p-3 shadow-lg'>
             <Typography className='text-left font-bold text-xl'>
                 List Users
             </Typography>

@@ -3,49 +3,38 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Asset250Service from '../../Service/Asset250Service';
 
-const AddAsset250 = () => {
-  const [name, setName] = useState('');
-  const [assetname, setAssetname] = useState('');
-  const [model, setModel] = useState('');
-  const [brand, setBrand] = useState('');
-  const [code, setCode] = useState('');
-  const [price, setPrice] = useState('');
-  const [value, setValue] = useState('');
-  const [date, setDate] = useState('');
-  const [assetcondition, setAssetCondition] = useState('');
-  const [user, setUser] = useState('');
-  const [office, setOffice] = useState('');
-  const [department, setDepartment] = useState('');
-  const [other, setOther] = useState('');
-  const [pcname, setPcname] = useState('');
-  const [type, setType] = useState('');
-  const [status, setStatus] = useState('');
+
+export const AddAsset250 = () => {
+
+  const [name, setName] = useState();
+  const [assetName, setAssetName] = useState();
+  const [model, setModel] = useState();
+  const [brand, setBrand] = useState();
+  const [code, setCode] = useState();
+  const [price, setPrice] = useState();
+  const [value, setValue] = useState();
+  const [date, setDate] = useState();
+  const [condition, setCondition] = useState();
+  const [user, setUser] = useState();
+  const [office, setOffice] = useState();
+  const [department, setDepartment] = useState();
+  const [other, setOther] = useState();
+  const [pcName, setPcName] = useState();
+  const [type, setType] = useState();
+  const [status, setStatus] = useState();
+
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const saveAndUpdateAsset250 = (e) => {
+
+//   Handle save and update Button
+const saveAndupdateAsset250 = (e) => {
     e.preventDefault();
-
-    const asset250 = {
-      name,
-      assetname,
-      model,
-      brand,
-      code,
-      price,
-      value,
-      date,
-      assetcondition,
-      user,
-      office,
-      department,
-      type,
-      other,
-      pcname,
-      status,
-    };
-
+  
+    const asset250 = { name, assetName, model, brand, code, price, value, date, condition, user, office, department, type , other, pcName, status};
+  
+    // Handle FindById Request
     if (id) {
       Asset250Service.updateAsset250(id, asset250)
         .then((response) => {
@@ -54,9 +43,10 @@ const AddAsset250 = () => {
         })
         .catch((error) => {
           console.log('Error updating asset by ID:', error);
-          setError('Failed to update asset');
+          setError("Failed to update asset")
         });
     } else {
+      // Handle Create Asset Request
       Asset250Service.createAsset250(asset250)
         .then((response) => {
           console.log(response.data);
@@ -64,38 +54,35 @@ const AddAsset250 = () => {
         })
         .catch((error) => {
           console.log('Error creating asset', error);
-          setError('Failed to create asset');
+          setError("Failed to create asset")
         });
     }
   };
 
   useEffect(() => {
-    if (id) {
-      Asset250Service.getAsset250DetailById(id)
+    Asset250Service.getAsset250DetailById(id)
         .then((response) => {
-          setName(response.data.name);
-          setAssetname(response.data.assetname);
-          setModel(response.data.model);
-          setBrand(response.data.brand);
-          setCode(response.data.code);
-          setPrice(response.data.price);
-          setValue(response.data.value);
-          setDate(response.data.date);
-          setAssetCondition(response.data.assetcondition);
-          setUser(response.data.user);
-          setOther(response.data.other);
-          setOffice(response.data.office);
-          setDepartment(response.data.department);
-          setType(response.data.type);
-          setPcname(response.data.pcname);
-          setStatus(response.data.status);
+            setName(response.data.name);
+            setAssetName(response.data.assetName);
+            setModel(response.data.model);
+            setBrand(response.data.brand);
+            setCode(response.data.code);
+            setPrice(response.data.price);
+            setValue(response.data.value);
+            setDate(response.data.date);
+            setCondition(response.data.condition);
+            setUser(response.data.user);
+            setOther(response.data.other);
+            setOffice(response.data.office);
+            setDepartment(response.data.department);
+            setType(response.data.type);
+            setPcName(response.data.pcName);
+            setStatus(response.data.status)
         })
-        .catch((error) => {
-          console.error('Error fetching asset by ID:', error);
-          setError('Failed to fetch asset details');
+        .catch(error => {
+            console.error('Error fetching asset by ID:', error);
         });
-    }
-  }, [id]);
+}, [id]);
 
     // Alert msg
     const title = () => {
@@ -145,8 +132,8 @@ const AddAsset250 = () => {
                     Asset Name:
                 </Typography>
                 <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
-                    value={assetname}
-                    onChange={(e) => setAssetname(e.target.value)}
+                    value={assetName}
+                    onChange={(e) => setAssetName(e.target.value)}
                 >
                     <option value='' className='text-gray-400' selected>Select Assetname</option>
                     <option value='Monitor'>Monitor</option>
@@ -261,8 +248,8 @@ const AddAsset250 = () => {
                 placeholder='Ex: PC21'
                 className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 name="pcname"
-                value={pcname}
-                onChange={(e) => setPcname(e.target.value)}
+                value={pcName}
+                onChange={(e) => setPcName(e.target.value)}
             />
             </div>
 
@@ -285,8 +272,8 @@ const AddAsset250 = () => {
                     Condition:
                 </Typography>
                 <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
-                    value={assetcondition}
-                    onChange={(e) => setAssetCondition(e.target.value)}
+                    value={condition}
+                    onChange={(e) => setCondition(e.target.value)}
                 >
                     <option value='' className='text-gray-400' selected>Select Condition</option>
                     <option value='New'>New</option>
@@ -370,12 +357,11 @@ const AddAsset250 = () => {
                     <option value='' className='text-gray-400' selected>Select Asset Status</option>
                     <option value='true' >Active</option>
                     <option value='false'>Inactive</option>
-                    {/* <option value=''>...</option> */}
                 </select>
             </div>
             
             <div className="flex xxs:justify-between md:justify-start align-middle col-span-3">
-                <button onClick= {(e) => saveAndUpdateAsset250(e)} className='w-28 mt-7 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 rounded-lg  text-sm px-5 py-2.5 me-2 mb-2 '>
+                <button onClick= {(e) => saveAndupdateAsset250(e)} className='w-28 mt-7 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 rounded-lg  text-sm px-5 py-2.5 me-2 mb-2 '>
                     Save
                 </button>
                 <Link to={`/asset250`} className='w-28 mt-5 focus:outline-none text-white bg-red-500 hover:bg-red-800 font-medium rounded-lg text-center self-center text-sm px-5 py-2.5'>Cancel</Link>

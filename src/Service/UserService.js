@@ -1,17 +1,11 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
 
-const USER_BASE_REST_API_URL = 'http://localhost:8081/api/users'
+const USER_BASE_REST_API_URL = 'http://192.168.137.14:3308/api/users'
 
 // const USER_DTO_REST_API_URL = 'http://localhost:8081/api/user'
 
-// const USER_REACTIVE = 'http://localhost:8081/api/user'
-
 class UserService {
-
-    // getUser() {
-    //     return axios.get(USER_REACTIVE)
-    // }
 
     // getUserDto() {
     //     return axios.get(USER_DTO_REST_API_URL)

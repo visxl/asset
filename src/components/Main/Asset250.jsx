@@ -7,7 +7,20 @@ import { ExportAsset250 } from '../Export Function/ExportAsset250';
 
 
 // Table thead
-const TABLE_HEAD = ["Id", "Name", "Asset Name", "Model", "Brand", "Code", "Price($)", "Value", "Purchase Date", "Condition", "User", "Office", "Status", "Action"];
+const TABLE_HEAD = ["Id", 
+    "Name", 
+    "Asset Name", 
+    "Model", 
+    "Brand", 
+    "Code", 
+    "Price($)", 
+    "Value", 
+    "Purchase Date", 
+    "Condition", 
+    "User", 
+    "Office", 
+    "Status", 
+    "Action"];
 const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
 
     const Asset250 = () => {
@@ -109,84 +122,84 @@ const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
 
     return (
         <div>
-        <section>
-            <div>
-                <div className="bg-white dark:bg-gray-800 relative shadow-xl rounded-2xl overflow-hidden">
-                    <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-                        <div className='xxs:max-w-80 sm:max-w-full '>
-                            <div className="md:w-full">
-                                <Typography className='text-left font-bold text-xl'>
-                                    List Asset Under 250
-                                </Typography>
+            <section>
+                <div>
+                    <div className="mt-5 bg-white dark:bg-gray-800 relative shadow-xl rounded-2xl overflow-hidden">
+                        <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                            <div className='xxs:max-w-80 sm:max-w-full '>
+                                <div className="md:w-full">
+                                    <Typography className='text-left font-bold text-xl'>
+                                        List Asset Under 250
+                                    </Typography>
                                 
-                                {error && <div className='mt-5 text-red-700'>Error: {error}</div>}
-                                <div className='mt-10 flex flex-col'>
-                                    <div className='flex flex-col items-start'>
-                                        <input className='md:w-64 xxs:w-full focus:outline-none text-black border font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2'
-                                            type="text" value={searchCode} 
-                                            onChange={handleSearchCodeInputChange} 
-                                            placeholder="Search Code" 
-                                        />
-                                        <Link to={'/add-asset'}  className='xxs:w-full md:w-32 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 text-center rounded-lg text-xs px-5 py-2.5 me-2 mb-2'>
-                                            Add Asset
-                                        </Link>
-                                        <div className='xxs:w-full flex md:flex-row md:justify-start xxs:justify-between'>
-                                            <Link to={'/asset/report'} className='xxs:w-full md:w-32 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 text-center font-medium rounded-lg text-xs px-5 py-2.5 me-2 mb-2'>
-                                                Preview
+                                    {error && <div className='mt-5 text-red-700'>Error: {error}</div>}
+                                    <div className='mt-10 flex flex-col'>
+                                        <div className='flex flex-col items-start'>
+                                            <input className='md:w-64 xxs:w-full focus:outline-none text-black border font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2'
+                                                type="text" value={searchCode} 
+                                                onChange={handleSearchCodeInputChange} 
+                                                placeholder="Search Code" 
+                                            />
+                                            <Link to={'/add-asset250'}  className='xxs:w-full md:w-32 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 text-center rounded-lg text-xs px-5 py-2.5 me-2 mb-2'>
+                                                Add Asset
                                             </Link>
-                                            <ExportAsset250 excelData={asset250} fileName={'List 31 06 2024 Over 250'} />
+                                            <div className='xxs:w-full flex md:flex-row md:justify-start xxs:justify-between'>
+                                                <Link to={'/asset250/report'} className='xxs:w-full md:w-32 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 text-center font-medium rounded-lg text-xs px-5 py-2.5 me-2 mb-2'>
+                                                    Preview
+                                                </Link>
+                                                <ExportAsset250 excelData={asset250} fileName={'List 31 06 2024 Over 250'} />
+                                            </div>
+                                        </div>
+                                        
+                                        <div className='sm:flex-col flex-wrap'>
+                                            <select className='w-full sm:w-44 text-black border-x-0 border-t-0 font-medium focus:outline-none text-sm px-5 py-2.5 me-2 mb-2'
+                                                value={priceFilter} onChange={handlePriceFilterChange}>
+                                                <option value="" >Filter</option>
+                                                <option value="asc">Ascending</option>
+                                                <option value="desc">Descending</option>
+                                            </select>
+                                            <select className='w-full sm:w-44 text-black border-x-0 border-t-0  font-medium text-sm px-5 py-2.5 me-2 mb-2'
+                                                value={selectOffice}
+                                                onChange={handlerSelectOfficeChange}
+                                                
+                                            >
+                                                <option value=''>Office</option>
+                                                <option value='Administrator'>Administrator</option>
+                                                <option value='Cashier'>Cashier</option>
+                                                <option value='CustomerService'>CustomerService</option>
+                                                <option value='Claim'>Claim</option>
+                                                <option value='AccountingAndFinance'>AccountingAndFinance</option>
+                                                <option value='InternalAudit'>InternalAudit</option>
+                                                <option value='Technical'>Technical</option>
+                                                <option value='MarketingAndSale'>MarketingAndSale</option>
+                                                <option value='InformationTechnology'>InformationTechnology</option>
+                                                <option value='KampongCham'>KampongCham</option>
+                                                <option value='Takeo'>Takeo</option>
+                                                <option value='BanteayMeanchey'>BanteayMeanchey</option>
+                                                <option value='Battambang'>Battambang</option>
+                                                <option value='Preyveng'>Preyveng</option>
+                                                <option value='ShianoukVille'>ShianoukVille</option>
+                                                <option value='Siemreap'>Siemreap</option>
+                                            </select>
+                                            
+                                            {/* <select className='w-full sm:w-44 text-black border-x-0 border-t-0 font-medium text-sm px-5 py-2.5 me-2 mb-2'
+                                                value={selectStatus}
+                                                onChange={handlerSelectStatusChange}
+                                            >
+                                                <option value=''>Status</option>
+                                                <option value='1'>Active</option>
+                                                <option value='0'>Inactive</option>
+                                            </select> */}
+                                            
                                         </div>
                                     </div>
-                                        
-                                    <div className='sm:flex-col flex-wrap'>
-                                        <select className='w-full sm:w-44 text-black border-x-0 border-t-0 font-medium focus:outline-none text-sm px-5 py-2.5 me-2 mb-2'
-                                            value={priceFilter} onChange={handlePriceFilterChange}>
-                                            <option value="" >Filter</option>
-                                            <option value="asc">Ascending</option>
-                                            <option value="desc">Descending</option>
-                                        </select>
-                                        <select className='w-full sm:w-44 text-black border-x-0 border-t-0  font-medium text-sm px-5 py-2.5 me-2 mb-2'
-                                            value={selectOffice}
-                                            onChange={handlerSelectOfficeChange}
-                                            
-                                        >
-                                            <option value=''>Office</option>
-                                            <option value='Administrator'>Administrator</option>
-                                            <option value='Cashier'>Cashier</option>
-                                            <option value='CustomerService'>CustomerService</option>
-                                            <option value='Claim'>Claim</option>
-                                            <option value='AccountingAndFinance'>AccountingAndFinance</option>
-                                            <option value='InternalAudit'>InternalAudit</option>
-                                            <option value='Technical'>Technical</option>
-                                            <option value='MarketingAndSale'>MarketingAndSale</option>
-                                            <option value='InformationTechnology'>InformationTechnology</option>
-                                            <option value='KampongCham'>KampongCham</option>
-                                            <option value='Takeo'>Takeo</option>
-                                            <option value='BanteayMeanchey'>BanteayMeanchey</option>
-                                            <option value='Battambang'>Battambang</option>
-                                            <option value='Preyveng'>Preyveng</option>
-                                            <option value='ShianoukVille'>ShianoukVille</option>
-                                            <option value='Siemreap'>Siemreap</option>
-                                        </select>
-                                        
-                                        {/* <select className='w-full sm:w-44 text-black border-x-0 border-t-0 font-medium text-sm px-5 py-2.5 me-2 mb-2'
-                                            value={selectStatus}
-                                            onChange={handlerSelectStatusChange}
-                                        >
-                                            <option value=''>Status</option>
-                                            <option value='1'>Active</option>
-                                            <option value='0'>Inactive</option>
-                                        </select> */}
-                                        
-                                    </div>
                                 </div>
-                            </div>
 
-                            <div className="pr-5 overflow-x-auto">
-                                <table className="w-auto text-black dark:text-white">
-                                    <thead>
-                                        <tr > 
-                                            {TABLE_HEAD.map((head, index) => (
+                                <div className="pr-5 overflow-x-auto">
+                                    <table className="w-auto text-black dark:text-white">
+                                        <thead>
+                                            <tr > 
+                                                {TABLE_HEAD.map((head, index) => (
                                                     <th key={index} className="border border-blue-gray-100 bg-blue-gray-50">
                                                         <Typography
                                                             variant="small"
@@ -197,21 +210,20 @@ const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
                                                         </Typography>
                                                     </th>
                                                 ))}
-                                        </tr>
-                                        
-                                    </thead>
-                                    <tbody>
-                                        {asset250 && asset250
-                                            .map(asset250 => {
-                                                return ( 
-                                                    <tr key={asset250.id} className={classes}>
-                                                        <td className={classes}>
-                                                            <Typography variant="small" color="blue-gray" className="text-xs font-normal">
-                                                                {asset250.id}
-                                                            </Typography>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {asset250 && asset250
+                                                .map(asset250 => {
+                                                    return ( 
+                                                        <tr key={asset250.id} className={classes}>
+                                                            <td className={classes}>
+                                                                <Typography variant="small" color="blue-gray" className="text-xs font-normal">
+                                                                    {asset250.id}
+                                                                </Typography>
                                                         </td>
                                                         <td className={classes}>
-                                                            <Typography variant="small" color="blue-gray" className="font-normal">
+                                                            <Typography variant="small" color="blue-gray" className="font-normal text-xs">
                                                                 {asset250.name}
                                                             </Typography>
                                                         </td>
@@ -241,7 +253,7 @@ const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
                                                             </Typography>
                                                         </td>
                                                         <td className={classes}>
-                                                            <Typography variant="small" color="blue-gray" className="font-normal">
+                                                            <Typography variant="small" color="blue-gray" className="font-normal text-xs">
                                                                 {asset250.value}
                                                             </Typography>
                                                         </td>
@@ -276,7 +288,7 @@ const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
                                                                 color="blue-gray"
                                                                 className="font-normal text-xs"
                                                                 style={{
-                                                                    backgroundColor: asset250.status ? 'green' : 'red',
+                                                                    backgroundColor: asset250.status ? 'green' : 'red' ,
                                                                     padding: '5px',
                                                                     borderRadius: '4px',
                                                                     color: 'white', 
@@ -318,7 +330,7 @@ const classes = "border border-solid text-sm p-1 hover:bg-gray-300";
                                     </svg>
                                     </Link>
                                 </li>
-                                {renderPageNumbers()}
+                                    {renderPageNumbers()}
                                 <li>
                                     <Link
                                     href="#"

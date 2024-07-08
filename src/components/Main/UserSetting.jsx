@@ -105,18 +105,18 @@ const UserSetting = () => {
     }, [userId]);
 
     return (
-        <Card className='w-full h-full rounded-xl p-5 pb-32 shadow-lg justify-self-center'>
+        <Card className='mt-5 w-full h-full rounded-xl p-5 pb-32 shadow-lg justify-self-center'>
             <Typography className="text-xl font-bold mb-6">
                 User Setting
             </Typography>
 
             <form className="max-w-screen-2xl xs:block grid grid-cols-8 gap-6 p-5">
-                    <div className="sm:col-span-8">
+                    <div className="md:col-span-8 xxs:col-span-8">
                         <Typography className="text-xl font-bold">
                             User Details:
                         </Typography>
                     </div>
-                    <div className="sm:col-span-4">
+                    <div className="md:col-span-4 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             English Name:
                         </Typography>
@@ -129,7 +129,7 @@ const UserSetting = () => {
                         
                     />
                     </div>
-                    <div className="sm:col-span-4">
+                    <div className="md:col-span-4 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             Khmer Name:
                         </Typography>
@@ -142,7 +142,7 @@ const UserSetting = () => {
                         
                     />
                     </div>
-                    <div className="sm:col-span-4">
+                    <div className="md:col-span-4 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             Gender:
                         </Typography>
@@ -155,7 +155,7 @@ const UserSetting = () => {
                         
                     />
                     </div>
-                    <div className="sm:col-span-4">
+                    <div className="md:col-span-4 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             Role:
                         </Typography>
@@ -180,7 +180,7 @@ const UserSetting = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     </div> */}
-                    <div className="sm:col-span-4 relative">
+                    <div className="md:col-span-4 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             Password:
                         </Typography>
@@ -203,7 +203,7 @@ const UserSetting = () => {
                         </div>
                     
                     <hr className="my-6 border-t border-gray-300 col-span-8" />
-                    <div className="sm:col-span-4">
+                    <div className="md:col-span-4 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             Date of Birth:
                         </Typography>
@@ -216,12 +216,12 @@ const UserSetting = () => {
                         
                     />
                     </div>
-                    <div className="sm:col-span-4">
+                    <div className="md:col-span-4 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             Join date:
                         </Typography>
                         <input
-                        type="text"
+                        type="date"
                         className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         name="name"
                         value={startDate}
@@ -230,7 +230,7 @@ const UserSetting = () => {
                     />
                     </div>
                     
-                    <div className="sm:col-span-4">
+                    <div className="md:col-span-4 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             Email:
                         </Typography>
@@ -242,7 +242,7 @@ const UserSetting = () => {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     </div>
-                    <div className="sm:col-span-4">
+                    <div className="md:col-span-4 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             National ID:
                         </Typography>
@@ -254,7 +254,7 @@ const UserSetting = () => {
                         onChange={(e) => setNatId(e.target.value)}
                     />
                     </div>
-                    <div className="sm:col-span-4">
+                    <div className="md:col-span-4 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             Phone Number:
                         </Typography>
@@ -266,7 +266,7 @@ const UserSetting = () => {
                         onChange={(e) => setPhoneNo(e.target.value)}
                     />
                     </div>
-                    <div className="sm:col-span-4">
+                    <div className="md:col-span-4 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             Marital Status:
                         </Typography>
@@ -285,7 +285,7 @@ const UserSetting = () => {
                             Skills
                         </Typography>
                     </div>
-                    <div className="sm:col-span-4">
+                    <div className="md:col-span-4 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             Skill:
                         </Typography>
@@ -297,7 +297,7 @@ const UserSetting = () => {
                         onChange={(e) => setSkill1(e.target.value)}
                     />
                     </div>
-                    <div className="sm:col-span-4">
+                    <div className="md:col-span-4 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             Skill:
                         </Typography>
@@ -310,7 +310,7 @@ const UserSetting = () => {
                         onChange={(e) => setSkill2(e.target.value)}
                     />
                     </div>
-                    <div className="sm:col-span-4">
+                    <div className="md:col-span-4 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             Skill:
                         </Typography>
@@ -323,7 +323,7 @@ const UserSetting = () => {
                         onChange={(e) => setSkill3(e.target.value)}
                     />
                     </div>
-                    <div className="sm:col-span-4">
+                    <div className="md:col-span-4 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             Skill:
                         </Typography>
@@ -336,12 +336,12 @@ const UserSetting = () => {
                         onChange={(e) => setSkill4(e.target.value)}
                     />
                     </div>
-                    <div className="sm:col-span-8">
+                    <div className="md:col-span-8 xxs:col-span-8">
                         <Typography className="text-xl font-bold">
                             About me:
                         </Typography>
                     </div>
-                    <div className="sm:col-span-8">
+                    <div className="col-span-8">
                         <textarea
                         type="text"
                         className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full h-40 p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -350,13 +350,13 @@ const UserSetting = () => {
                         onChange={(e) => setAboutMe(e.target.value)}
                     />
                     </div>
-                    <div className="sm:col-span-8">
+                    <div className="col-span-8">
                         <Typography className="text-xl font-bold">
                             Work Experience:
                         </Typography>
                     </div>
                     {/* ex 1 */}
-                    <div className="sm:col-span-3">
+                    <div className="md:col-span-3 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             Role:
                         </Typography>
@@ -369,7 +369,7 @@ const UserSetting = () => {
                         onChange={(e) => setExperience(e.target.value)}
                     />
                     </div>
-                    <div className="sm:col-span-3">
+                    <div className="md:col-span-3 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             Workplace:
                         </Typography>
@@ -381,7 +381,7 @@ const UserSetting = () => {
                         onChange={(e) => setWorkPlace(e.target.value)}
                     />
                     </div>
-                    <div className="sm:col-span-2">
+                    <div className="md:col-span-2 xxs:col-span-8">
                         <Typography className="text-lg mb-1">
                             Year:
                         </Typography>
@@ -394,7 +394,7 @@ const UserSetting = () => {
                         onChange={(e) => setYear(e.target.value)}
                     />
                     </div>
-                    <div className="sm:col-span-8">
+                    <div className="col-span-8">
                         <Typography className="text-lg mb-1">
                             Description:
                         </Typography>
@@ -409,14 +409,14 @@ const UserSetting = () => {
                     
 
                     
-                    <div className="sm:col-span-2 py-3">
+                    <div className="col-span-8 py-3">
                         <button onClick= {(e) => saveAndupdateUser(e)} className='w-28 mt-6 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 rounded-lg  text-sm px-5 py-2.5 me-2 mb-2 '>
                             Save
                         </button>
                         <Link to={`/users`} className='w-16 mt-5 focus:outline-none text-white bg-red-500 hover:bg-red-800 font-medium rounded-lg text-sm px-8 py-3'>Cancel</Link>
                     </div>
                 </form>
-    </Card>
+            </Card>
     );
 };
 

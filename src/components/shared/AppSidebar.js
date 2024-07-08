@@ -40,10 +40,10 @@ export default function AppSidebar() {
                                     <Sidebar.Item href='/asset250'>
                                       Asset Under 250
                                     </Sidebar.Item>
-                                    <Sidebar.Item>
+                                    <Sidebar.Item href='/supplier'>
                                       Supplier
                                     </Sidebar.Item>
-                                    <Sidebar.Item>
+                                    <Sidebar.Item href='/repair'>
                                       Repair List
                                     </Sidebar.Item>
                                   </Sidebar.Collapse>
@@ -65,7 +65,7 @@ export default function AppSidebar() {
                                 </Sidebar.ItemGroup>
 
                                 <Sidebar.ItemGroup>
-                                  <Sidebar.Item href={`/user/setting/${userId}`} icon={HiCog}>
+                                  <Sidebar.Item href={`/users/setting/${userId}`} icon={HiCog}>
                                     Setting
                                   </Sidebar.Item>
                                   <Sidebar.Item href='/login' icon={HiArrowLeft}>

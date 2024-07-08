@@ -22,6 +22,7 @@ import UserReport from './components/Report/UserReport';
 import Supplier from './components/Main/Supplier';
 import SupplierDetail from './components/View/SupplierDetail';
 import Sidebar from './components/shared/Sidebar'
+import AddSupplier from './components/Create And Edit/AddSupplier';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path='asset/view/:id' element={<AssetDetail/>}/>
 
           <Route path='supplier' element={<Supplier />}/>
+          <Route path='add-supplier' element={<AddSupplier/>}/>
           <Route path='supplier/view/:id' element={<SupplierDetail/>}/>
 
           <Route path='asset250' element={<Asset250 />}/>

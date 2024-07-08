@@ -5,9 +5,9 @@ const ASSET250_BASE_REST_API_URL = 'http://192.168.137.14:3308/api/asset250'
 
 class Asset250Service {
     
-    // Asset
+    // Main CRUD
     getAllAsset250() {
-        return axios.get('http://192.168.137.14:3308/api/asset250/report')
+        return axios.get(ASSET250_BASE_REST_API_URL + '/report')
     }
 
     createAsset250(asset250) {
@@ -18,10 +18,6 @@ class Asset250Service {
         return axios.get(ASSET250_BASE_REST_API_URL + '/' + asset250Id)
     }
 
-    getAsset250DetailById(asset250Id) {
-        return axios.get('http://192.168.137.14:3308/api/asset250/detail/' + asset250Id)
-    }
-
     updateAsset250(asset250Id, asset250) {
         return axios.put(ASSET250_BASE_REST_API_URL + "/" + asset250Id, asset250)
     }
@@ -30,8 +26,18 @@ class Asset250Service {
         return axios.delete(ASSET250_BASE_REST_API_URL + "/" + asset250Id)
     }
 
+
+    // Optional
+    getAsset250DetailById(asset250Id) {
+        return axios.get(ASSET250_BASE_REST_API_URL + '/detail/' + asset250Id)
+    }
+
     getAsset250ByOffice(office) {
         return axios.get(ASSET250_BASE_REST_API_URL + '/office?office=' + office)
+    }
+
+    getActiveAsset250(status) {
+        return axios.get(ASSET250_BASE_REST_API_URL + 'status?status=' + status)
     }
 }
 
