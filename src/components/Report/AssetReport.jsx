@@ -29,7 +29,6 @@ import AssetService from '../../Service/AssetService';
     []);
 
     return (
-        // <Card className='w-screen rounded-xl p-5 shadow-lg'>
             <div className="relative">
                 <img src={LOGOJPG} alt='logo'/>
                 <Typography className='text-center text-2xl font-semibold ' >
@@ -129,7 +128,6 @@ import AssetService from '../../Service/AssetService';
                     </tbody>
                 </table>
             </div>
-        // </Card>
     );
 }
 
