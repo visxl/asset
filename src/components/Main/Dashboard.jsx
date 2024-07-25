@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState, useCallback } from 'react';
 import Line from '../shared/Line';
 import Pie from '../shared/Pie';
+import { HiArrowSmRight } from 'react-icons/hi';
+import { Button } from 'flowbite-react';
 // import Chat from './Chat';
 
 export default function Dashboard() {
@@ -17,6 +19,8 @@ export default function Dashboard() {
   const [asset, setAssets] = useState([]);
   const [totalItemsUser, setTotalItemsUser] = useState(0);
   const [user, setUser] = useState([]);
+  const [supplier, setSuppliers] = useState([])
+  const [totalItemsSupplier, setTotalItemsSupplier] = useState(0);
 
   const fetchData = useCallback(async (endpoint, setData, setTotalItems) => {
     try {
@@ -33,27 +37,31 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-    fetchData(`http://localhost:8081/api/asset/page/${currentPage}`, setAssets, setTotalItems);
-    fetchData(`http://localhost:8081/api/asset250/page/${currentPage}`, setAsset250, setTotalItems250);
-    fetchData(`http://localhost:8081/api/customer/page/${currentPage}`, setCustomer, setTotalItemsCustomer);
-    fetchData(`http://localhost:8081/api/users/page/${currentPage}`, setUser, setTotalItemsUser);
+    fetchData(`http://192.168.137.14:3308/api/asset/page/${currentPage}`, setAssets, setTotalItems);
+    fetchData(`http://192.168.137.14:3308/api/asset250/page/${currentPage}`, setAsset250, setTotalItems250);
+    fetchData(`http://192.168.137.14:3308/api/customer/page/${currentPage}`, setCustomer, setTotalItemsCustomer);
+    fetchData(`http://192.168.137.14:3308/api/users/page/${currentPage}`, setUser, setTotalItemsUser);
+    fetchData(`http://192.168.137.14:3308/api/supplier/page/${currentPage}`, setSuppliers, setTotalItemsSupplier);
   }, [currentPage, fetchData]);
 
   const renderCard = (title, list, totalItems, link) => (
-    <Card className="w-60 p-5 flex flex-wrap justify-center mr-5 shadow-lg">
+    <Card className=" xxs:w-80 md:w-45 p-2 flex flex-wrap justify-start gap-2 shadow-lg dark:bg-gray-700">
       <CardBody className='text-center'>
-        <Typography variant="h5" color="blue-gray" className="mb-2">
+        <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
           {title}
         </Typography>
-        <Typography className='pb-2'>
+        <Typography className='pb-2 dark:text-gray-200'>
           List {list}
         </Typography>
-        <Typography className='pb-2 pt-2'>
+        <Typography className='pb-1 pt-1 dark:text-gray-200'>
           Total {list}: {totalItems}
         </Typography>
       </CardBody>
-      <CardFooter className="pt-0 mt-5 text-center">
-        <Link to={link} className="w-full focus:outline-none text-white bg-blue-700 hover:bg-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">See More</Link>
+      <CardFooter className="pt-0 mt-5 text-center dark:text-gray-200">
+        <Button to={link} 
+          className="w-full focus:outline-none text-black dark:text-gray-200 bg-gray-50 dark:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-500 dark:focus:ring-gray-500 dark:focus:border-gray-500">
+            See More<HiArrowSmRight className='w-5 h-5 ml-2 '/> 
+        </Button>
       </CardFooter>
     </Card>
   );
@@ -61,33 +69,29 @@ export default function Dashboard() {
   return (
     <body>
       <section className="p-5">
-        <Card className="p-5 shadow-lg">
-          <Typography variant="h4" color="blue-gray" className="mb-5">
-            Quick Links
-          </Typography>
-          <div className="flex flex-wrap justify-start">
-            {renderCard("Asset", "Asset", totalItems, "/asset")}
-            {renderCard("Asset Under 250", "Asset Under 250", totalItems250, "/asset250")}
-            {renderCard("Department", "Department", totalItems, "/department")}
-            {renderCard("User", "User", totalItemsUser, "/users")}
-            {renderCard("Customer", "Customer", totalItemsCustomer, "/customer")}
-            
-          </div>
-        </Card>
+        <Typography variant="h4" color="blue-gray" className="mb-5 dark:text-gray-200">
+          Quick Links
+        </Typography>
+        <div className="flex flex-wrap gap-3">
+          {renderCard("Asset", "Asset", totalItems, "/asset")}
+          {renderCard("Asset Under 250", "Asset Under 250", totalItems250, "/asset250")}
+          {renderCard("Department", "Department", totalItems, "/department")}
+          {renderCard("User", "User", totalItemsUser, "/users")}
+          {renderCard("Customer", "Customer", totalItemsCustomer, "/customer")}
+          {renderCard("Supplier", "Supplier", totalItemsSupplier, "/supplier")}            
+        </div>
 
-        <Card className="mt-6 px-2 py-2 shadow-lg h-auto">
-          <Typography variant="h4" color="blue-gray" className="mb-5 text-2xl">
+          <Typography variant="h4" color="blue-gray" className="mb-5 mt-10 text-2xl dark:text-gray-200">
             Charts
           </Typography>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="w-full">
+          <div className="xxs:flex xxs:flex-wrap md:w-full md:grid md:grid-cols-2 md:gap-3 md:justify-evenly md:align-middle">
+            <div className="xxs:w-80 md:w-full">
               <Line />
             </div>
-            <div className="w-full">
+            <div className="xxs:w-80 md:w-full">
               <Pie />
             </div>
           </div>
-        </Card>
       </section>
       {/* <Chat/> */}
     </body>

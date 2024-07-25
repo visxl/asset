@@ -1,8 +1,10 @@
 import { Typography } from '@material-tailwind/react'
 import React, { useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import AssetService from '../../Service/AssetService'
 import { useEffect } from 'react'
+import { HiArrowCircleLeft, HiCheck, HiSave } from 'react-icons/hi'
+import { Button } from 'flowbite-react'
 
 export const AddAsset = () => {
   
@@ -23,6 +25,7 @@ export const AddAsset = () => {
   const [ type, setType ] = useState()
   const [ status, setStatus] = useState()
   
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const {id} = useParams();
@@ -32,7 +35,7 @@ const saveAndupdateAsset = (e) => {
     e.preventDefault();
   
     const asset = { name, assetName, model, brand, code, price, value, date, condition, user, office, department, type , other, pcName, status};
-  
+
     // Handle FindById Request
     if (id) {
       AssetService.updateAsset(id, asset)
@@ -48,6 +51,8 @@ const saveAndupdateAsset = (e) => {
       // Handle Create Asset Request
       AssetService.createAsset(asset)
         .then((response) => {
+          setShowSuccessToast(true)
+          setTimeout(() => setShowSuccessToast(false), 3000)
           console.log(response.data);
           navigate('/asset');
         })
@@ -58,41 +63,41 @@ const saveAndupdateAsset = (e) => {
     }
   };
 
-  useEffect(() => {
-    AssetService.getAssetDetailById(id)
-        .then((response) => {
-            setName(response.data.name);
-            setAssetName(response.data.assetName);
-            setModel(response.data.model);
-            setBrand(response.data.brand);
-            setCode(response.data.code);
-            setPrice(response.data.price);
-            setValue(response.data.value);
-            setDate(response.data.date);
-            setCondition(response.data.condition);
-            setUser(response.data.user);
-            setOther(response.data.other);
-            setOffice(response.data.office);
-            setDepartment(response.data.department);
-            setType(response.data.type);
-            setPcName(response.data.pcName);
-            setStatus(response.data.status)
-        })
-        .catch(error => {
-            console.error('Error fetching asset by ID:', error);
-        });
-}, [id]);
+    useEffect(() => {
+        AssetService.getAssetDetailById(id)
+            .then((response) => {
+                setName(response.data.name);
+                setAssetName(response.data.assetName);
+                setModel(response.data.model);
+                setBrand(response.data.brand);
+                setCode(response.data.code);
+                setPrice(response.data.price);
+                setValue(response.data.value);
+                setDate(response.data.date);
+                setCondition(response.data.condition);
+                setUser(response.data.user);
+                setOther(response.data.other);
+                setOffice(response.data.office);
+                setDepartment(response.data.department);
+                setType(response.data.type);
+                setPcName(response.data.pcName);
+                setStatus(response.data.status)
+            })
+            .catch(error => {
+                console.error('Error fetching asset by ID:', error);
+            });
+    }, [id]);
 
     // Alert msg
     const title = () => {
         if(id) {
             return (
-            <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50" role="alert">
+            <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 w-full" role="alert">
                 <span class="font-medium">Update Form!</span>
             </div>) 
         }else {
             return (
-            <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50" role="alert">
+            <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 w-full" role="alert">
                 <span class="font-medium">Add New Asset!</span>
             </div>) 
         }
@@ -100,27 +105,35 @@ const saveAndupdateAsset = (e) => {
 
 return (
     <>
+        {showSuccessToast && (
+            <div className="fixed top-4 right-4 z-50">
+                <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
+                    <HiCheck className="h-5 w-5" />
+                </div>
+                <div className="ml-3 text-sm font-normal">Item created successfully.</div>
+            </div>
+        )}
         <div className='p-4 xxs:w-full md:w-full mt-5'>
             {error && (
             <Typography className="text-red-500 mb-4">
             {error}
             </Typography>
         )}
-            <Typography className="text-xl font-bold mb-6">
+            <Typography className="text-xl font-bold mb-6 text-black dark:text-gray-200">
                 Asset Over 250
             </Typography>
                 {
                     title()
                 }
-            <form className="xxs:w-80 md:p-5 md:w-screen h-full grid xxs:grid-cols-1 md:grid-cols-3 gap-3">
+            <form className="xxs:w-full md:p-5 md:w-screen h-full grid xxs:grid-cols-1 md:grid-cols-3 gap-3">
                 <div className="xxs:col-span-3 md:col-span-1">
-                    <Typography className="md:text-lg xxs:text-xs mb-1">
+                    <Typography className="md:text-lg xxs:text-xs mb-1 text-black dark:text-gray-200">
                         Name:
                     </Typography>
                     <input
                         type="text"
                         placeholder='Ex: ម៉ូនីទ័រ...'
-                        className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
                         name="name"
                         value={name} required
                         onChange={(e) => setName(e.target.value)}
@@ -128,14 +141,14 @@ return (
                 </div>
 
                 <div className="xxs:col-span-3 md:col-span-1">
-                    <Typography className="md:text-lg xxs:text-xs mb-1">
+                    <Typography className="md:text-lg xxs:text-xs mb-1 text-black dark:text-gray-200">
                         Asset Name:
                     </Typography>
-                    <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
+                    <select className='w-full text-black dark:text-gray-200 bg-gray-50 dark:bg-gray-500 border border-gray-400 dark:focus:ring-gray-500 dark:focus:border-gray-500 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                         value={assetName}
                         onChange={(e) => setAssetName(e.target.value)}
                     >
-                        <option value='' className='text-gray-400' selected>Select Assetname</option>
+                        <option value='' className='text-black dark:text-gray-200' selected>Select Assetname</option>
                         <option value='Monitor'>Monitor</option>
                         <option value='System Unit'>System Unit</option>
                         <option value='Printer'>Printer</option>
@@ -148,130 +161,135 @@ return (
                 </div>
 
                 <div className="xxs:col-span-3 md:col-span-1">
-                    <Typography className="md:text-lg xxs:text-xs mb-1">
+                    <Typography className="md:text-lg xxs:text-xs mb-1 text-black dark:text-gray-200">
                         Model:
                     </Typography>
                     <input
                         type="text"
                         placeholder='Ex: HP, Dell...'
-                        className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="bg-gray-50 dark:bg-gray-500 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
                         name="model"
                         value={model} required
                         onChange={(e) => setModel(e.target.value)}
                     />
                 </div>
+
                 <div className="xxs:col-span-3 md:col-span-1">
-                    <Typography className="md:text-lg xxs:text-xs mb-1">
+                    <Typography className="md:text-lg xxs:text-xs mb-1 text-black dark:text-gray-200">
                         Brand:
                     </Typography>
                     <input
                         type="text"
                         placeholder='Ex: E1910c...'
-                        className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
                         name="brand"
                         value={brand} required
                         onChange={(e) => setBrand(e.target.value)}
                     />
                 </div>
+
                 <div className="xxs:col-span-3 md:col-span-1">
-                    <Typography className="md:text-lg xxs:text-xs mb-1">
+                    <Typography className="md:text-lg xxs:text-xs mb-1 text-black dark:text-gray-200">
                         Code:
                     </Typography>
                     <input
                         type="text"
                         placeholder='Ex: ADM FA 00000...'
-                        className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
                         name="code"
                         value={code} 
                         onChange={(e) => setCode(e.target.value)}
                     />
                 </div>
+
                 <div className="xxs:col-span-3 md:col-span-1">
-                    <Typography className="md:text-lg xxs:text-xs mb-1">
+                    <Typography className="md:text-lg xxs:text-xs mb-1 text-black dark:text-gray-200">
                         Price:
                     </Typography>
                     <input
-                    type="number"
-                    placeholder='Ex: 000.00...'
-                    className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    name="price"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                />
+                        type="number"
+                        placeholder='Ex: 000.00...'
+                        className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                        name="price"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                    />
                 </div>
+
                 <div className="xxs:col-span-3 md:col-span-1">
-                    <Typography className="md:text-lg xxs:text-xs mb-1">
+                    <Typography className="md:text-lg xxs:text-xs mb-1 text-black dark:text-gray-200">
                         Value:
                     </Typography>
                     <input
-                    type="number"
-                    placeholder='Ex: 000.00...'
-                    className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    name="value"
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                />
+                        type="number"
+                        placeholder='Ex: 000.00...'
+                        className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                        name="value"
+                        value={value}
+                        onChange={(e) => setValue(e.target.value)}
+                    />
                 </div>
+
                 <div className="xxs:col-span-3 md:col-span-1">
-                    <Typography className="md:text-lg xxs:text-xs mb-1">
+                    <Typography className="md:text-lg xxs:text-xs mb-1 text-black  dark:text-gray-200">
                         Purchase Date:
                     </Typography>
                     <input
-                    type="date"
-                    className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    name="date"
-                    value={date} required
-                    onChange={(e) => setDate(e.target.value)}
-                />
+                        type="date"
+                        className="bg-gray-50 border dark:text-gray-200 border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                        name="date"
+                        value={date} required
+                        onChange={(e) => setDate(e.target.value)}
+                    />
                 </div>
 
                 <div className="xxs:col-span-3 md:col-span-1">
-                    <Typography className="md:text-lg xxs:text-xs mb-1">
+                    <Typography className="md:text-lg xxs:text-xs mb-1 text-black dark:text-gray-200">
                         User:
                     </Typography>
                     <input
-                    type="text"
-                    placeholder='Ex: ប្រើរួម...'
-                    className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    name="user"
-                    value={user} 
-                    onChange={(e) => setUser(e.target.value)}
-                />
+                        type="text"
+                        placeholder='Ex: ប្រើរួម...'
+                        className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                        name="user"
+                        value={user} 
+                        onChange={(e) => setUser(e.target.value)}
+                    />
                 </div>
 
                 <div className="xxs:col-span-3 md:col-span-1">
-                    <Typography className="md:text-lg xxs:text-xs mb-1">
+                    <Typography className="md:text-lg xxs:text-xs mb-1 text-black dark:text-gray-200">
                         PC Name:
                     </Typography>
                     <input
-                    type="text"
-                    placeholder='Ex: PC21'
-                    className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    name="pcname"
-                    value={pcName}
-                    onChange={(e) => setPcName(e.target.value)}
-                />
+                        type="text"
+                        placeholder='Ex: PC21'
+                        className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                        name="pcname"
+                        value={pcName}
+                        onChange={(e) => setPcName(e.target.value)}
+                    />
                 </div>
 
                 <div className="xxs:col-span-3 md:col-span-1">
-                    <Typography className="md:text-lg xxs:text-xs mb-1">
+                    <Typography className="md:text-lg xxs:text-xs mb-1 text-black dark:text-gray-200">
                         Other:
                     </Typography>
                     <input
-                    type="text"
-                    placeholder='Ex: ប្រើរួម...'
-                    className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    name="other"
-                    value={other}
-                    onChange={(e) => setOther(e.target.value)}
-                />
+                        type="text"
+                        placeholder='Ex: ប្រើរួម...'
+                        className="bg-gray-50 border border-gray-300 md:text-sm xxs:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                        name="other"
+                        value={other}
+                        onChange={(e) => setOther(e.target.value)}
+                    />
                 </div>
 
                 <div className="xxs:col-span-3 md:col-span-1">
-                    <Typography className="md:text-lg xxs:text-xs mb-1">
+                    <Typography className="md:text-lg xxs:text-xs mb-1 text-black dark:text-gray-200">
                         Condition:
                     </Typography>
-                    <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md md:h-auto xxs:text-xs xxs:h-10'
+                    <select className='w-full text-black dark:text-gray-200 bg-gray-50 dark:bg-gray-500 border border-gray-400 dark:focus:ring-gray-500 dark:focus:border-gray-500 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                         value={condition}
                         onChange={(e) => setCondition(e.target.value)}
                     >
@@ -283,10 +301,10 @@ return (
                 </div>
 
                 <div className="xxs:col-span-3 md:col-span-1">
-                    <Typography className="md:text-lg xxs:text-xs mb-1">
+                    <Typography className="md:text-lg xxs:text-xs mb-1 text-black dark:text-gray-200">
                         Type:
                     </Typography>
-                    <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
+                    <select className='w-full text-black dark:text-gray-200 bg-gray-50 dark:bg-gray-500 border border-gray-400 dark:focus:ring-gray-500 dark:focus:border-gray-500 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                         value={type}
                         onChange={(e) => setType(e.target.value)}
                     >
@@ -298,10 +316,10 @@ return (
                 </div>
 
                 <div className="xxs:col-span-3 md:col-span-1">
-                    <Typography className="md:text-lg xxs:text-xs mb-1">
+                    <Typography className="md:text-lg xxs:text-xs mb-1 text-black dark:text-gray-200">
                         Office:
                     </Typography>
-                    <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
+                    <select className='w-full text-black dark:text-gray-200 bg-gray-50 dark:bg-gray-500 border border-gray-400 dark:focus:ring-gray-500 dark:focus:border-gray-500 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                         value={office}
                         onChange={(e) => setOffice(e.target.value)}
                     >
@@ -326,10 +344,10 @@ return (
                 </div>
 
                 <div className="xxs:col-span-3 md:col-span-1">
-                    <Typography className="md:text-lg xxs:text-xs mb-1">
+                    <Typography className="md:text-lg xxs:text-xs mb-1 text-black dark:text-gray-200">
                         Department:
                     </Typography>
-                    <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
+                    <select className='w-full text-black dark:text-gray-200 bg-gray-50 dark:bg-gray-500 border border-gray-400 dark:focus:ring-gray-500 dark:focus:border-gray-500 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                         value={department}
                         onChange={(e) => setDepartment(e.target.value)}
                     >
@@ -347,25 +365,30 @@ return (
                 </div>
 
                 <div className="xxs:col-span-3 md:col-span-1">
-                    <Typography className="md:text-lg xxs:text-xs mb-1">
+                    <Typography className="md:text-lg xxs:text-xs mb-1 text-black dark:text-gray-200">
                         Status:
                     </Typography>
-                    <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
+                    <select className='w-full text-black dark:text-gray-200 bg-gray-50 dark:bg-gray-500 border border-gray-400 dark:focus:ring-gray-500 dark:focus:border-gray-500 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                         value={status}
                         onChange={(e) => setStatus(e.target.value)}
                     >
                         <option value='' className='text-gray-400' selected>Select Asset Status</option>
                         <option value='true' >Active</option>
                         <option value='false'>Inactive</option>
-                        {/* <option value=''>...</option> */}
                     </select>
-                </div>
-                
-                <div className="flex xxs:justify-between md:justify-start align-middle col-span-3">
-                    <button onClick= {(e) => saveAndupdateAsset(e)} className='w-28 mt-7 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 rounded-lg text-center self-center text-sm px-5 py-2.5 me-2 mb-2 '>
+                </div>              
+
+                <div className="flex xxs:justify-between md:justify-start align-middle col-span-3 mt-5">
+                    <Button className='text-black dark:text-gray-200 text-sm xxs:w-32 md:w-20 mb-2' href='/add-asset'
+                        onClick={(e) => saveAndupdateAsset(e)}
+                    >
+                        <HiSave className="mr-2 h-5 w-5" />
                         Save
-                    </button>
-                    <Link to={`/asset`} className='w-28 mt-5 focus:outline-none text-white bg-red-500 hover:bg-red-800 font-medium rounded-lg text-sm text-center self-center px-5 py-2.5'>Cancel</Link>
+                    </Button>
+                    <Button className='text-black dark:text-gray-200 text-sm xxs:w-32 md:w-20 mb-2' href='/asset'>
+                        <HiArrowCircleLeft className="mr-2 h-5 w-5" />
+                        Cancel
+                    </Button>
                 </div>
             </form>
         </div>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'sheetjs-style';
 import PropTypes from 'prop-types';
+import { Button } from 'flowbite-react';
+import { HiDownload } from 'react-icons/hi';
 
 export const ExportAsset250 = ({ fileName }) => {
   const [excelData, setExcelData] = useState([]);
@@ -14,7 +16,7 @@ export const ExportAsset250 = ({ fileName }) => {
 
   const fetchExcelData = async () => {
     try {
-      const response = await fetch('http://192.168.137.14/api/asset250/report');
+      const response = await fetch('http://192.168.137.14:3308/api/asset250/report');
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
@@ -39,11 +41,12 @@ export const ExportAsset250 = ({ fileName }) => {
   };
 
   return (
-      <button content="Excel Export" className='xxs:w-full md:w-32 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 font-medium rounded-lg text-xs px-2 py-2.5 md:me-2 sm:me-2 mb-2 '
-        onClick={exportToExcel}
-      >
-        Export
-      </button>
+    <Button content="Excel Export" className='text-black dark:text-gray-200 text-sm xxs:w-full md:w-36 mb-2 mr-2 dark:focus:ring-gray-500 dark:focus:border-gray-500 hover:bg-gray-200 dark:hover:bg-gray-900'
+      onClick={exportToExcel}
+    >
+      <HiDownload className='mr-2 w-5 h-5'/>
+      Export CSV
+  </Button>
   );
 };
 

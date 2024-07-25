@@ -1,7 +1,9 @@
 import { Typography } from '@material-tailwind/react';
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Asset250Service from '../../Service/Asset250Service';
+import { Button } from 'flowbite-react';
+import { HiArrowCircleLeft, HiSave } from 'react-icons/hi';
 
 
 export const AddAsset250 = () => {
@@ -33,7 +35,6 @@ const saveAndupdateAsset250 = (e) => {
     e.preventDefault();
   
     const asset250 = { name, assetName, model, brand, code, price, value, date, condition, user, office, department, type , other, pcName, status};
-  
     // Handle FindById Request
     if (id) {
       Asset250Service.updateAsset250(id, asset250)
@@ -106,7 +107,7 @@ const saveAndupdateAsset250 = (e) => {
           {error}
         </Typography>
       )}
-        <Typography className="text-xl font-bold mb-6">
+        <Typography className="text-xl font-bold mb-6 text-black dark:text-gray-200">
             Asset under 250
         </Typography>
             {
@@ -114,13 +115,13 @@ const saveAndupdateAsset250 = (e) => {
             }
         <form className="xxs:w-80 md:p-5 md:w-screen h-full grid xxs:grid-cols-1 md:grid-cols-3 gap-3">
             <div className="xxs:col-span-3 md:col-span-1">
-                <Typography className="text-lg mb-1">
+                <Typography className="text-lg mb-1 text-black dark:text-gray-200">
                     Name:
                 </Typography>
                 <input
                     type="text"
                     placeholder='Ex: ម៉ូនីទ័រ...'
-                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-200 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
                     name="name"
                     value={name} required
                     onChange={(e) => setName(e.target.value)}
@@ -128,10 +129,10 @@ const saveAndupdateAsset250 = (e) => {
             </div>
 
             <div className="xxs:col-span-3 md:col-span-1">
-                <Typography className="text-lg mb-1">
+                <Typography className="text-lg mb-1 text-black dark:text-gray-200">
                     Asset Name:
                 </Typography>
-                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
+                <select className='w-full text-black dark:text-gray-200 bg-gray-50 dark:bg-gray-500 border border-gray-300 dark:border-gray-500 dark:focus:ring-gray-500 dark:focus:border-gray-500 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                     value={assetName}
                     onChange={(e) => setAssetName(e.target.value)}
                 >
@@ -148,77 +149,77 @@ const saveAndupdateAsset250 = (e) => {
             </div>
 
             <div className="xxs:col-span-3 md:col-span-1">
-                <Typography className="text-lg mb-1">
+                <Typography className="text-lg mb-1 text-black dark:text-gray-200">
                     Model:
                 </Typography>
                 <input
                     type="text"
                     placeholder='Ex: HP, Dell...'
-                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-200 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
                     name="model"
                     value={model} required
                     onChange={(e) => setModel(e.target.value)}
                 />
             </div>
             <div className="xxs:col-span-3 md:col-span-1">
-                <Typography className="text-lg mb-1">
+                <Typography className="text-lg mb-1 text-black dark:text-gray-200">
                     Brand:
                 </Typography>
                 <input
                     type="text"
                     placeholder='Ex: E1910c...'
-                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-200 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
                     name="brand"
                     value={brand} required
                     onChange={(e) => setBrand(e.target.value)}
                 />
             </div>
             <div className="xxs:col-span-3 md:col-span-1">
-                <Typography className="text-lg mb-1">
+                <Typography className="text-lg mb-1 text-black dark:text-gray-200">
                     Code:
                 </Typography>
                 <input
                     type="text"
                     placeholder='Ex: ADM FA 00000...'
-                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-200 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
                     name="code"
                     value={code} 
                     onChange={(e) => setCode(e.target.value)}
                 />
             </div>
             <div className="xxs:col-span-3 md:col-span-1">
-                <Typography className="text-lg mb-1">
+                <Typography className="text-lg mb-1 text-black dark:text-gray-200">
                     Price:
                 </Typography>
                 <input
                 type="number"
                 placeholder='Ex: 000.00...'
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-200 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
                 name="price"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
             />
             </div>
             <div className="xxs:col-span-3 md:col-span-1">
-                <Typography className="text-lg mb-1">
+                <Typography className="text-lg mb-1 text-black dark:text-gray-200">
                     Value:
                 </Typography>
                 <input
                 type="number"
                 placeholder='Ex: 000.00...'
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-200 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
                 name="value"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
             />
             </div>
             <div className="xxs:col-span-3 md:col-span-1">
-                <Typography className="text-lg mb-1">
+                <Typography className="text-lg mb-1 text-black dark:text-gray-200">
                     Purchase Date:
                 </Typography>
                 <input
                 type="date"
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-400 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-200 text-black dark:text-gray-200 dark:focus:ring-gray-500 dark:focus:border-gray-500"
                 name="date"
                 value={date} required
                 onChange={(e) => setDate(e.target.value)}
@@ -226,13 +227,13 @@ const saveAndupdateAsset250 = (e) => {
             </div>
 
             <div className="xxs:col-span-3 md:col-span-1">
-                <Typography className="text-lg mb-1">
+                <Typography className="text-lg mb-1 text-black dark:text-gray-200">
                     User:
                 </Typography>
                 <input
                 type="text"
                 placeholder='Ex: ប្រើរួម...'
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-200 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
                 name="user"
                 value={user} 
                 onChange={(e) => setUser(e.target.value)}
@@ -240,13 +241,13 @@ const saveAndupdateAsset250 = (e) => {
             </div>
 
             <div className="xxs:col-span-3 md:col-span-1">
-                <Typography className="text-lg mb-1">
+                <Typography className="text-lg mb-1 text-black dark:text-gray-200">
                     PC Name:
                 </Typography>
                 <input
                 type="text"
                 placeholder='Ex: PC21'
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-200 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
                 name="pcname"
                 value={pcName}
                 onChange={(e) => setPcName(e.target.value)}
@@ -254,13 +255,13 @@ const saveAndupdateAsset250 = (e) => {
             </div>
 
             <div className="col-span-2">
-                <Typography className="text-lg mb-1">
+                <Typography className="text-lg mb-1 text-black dark:text-gray-200">
                     Other:
                 </Typography>
                 <input
                 type="text"
                 placeholder='Ex: ប្រើរួម...'
-                className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-200 text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
                 name="other"
                 value={other}
                 onChange={(e) => setOther(e.target.value)}
@@ -268,10 +269,10 @@ const saveAndupdateAsset250 = (e) => {
             </div>
 
             <div className="xxs:col-span-3 md:col-span-1">
-                <Typography className="text-lg mb-1">
+                <Typography className="text-lg mb-1 text-black dark:text-gray-200">
                     Condition:
                 </Typography>
-                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
+                <select className='w-full text-black dark:text-gray-200 bg-gray-50 dark:bg-gray-500 border border-gray-400 dark:focus:ring-gray-500 dark:focus:border-gray-500 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                     value={condition}
                     onChange={(e) => setCondition(e.target.value)}
                 >
@@ -283,10 +284,10 @@ const saveAndupdateAsset250 = (e) => {
             </div>
 
             <div className="xxs:col-span-3 md:col-span-1">
-                <Typography className="text-lg mb-1">
+                <Typography className="text-lg mb-1 text-black dark:text-gray-200">
                     Type:
                 </Typography>
-                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
+                <select className='w-full text-black dark:text-gray-200 bg-gray-50 dark:bg-gray-500 border border-gray-400 dark:focus:ring-gray-500 dark:focus:border-gray-500 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                     value={type}
                     onChange={(e) => setType(e.target.value)}
                 >
@@ -298,10 +299,10 @@ const saveAndupdateAsset250 = (e) => {
             </div>
 
             <div className="xxs:col-span-3 md:col-span-1">
-                <Typography className="text-lg mb-1">
+                <Typography className="text-lg mb-1 text-black dark:text-gray-200">
                     Office:
                 </Typography>
-                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
+                <select className='w-full text-black dark:text-gray-200 bg-gray-50 dark:bg-gray-500 border border-gray-400 dark:focus:ring-gray-500 dark:focus:border-gray-500 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                     value={office}
                     onChange={(e) => setOffice(e.target.value)}
                 >
@@ -326,10 +327,10 @@ const saveAndupdateAsset250 = (e) => {
             </div>
 
             <div className="xxs:col-span-3 md:col-span-1">
-                <Typography className="text-lg mb-1">
+                <Typography className="text-lg mb-1 text-black dark:text-gray-200">
                     Department:
                 </Typography>
-                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
+                <select className='w-full text-black dark:text-gray-200 bg-gray-50 dark:bg-gray-500 border border-gray-400 dark:focus:ring-gray-500 dark:focus:border-gray-500 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                     value={department}
                     onChange={(e) => setDepartment(e.target.value)}
                 >
@@ -347,10 +348,10 @@ const saveAndupdateAsset250 = (e) => {
             </div>
 
             <div className="xxs:col-span-3 md:col-span-1">
-                <Typography className="text-lg mb-1">
+                <Typography className="text-lg mb-1 text-black dark:text-gray-200">
                     Status:
                 </Typography>
-                <select className='w-full text-black bg-gray-50 border border-gray-400 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
+                <select className='w-full text-black dark:text-gray-200 bg-gray-50 dark:bg-gray-500 border border-gray-400 dark:focus:ring-gray-500 dark:focus:border-gray-500 font-medium rounded-lg md:text-md xxs:text-xs xxs:h-10'
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}
                 >
@@ -360,11 +361,20 @@ const saveAndupdateAsset250 = (e) => {
                 </select>
             </div>
             
-            <div className="flex xxs:justify-between md:justify-start align-middle col-span-3">
-                <button onClick= {(e) => saveAndupdateAsset250(e)} className='w-28 mt-7 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 rounded-lg  text-sm px-5 py-2.5 me-2 mb-2 '>
+            <div className="flex xxs:justify-between md:justify-start align-middle col-span-3 mt-5">
+                <Button className='text-black dark:text-gray-200 text-sm xxs:w-32 md:w-20 mb-2' 
+                    href='/add-asset250'
+                    onClick={(e) => saveAndupdateAsset250(e)}
+                >
+                    <HiSave className="mr-2 h-5 w-5" />
                     Save
-                </button>
-                <Link to={`/asset250`} className='w-28 mt-5 focus:outline-none text-white bg-red-500 hover:bg-red-800 font-medium rounded-lg text-center self-center text-sm px-5 py-2.5'>Cancel</Link>
+                </Button>
+                <Button className='text-black dark:text-gray-200 text-sm xxs:w-32 md:w-20 mb-2' 
+                    href='/asset250'
+                >
+                    <HiArrowCircleLeft className="mr-2 h-5 w-5" />
+                    Cancel
+                </Button>
             </div>
         </form>
     </div>

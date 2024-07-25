@@ -1,12 +1,12 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
 
-const TASK_BASE_REST_API_URL = 'http://192.168.1.94:3308/api/task'
+const TASK_BASE_REST_API_URL = 'http://192.168.137.14:3308/api/task'
 
 class TaskService {
     
     // Task
-    getAlTask() {
+    getAllTask() {
         return axios.get(TASK_BASE_REST_API_URL)
     }
 

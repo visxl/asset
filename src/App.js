@@ -9,7 +9,6 @@ import Customer from './components/Main/Customer';
 import AddCustomer from './components/Create And Edit/AddCustomer';
 import Users from './components/Main/Users';
 import UserSetting from './components/Main/UserSetting';
-import UserProfile from './components/Main/UserProfile';
 import AssetDetail from './components/View/AssetDetail';
 import Asset250Detail from './components/View/Asset250Detail';
 import AssetReport from './components/Report/AssetReport';
@@ -20,18 +19,22 @@ import Task from './components/Main/Task';
 import AddTask from './components/Create And Edit/AddTask';
 import UserReport from './components/Report/UserReport';
 import Supplier from './components/Main/Supplier';
-import SupplierDetail from './components/View/SupplierDetail';
-import Sidebar from './components/shared/Sidebar'
+import Sidebar from './components/shared/Sidebar';
 import AddSupplier from './components/Create And Edit/AddSupplier';
+import TaskReport from './components/Report/TaskReport';
+import UserProfile from './components/Main/UserProfile';
+import SupplierReport from './components/Report/SupplierReport';
 
 function App() {
   return (
     <Router>
-      <Routes >
+      <Routes>
         <Route path='test' element={<Sidebar />} />
         <Route path='/login' element={<Login />}/>
         <Route path='asset/report' element={<AssetReport/>}/>
         <Route path='asset250/report' element={<Asset250Report/>}/>
+        
+        <Route path='task/report' element={<TaskReport/>}/>
         <Route path='user/report' element={<UserReport/>}/>
         
         <Route path='/' element={<Layout />}>
@@ -49,7 +52,9 @@ function App() {
 
           <Route path='supplier' element={<Supplier />}/>
           <Route path='add-supplier' element={<AddSupplier/>}/>
-          <Route path='supplier/view/:id' element={<SupplierDetail/>}/>
+          <Route path='edit-supplier/:id' element={<AddSupplier/>}/>
+          <Route path='supplier/report' element={<SupplierReport/>}/>
+          
 
           <Route path='asset250' element={<Asset250 />}/>
           <Route path='add-asset250' element={<AddAsset250 />}/>

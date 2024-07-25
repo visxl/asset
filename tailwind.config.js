@@ -5,18 +5,20 @@ module.exports = {
   ,"node_modules/flowbite-react/lib/esm/**/*.js",
   "./node_modules/flowbite/**/*.js"],
   theme: {
-    screens: {
-      'xxs': '375px',
-      // 'xxs-flip': '540',
-      'sm': '750px',
-      'md': '1200px'
+    extend: {
+      screens: {
+        'xxs': '375px',
+        md: '640px'
+      },
     },
-    extend: {},
   },
   plugins: [
     require('flowbite/plugin')({
         charts: true,
     }),
+    require('postcss-import'),
+    require('tailwindcss'),
+    require('autoprefixer'),
 
 
   ]

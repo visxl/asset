@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'sheetjs-style';
 import PropTypes from 'prop-types';
+import { Button } from 'flowbite-react';
+import { HiDownload } from 'react-icons/hi';
 
 export const ExportAsset = ({ fileName }) => {
   const [excelData, setExcelData] = useState([]);
@@ -39,11 +41,12 @@ export const ExportAsset = ({ fileName }) => {
   };
 
   return (
-      <button content="Excel Export" className='xxs:w-full md:w-32 focus:outline-none text-white bg-blue-700 hover:bg-blue-300 font-medium rounded-lg text-xs px-2 py-2.5 md:me-2 sm:me-2 mb-2 '
+      <Button content="Excel Export" className='text-black dark:text-gray-200 text-sm xxs:w-full md:w-36 mb-2 mr-2 dark:focus:ring-gray-500 dark:focus:border-gray-500 hover:bg-gray-200 dark:hover:bg-gray-900'
         onClick={exportToExcel}
       >
+        <HiDownload className='mr-2 w-5 h-5'/>
         Export CSV
-      </button>
+      </Button>
   );
 }; 
 

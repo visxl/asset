@@ -1,8 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { Card, Typography } from '@material-tailwind/react';
+import { Button } from 'flowbite-react';
 import React, { useState } from 'react';
+import { HiArrowCircleRight, HiLogin } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import LOGO from "../asset/Logo.png"
 
 const Login = () => {
   const [engName, setEngName] = useState('');
@@ -58,19 +61,23 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <Card className="flex">
-        <Typography className='text-center text-2xl font-bold text-black mt-5'>
-          SignIn
-        </Typography>
-        <form className="w-96 self-center p-6" onSubmit={handleLogin}>
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-200">
+      <div className="bg-white rounded-2xl">
+        <div className='flex justify-center pt-5'>
+          <img src={LOGO} alt='logo' className='w-64'/>
+          {/* <Typography className='text-center text-2xl font-bold text-black mt-5'>
+            SignIn
+          </Typography> */}
+        </div>
+        
+        <form className="w-full self-center p-6" onSubmit={handleLogin}>
           <div className="mb-5">
             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
             <input
               type="text"
               id="email"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="name"
+              className="bg-gray-50 border w-96 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Username"
               value={engName}
               onChange={(e) => setEngName(e.target.value)}
             />
@@ -82,7 +89,7 @@ const Login = () => {
               type="password"
               id="password"
               placeholder='***'
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -94,9 +101,15 @@ const Login = () => {
             </div>
             <label htmlFor="remember" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
           </div>
-          <button type="submit" value="login" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+          <Button 
+            type="submit" 
+            value="login" 
+            className="text-black text-sm w-full mb-2 focus:ring-gray-600 hover:bg-gray-200" 
+          >
+            <span>Sign In</span><HiArrowCircleRight className='w-5 h-5 ml-3'/>
+          </Button>
         </form>
-      </Card>
+      </div>
     </div>
   );
 };

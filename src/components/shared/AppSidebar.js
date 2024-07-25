@@ -1,24 +1,28 @@
 import React, { useState } from 'react';
 import { Button, Drawer, Sidebar } from 'flowbite-react';
-import LOGO from '../asset/Banner.jpg';
-import { HiArrowLeft,HiChartPie, HiDotsHorizontal, HiCog, HiUser, HiViewList } from 'react-icons/hi';
+import LOGO from '../asset/Logo.png'
+import { HiArrowLeft,HiChartPie, HiDotsHorizontal, HiCog, HiUser, HiViewList, HiBookOpen } from 'react-icons/hi';
 
 export default function AppSidebar() {
   
   const userId = localStorage.getItem('userId');
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = () => {
     setIsOpen(false);
   };
 
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
+
   return (
     <>
             <div className="items-center justify-center">
-                <Button onClick={() => setIsOpen(true)} className='text-black pb-2 pt-2'><HiDotsHorizontal /></Button>
+                <Button onClick={handleOpen} className='text-black dark:text-white pb-2 pt-2'><HiDotsHorizontal /></Button>
             </div>
 
-            <Drawer open={isOpen} onClose={handleClose} className='h-full'>
+            <Drawer open={isOpen} onClose={handleClose} className='h-full w-72'>
                 <div>
                   <img src={LOGO} alt='logo' className='w-56'/>
                 </div>
@@ -33,7 +37,7 @@ export default function AppSidebar() {
                                   <Sidebar.Item href={`/users/profile/${userId}`} icon={HiUser}>
                                     Profile
                                   </Sidebar.Item>
-                                  <Sidebar.Collapse  icon={HiViewList} label='Asset' className='gap-3'>
+                                  <Sidebar.Collapse  icon={HiViewList} label='Asset' className=''>
                                     <Sidebar.Item href='/asset' >
                                       Asset Over 250
                                     </Sidebar.Item>
@@ -47,21 +51,10 @@ export default function AppSidebar() {
                                       Repair List
                                     </Sidebar.Item>
                                   </Sidebar.Collapse>
-                                  {/* <Sidebar.Item href='/' icon={HiChartPie}>
-                                    Dashboard
+
+                                  <Sidebar.Item href='/task' icon={HiBookOpen}>
+                                    Task
                                   </Sidebar.Item>
-                                  <Sidebar.Item href='/' icon={HiChartPie}>
-                                    Dashboard
-                                  </Sidebar.Item>
-                                  <Sidebar.Item href='/' icon={HiChartPie}>
-                                    Dashboard
-                                  </Sidebar.Item>
-                                  <Sidebar.Item href='/' icon={HiChartPie}>
-                                    Dashboard
-                                  </Sidebar.Item>
-                                  <Sidebar.Item href='/' icon={HiChartPie}>
-                                    Dashboard
-                                  </Sidebar.Item> */}
                                 </Sidebar.ItemGroup>
 
                                 <Sidebar.ItemGroup>
