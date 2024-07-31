@@ -69,7 +69,7 @@ const getChartOptions = () => {
   
   return (
     
-<div class=" w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+<div class=" w-full bg-white rounded-lg shadow dark:bg-gray-700 p-4 md:p-6">
 
     <div class="flex justify-between items-start w-full pb-16">
         <div class="flex-col items-center">

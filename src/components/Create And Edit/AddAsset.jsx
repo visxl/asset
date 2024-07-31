@@ -1,9 +1,9 @@
 import { Typography } from '@material-tailwind/react'
 import React, { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import AssetService from '../../Service/AssetService'
 import { useEffect } from 'react'
-import { HiArrowCircleLeft, HiCheck, HiSave } from 'react-icons/hi'
+import { HiArrowCircleLeft, HiCheck, HiChevronRight, HiHome, HiSave } from 'react-icons/hi'
 import { Button } from 'flowbite-react'
 
 export const AddAsset = () => {
@@ -105,6 +105,34 @@ const saveAndupdateAsset = (e) => {
 
 return (
     <>
+        {/* <!-- Breadcrumb --> */}
+        <nav className="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+            <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                <li className="inline-flex items-center">
+                    <Link to="/" className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                        <HiHome className='mr-2'/>
+                        Home
+                    </Link>
+                </li>
+                <li>
+                    <div className="flex items-center">
+                        <HiChevronRight className='w-5 h-5 text-gray-700 dark:text-gray-400'/>
+                            <Link to="/asset" className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                                Asset
+                            </Link>
+                        </div>
+                    </li>
+                <li aria-current="page">
+                    <div className="flex items-center">
+                        <HiChevronRight className='w-5 h-5 text-gray-700 dark:text-gray-400'/>
+                        <Link to="/add-asset" className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                            Create
+                        </Link>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+        {/* <!-- End Breadcrumb --> */}
         {showSuccessToast && (
             <div className="fixed top-4 right-4 z-50">
                 <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
@@ -125,7 +153,7 @@ return (
                 {
                     title()
                 }
-            <form className="xxs:w-full md:p-5 md:w-screen h-full grid xxs:grid-cols-1 md:grid-cols-3 gap-3">
+            <form className="xxs:w-full md:w-full h-full grid xxs:grid-cols-1 md:grid-cols-3 gap-3">
                 <div className="xxs:col-span-3 md:col-span-1">
                     <Typography className="md:text-lg xxs:text-xs mb-1 text-black dark:text-gray-200">
                         Name:
@@ -379,13 +407,13 @@ return (
                 </div>              
 
                 <div className="flex xxs:justify-between md:justify-start align-middle col-span-3 mt-5">
-                    <Button className='text-black dark:text-gray-200 text-sm xxs:w-32 md:w-20 mb-2' href='/add-asset'
+                    <Button className='text-black dark:text-gray-200 text-sm w-32 mb-2 mr-2' href='/add-asset'
                         onClick={(e) => saveAndupdateAsset(e)}
                     >
                         <HiSave className="mr-2 h-5 w-5" />
                         Save
                     </Button>
-                    <Button className='text-black dark:text-gray-200 text-sm xxs:w-32 md:w-20 mb-2' href='/asset'>
+                    <Button className='text-black dark:text-gray-200 text-sm w-32 mb-2' href='/asset'>
                         <HiArrowCircleLeft className="mr-2 h-5 w-5" />
                         Cancel
                     </Button>

@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Card, CardBody, CardFooter, Typography } from '@material-tailwind/react';
-import { Link } from 'react-router-dom';
 import { useEffect, useState, useCallback } from 'react';
 import Line from '../shared/Line';
 import Pie from '../shared/Pie';
@@ -45,7 +44,8 @@ export default function Dashboard() {
   }, [currentPage, fetchData]);
 
   const renderCard = (title, list, totalItems, link) => (
-    <Card className=" xxs:w-80 md:w-45 p-2 flex flex-wrap justify-start gap-2 shadow-lg dark:bg-gray-700">
+    <Card 
+      className=" xxs:w-full md:w-56 md:flex md:flex-wrap md:justify-start gap-2 shadow-lg dark:bg-gray-700">
       <CardBody className='text-center'>
         <Typography variant="h5" color="blue-gray" className="mb-2 dark:text-gray-200">
           {title}
@@ -58,9 +58,9 @@ export default function Dashboard() {
         </Typography>
       </CardBody>
       <CardFooter className="pt-0 mt-5 text-center dark:text-gray-200">
-        <Button to={link} 
+        <Button href={link} 
           className="w-full focus:outline-none text-black dark:text-gray-200 bg-gray-50 dark:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-500 dark:focus:ring-gray-500 dark:focus:border-gray-500">
-            See More<HiArrowSmRight className='w-5 h-5 ml-2 '/> 
+            More<HiArrowSmRight className='w-5 h-5 ml-2 '/> 
         </Button>
       </CardFooter>
     </Card>
@@ -68,13 +68,13 @@ export default function Dashboard() {
 
   return (
     <body>
-      <section className="p-5">
+      <section className="p-3">
         <Typography variant="h4" color="blue-gray" className="mb-5 dark:text-gray-200">
           Quick Links
         </Typography>
         <div className="flex flex-wrap gap-3">
           {renderCard("Asset", "Asset", totalItems, "/asset")}
-          {renderCard("Asset Under 250", "Asset Under 250", totalItems250, "/asset250")}
+          {renderCard("Asset 250", "Asset 250", totalItems250, "/asset250")}
           {renderCard("Department", "Department", totalItems, "/department")}
           {renderCard("User", "User", totalItemsUser, "/users")}
           {renderCard("Customer", "Customer", totalItemsCustomer, "/customer")}
@@ -84,11 +84,11 @@ export default function Dashboard() {
           <Typography variant="h4" color="blue-gray" className="mb-5 mt-10 text-2xl dark:text-gray-200">
             Charts
           </Typography>
-          <div className="xxs:flex xxs:flex-wrap md:w-full md:grid md:grid-cols-2 md:gap-3 md:justify-evenly md:align-middle">
-            <div className="xxs:w-80 md:w-full">
+          <div className="xxs:flex xxs:flex-wrap md:w-full md:grid md:grid-cols-2 md:gap-3 md:justify-between md:align-middle">
+            <div className="w-full">
               <Line />
             </div>
-            <div className="xxs:w-80 md:w-full">
+            <div className="w-full">
               <Pie />
             </div>
           </div>

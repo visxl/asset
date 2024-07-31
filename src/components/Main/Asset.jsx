@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import AssetService from '../../Service/AssetService';
 import { ExportAsset } from '../Export Function/ExportAsset';
 import { Button, Dropdown, Select } from 'flowbite-react';
-import { HiChevronLeft, HiChevronRight, HiFilter, HiOutlineEye, HiOutlinePencilAlt, HiOutlineTrash, HiPlus, HiSearch, HiX } from 'react-icons/hi';
+import { HiChevronLeft, HiChevronRight, HiFilter, HiHome, HiOutlineEye, HiOutlinePencilAlt, HiOutlineTrash, HiPlus, HiSearch, HiX } from 'react-icons/hi';
 
 const TABLE_HEAD = [
     "Id", 
@@ -24,7 +24,7 @@ const TABLE_HEAD = [
     "Status", 
     "Action"
 ];
-const classes = "text-sm p-1 hover:bg-gray-300 dark:hover:bg-gray-500";
+const classes = "text-sm p-1 xxs:w-20 md:h-14 xxs:w-auto md:w-44 hover:bg-gray-300 dark:hover:bg-gray-500";
 
 const Asset = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -102,7 +102,7 @@ const Asset = () => {
 
     const renderPageNumbers = () => {
         const pageNumbers = []
-        const visiblePages = 2
+        const visiblePages = 1
         
         for (let i = 1; i <= visiblePages; i++) {
             pageNumbers.push(i);
@@ -110,21 +110,21 @@ const Asset = () => {
           if (currentPage > visiblePages + 1) {
             pageNumbers.push('...');
           }
-          for (let i = Math.max(visiblePages + 1, currentPage - 1); i <= Math.min(totalPages - visiblePages, currentPage + 1); i++) {
+          for (let i = Math.max(visiblePages + 1, currentPage - 1); i <= Math.min(currentPage + 1); i++) {
             pageNumbers.push(i);
           }
-          if (currentPage < totalPages - visiblePages) {
-            pageNumbers.push('...');
-          }
-          for (let i = totalPages - visiblePages + 1; i <= totalPages; i++) {
-            if (i > visiblePages) { 
-              pageNumbers.push(i);
-            }
-          }
+        //   if (currentPage < totalPages - visiblePages) {
+        //     pageNumbers.push('...');
+        //   }
+        //   for (let i = totalPages - visiblePages + 1; i <= totalPages; i++) {
+        //     if (i > visiblePages) { 
+        //       pageNumbers.push(i);
+        //     }
+        //   }
         
           return pageNumbers.map((number, index) => (
             <li key={index}>
-              {number === '...' ? (
+              {number === '.' ? (
                 <span className="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400">...</span>
               ) : (
                 <Link
@@ -164,22 +164,48 @@ const Asset = () => {
 
     if (loading) {
         return (
-            <Typography className='h-screen mt-10 text-2xl dark:text-gray-200'> 
-                Loading . . . 
-            </Typography>
+            <div className='flex justify-center'>
+                <Typography className='h-screen mt-10 text-2xl dark:text-gray-200'> 
+                    Loading . . . 
+                </Typography>
+            </div>
         )
     }
 
     if (error) {
         return (
-            <Typography className='h-screen mt-10 text-2xl dark:text-gray-200'> 
-                Error 404
-            </Typography>
+            <div className='flex justify-center'>
+                <Typography className='h-screen mt-10 text-2xl dark:text-gray-200'> 
+                    Error
+                </Typography>
+            </div>
+            
         )
     }
 
     return (
         <div>
+            {/* <!-- Breadcrumb --> */}
+            <nav className="flex px-5 py-3 mt-10 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+                <ol className="inline-flex items-center space-x-1 md:space-x-2">
+                    <li className="inline-flex items-center">
+                        <Link to="/" className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                            <HiHome className='mr-2'/>
+                            Home
+                        </Link>
+                    </li>
+                    <li>
+                        <div className="flex items-center">
+                            <HiChevronRight className='w-5 h-5 text-gray-700 dark:text-gray-400'/>
+                            <Link to="#" className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                                Asset
+                            </Link>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+            {/* <!-- End Breadcrumb --> */}
+
             {showDeleteToast && (
                 <div className="fixed top-4 right-4 z-50">
                     <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200">
@@ -189,9 +215,9 @@ const Asset = () => {
                 </div>
             )}
             <section className='mt-5 bg-white dark:bg-gray-700 relative shadow-2xl rounded-2xl overflow-hidden'>
-                <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-2">
+                <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-3">
                     <div className='w-auto xxs:max-w-full xs:max-w-96 sm:max-w-full xl:max-w-full'>
-                        <div className="w-full">
+                        <header className="w-full">
                             <Typography className='text-left font-bold text-xl dark:text-gray-200'>
                                 List Asset Over 250
                             </Typography>
@@ -201,9 +227,9 @@ const Asset = () => {
                             <div className='mt-10 flex flex-col'>
                                 <div className='flex md:flex-row xxs:flex-col items-start'>
                                     <div className=' items-center xxs:w-full md:max-w-sm'>
-                                        <label for="simple-search" class="sr-only">Search</label>
-                                        <div class="relative w-full mb-2">
-                                            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none mr-4">
+                                        <label for="simple-search" className="sr-only">Search</label>
+                                        <div className="relative w-full mb-2">
+                                            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none mr-4">
                                                 <HiSearch className='text-black dark:text-gray-200'/>
                                             </div>
                                             <input type="text" id="simple-search" value={searchCode} onChange={handleSearchCodeInputChange} 
@@ -216,6 +242,7 @@ const Asset = () => {
 
                             {/* Function Button */}
                             <div className='xxs:w-full flex md:flex-row xxs:flex-col md:justify-start xxs:justify-evenly '>
+                                
                                 <div className="flex xxs:flex-col md:flex-row">
                                     <div className="flex xxs:flex-row md:mr-2">
                                         <Button className='text-black dark:text-gray-200 dark:focus:ring-gray-500 dark:focus:border-gray-500 text-sm xxs:w-full md:w-36 mb-2 mr-2 hover:bg-gray-200 dark:hover:bg-gray-900' href='/add-asset'>
@@ -283,10 +310,10 @@ const Asset = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </header>
                         {/* End Function Button */}
 
-                        <div className="overflow-x-auto ">
+                        <main className="overflow-x-auto ">
                             <table className="overflow-x-auto text-black bg-white dark:bg-gray-700 dark:text-gray-200">
                                 <thead>
                                     <tr > 
@@ -310,67 +337,67 @@ const Asset = () => {
                                             return ( 
                                                 <tr key={assets.id} className={classes}>
                                                     <td className={classes}>
-                                                        <Typography variant="small" color="blue-gray" className="text-xs font-normal">
+                                                        <Typography variant="small" color="blue-gray" className="text-sm font-normal">
                                                             {assets.id}
                                                         </Typography>
                                                     </td>
                                                     {/* <td className={classes}>
-                                                        <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                             {assets.name}
                                                         </Typography>
                                                     </td> */}
                                                     <td className={classes}>
-                                                        <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                             {assets.assetName}
                                                         </Typography>
                                                     </td>
                                                     <td className={classes}>
-                                                        <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                             {assets.model}
                                                         </Typography>
                                                     </td>
                                                     <td className={classes}>
-                                                        <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                             {assets.brand}
                                                         </Typography>
                                                     </td>
                                                     <td className={classes}>
-                                                        <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                             {assets.code}
                                                         </Typography>
                                                     </td>
                                                     <td className={classes}>
-                                                        <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                             {assets.price}
                                                         </Typography>
                                                     </td>
                                                     {/* <td className={classes}>
-                                                        <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                             {assets.value}
                                                         </Typography>
                                                     </td> */}
                                                     <td className={classes}>
-                                                        <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                             {assets.date}
                                                         </Typography>
                                                     </td>
                                                     <td className={classes}>
-                                                        <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                             {assets.condition}
                                                         </Typography>
                                                     </td>
                                                     <td className={classes}>
-                                                        <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                             {assets.user}
                                                         </Typography>
                                                     </td>
                                                     <td className={classes}>
-                                                        <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                             {assets.other}
                                                         </Typography>
                                                     </td>
                                                     <td className={classes}>
-                                                        <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                             {assets.office}
                                                         </Typography>
                                                     </td>
@@ -378,7 +405,7 @@ const Asset = () => {
                                                         <Typography
                                                             variant="small"
                                                             color="blue-gray"
-                                                            className="font-normal text-xs "
+                                                            className="font-normal text-sm "
                                                             style={{
                                                                 padding: '5px',
                                                                 borderRadius: '4px',
@@ -401,11 +428,11 @@ const Asset = () => {
                                     )} 
                                 </tbody>
                             </table>
-                        </div>
+                        </main>
                         <Typography className='mt-5 mb-5 text-black dark:text-gray-200'>
                             Total Asset: {totalItems}
                         </Typography>
-                        <nav className="flex flex-col items-center justify-between space-y-3 md:flex-row md:items-start md:space-y-0" aria-label="Table navigation">
+                        <footer className="flex flex-col items-center justify-between space-y-3 md:flex-row md:items-start md:space-y-0" aria-label="Table navigation">
                             <ul className="inline-flex items-stretch -space-x-px">
                                 <li>
                                     <Link
@@ -427,7 +454,7 @@ const Asset = () => {
                                     </Link>
                                 </li>
                             </ul>
-                        </nav>
+                        </footer>
                     </div>
                 </div>
             </section>

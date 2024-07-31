@@ -8,7 +8,7 @@ import { HiCalendar, HiChevronLeft, HiChevronRight, HiOutlineEye, HiOutlinePenci
 
 // Table thead
 const TABLE_HEAD = ["ID", "Problem", "Solution", "Request By", "Date", "From time", "To Time", "Status", "Action"];
-const classes = "border border-solid text-sm p-1 hover:bg-gray-300 dark:hover:bg-gray-500";
+const classes = "text-sm p-1 hover:bg-gray-300 dark:hover:bg-gray-500";
 
 // Fetch data from backend
 const Task = () => {
@@ -165,14 +165,14 @@ const Task = () => {
                                             <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                                 <HiCalendar className='text-black dark:text-gray-200'/>
                                             </div>
-                                            <input Datepicker type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500" 
+                                            <input Datepicker type="text" className="dark:text-gray-200 bg-gray-50 border dark:bg-gray-600 border-gray-400 dark:focus:ring-gray-500 dark:focus:border-gray-500 text-sm rounded-lg block w-80 xxs:w-full ps-10 h-9 " 
                                                 placeholder="Search date" 
                                             />
                                         </div>
                                         {/* Search end */}
                                         {/* Function Button */}
-                                        <div className='flex md:flex-col xxs:justify-between w-full xxs:gap-2 md:gap-0 mt-2'>
-                                            <Button className='text-black dark:text-gray-200 text-sm xxs:w-full md:w-36 mb-2' href='/add-task'>
+                                        <div className='flex md:flex-row xxs:justify-between md:justify-start w-full xxs:gap-2 md:gap-0 mt-2'>
+                                            <Button className='text-black dark:text-gray-200 text-sm xxs:w-full md:w-36 mb-2 mr-2' href='/add-task'>
                                                 <HiPlus className="mr-2 h-5 w-5" />
                                                 Create
                                             </Button>
@@ -208,37 +208,37 @@ const Task = () => {
                                     {task && task.map((task) => (
                                         <tr key={task.id} className={classes}>
                                             <td className={classes}>
-                                                <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                     {task.id}
                                                 </Typography>
                                             </td>
                                             <td className={classes}>
-                                                <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                     {task.problem}
                                                 </Typography>
                                             </td>
                                             <td className={classes}>
-                                                <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                     {task.solution}
                                                 </Typography>
                                             </td>
                                             <td className={classes}>
-                                                <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                     {task.reqBy}
                                                 </Typography>
                                             </td>
                                             <td className={classes}>
-                                                <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                     {formatDate(task.date)}
                                                 </Typography>
                                             </td>
                                             <td className={classes}>
-                                                <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                     {formatTime(task.fromTime)}
                                                 </Typography>
                                             </td>
                                             <td className={classes}>
-                                                <Typography variant="small" color="blue-gray" className="font-normal text-xs">
+                                                <Typography variant="small" color="blue-gray" className="font-normal text-sm">
                                                     {formatTime(task.toTime)}
                                                 </Typography>
                                             </td>
@@ -246,7 +246,7 @@ const Task = () => {
                                                 <Typography
                                                     variant="small"
                                                     color="blue-gray"
-                                                    className="font-normal text-xs"
+                                                    className="font-normal text-sm"
                                                     style=
                                                     {{
                                                         padding: '5px',
@@ -257,7 +257,7 @@ const Task = () => {
                                                     {task.status ? 'Complete' : 'Pending'}
                                                 </Typography>
                                             </td>
-                                            <td className="border border-solid text-sm hover:bg-gray-500">
+                                            <td className="text-sm hover:bg-gray-500">
                                                 <Dropdown label='Action' color='black' backgroundColor='gray' size="sm">
                                                     <Dropdown.Item href={`/task/view/${task.id}`} className='w-28'><HiOutlineEye className="mr-2 h-4 w-4" />View</Dropdown.Item>
                                                     <Dropdown.Item href={`/edit-task/${task.id}`} className='w-28'><HiOutlinePencilAlt className="mr-2 h-4 w-4" />Edit</Dropdown.Item>

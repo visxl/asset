@@ -4,14 +4,14 @@ import { Typography } from "@material-tailwind/react";
 import { Link } from 'react-router-dom';
 import Asset250Service from '../../Service/Asset250Service';
 import { ExportAsset250 } from '../Export Function/ExportAsset250';
-import { HiChevronLeft, HiChevronRight, HiFilter, HiOutlineEye, HiOutlinePencilAlt, HiOutlineTrash, HiPlus, HiSearch, HiX } from 'react-icons/hi';
+import { HiChevronLeft, HiChevronRight, HiFilter, HiHome, HiOutlineEye, HiOutlinePencilAlt, HiOutlineTrash, HiPlus, HiSearch, HiX } from 'react-icons/hi';
 import { Button, Dropdown, Select } from 'flowbite-react';
 
 
 // Table thead
 const TABLE_HEAD = ["Id", 
     "Name", 
-    "Asset Name", 
+    // "Asset Name", 
     "Model", 
     "Brand", 
     "Code", 
@@ -23,7 +23,7 @@ const TABLE_HEAD = ["Id",
     "Office", 
     "Status", 
     "Action"];
-const classes = "border border-solid text-sm p-1 hover:bg-gray-300 dark:hover:bg-gray-500";
+const classes = "w-48 text-sm hover:bg-gray-300 dark:hover:bg-gray-500";
 
     const Asset250 = () => {
         const [currentPage, setCurrentPage] = useState(1);
@@ -155,6 +155,34 @@ const classes = "border border-solid text-sm p-1 hover:bg-gray-300 dark:hover:bg
 
     return (
         <div>
+            {/* <!-- Breadcrumb --> */}
+            <nav className="flex px-5 py-3 mb-10 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+                <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li className="inline-flex items-center">
+                        <Link to="/" className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                            <HiHome className='mr-2'/>
+                            Home
+                        </Link>
+                    </li>
+                    <li>
+                        <div className="flex items-center">
+                            <HiChevronRight className='w-5 h-5 text-gray-700 dark:text-gray-400'/>
+                            <Link to="/asset250" className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                                Asset Under 250
+                            </Link>
+                        </div>
+                    </li>
+                    {/* <li aria-current="page">
+                        <div className="flex items-center">
+                            <HiChevronRight className='w-5 h-5 text-gray-700 dark:text-gray-400'/>
+                            <Link to="/asset250/report" className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                                Preview
+                            </Link>
+                        </div>
+                    </li> */}
+                </ol>
+            </nav>
+            {/* <!-- End Breadcrumb --> */}
             {showDeleteToast && (
                 <div className="fixed top-4 right-4 z-50">
                     <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200">
@@ -168,7 +196,7 @@ const classes = "border border-solid text-sm p-1 hover:bg-gray-300 dark:hover:bg
                     <div className='w-auto xxs:max-w-full xs:max-w-96 sm:max-w-full xl:max-w-full'>
                         <div className="w-full">
                             <Typography className='text-left font-bold text-xl dark:text-gray-200'>
-                                List Asset Over 250
+                                List Asset Under 250
                             </Typography>
                                     
                             {error && <div className='mt-5 text-red-700'>Error: {error}</div>}
@@ -193,11 +221,11 @@ const classes = "border border-solid text-sm p-1 hover:bg-gray-300 dark:hover:bg
                             <div className='xxs:w-full flex md:flex-row xxs:flex-col md:justify-start xxs:justify-evenly '>
                                 <div className="flex xxs:flex-col md:flex-row">
                                     <div className="flex xxs:flex-row md:mr-2">
-                                        <Button className='text-black dark:text-gray-200 dark:focus:ring-gray-500 dark:focus:border-gray-500 text-sm xxs:w-full md:w-36 mb-2 mr-2 hover:bg-gray-200 dark:hover:bg-gray-900' href='/add-asset'>
+                                        <Button className='text-black dark:text-gray-200 dark:focus:ring-gray-500 dark:focus:border-gray-500 text-sm xxs:w-full md:w-36 mb-2 mr-2 hover:bg-gray-200 dark:hover:bg-gray-900' href='/add-asset250'>
                                             <HiPlus className="mr-2 h-5 w-5" />
                                                 Create
                                         </Button>
-                                        <Button className='text-black dark:text-gray-200 text-sm xxs:w-full md:w-36 mb-2 dark:focus:ring-gray-500 dark:focus:border-gray-500 hover:bg-gray-200 dark:hover:bg-gray-900' href='/asset/report'>
+                                        <Button className='text-black dark:text-gray-200 text-sm xxs:w-full md:w-36 mb-2 dark:focus:ring-gray-500 dark:focus:border-gray-500 hover:bg-gray-200 dark:hover:bg-gray-900' href='/asset250/report'>
                                             <HiOutlineEye className="mr-2 h-5 w-5" />
                                                 Preview
                                         </Button>
@@ -289,16 +317,16 @@ const classes = "border border-solid text-sm p-1 hover:bg-gray-300 dark:hover:bg
                                                             {asset250.id}
                                                         </Typography>
                                                     </td>
-                                                    {/* <td className={classes}>
+                                                    <td className={classes}>
                                                         <Typography variant="small" color="blue-gray" className="font-normal text-xs">
                                                             {asset250.name}
                                                         </Typography>
-                                                    </td> */}
-                                                    <td className={classes}>
+                                                    </td>
+                                                    {/* <td className={classes}>
                                                         <Typography variant="small" color="blue-gray" className="font-normal text-xs">
                                                             {asset250.assetName}
                                                         </Typography>
-                                                    </td>
+                                                    </td> */}
                                                     <td className={classes}>
                                                         <Typography variant="small" color="blue-gray" className="font-normal text-xs">
                                                             {asset250.model}
@@ -319,11 +347,11 @@ const classes = "border border-solid text-sm p-1 hover:bg-gray-300 dark:hover:bg
                                                             {asset250.price}
                                                         </Typography>
                                                     </td>
-                                                    {/* <td className={classes}>
+                                                    <td className={classes}>
                                                         <Typography variant="small" color="blue-gray" className="font-normal text-xs">
                                                             {asset250.value}
                                                         </Typography>
-                                                    </td> */}
+                                                    </td>
                                                     <td className={classes}>
                                                         <Typography variant="small" color="blue-gray" className="font-normal text-xs">
                                                             {asset250.date}
@@ -339,11 +367,11 @@ const classes = "border border-solid text-sm p-1 hover:bg-gray-300 dark:hover:bg
                                                             {asset250.user}
                                                         </Typography>
                                                     </td>
-                                                    <td className={classes}>
+                                                    {/* <td className={classes}>
                                                         <Typography variant="small" color="blue-gray" className="font-normal text-xs">
                                                             {asset250.other}
                                                         </Typography>
-                                                    </td>
+                                                    </td> */}
                                                     <td className={classes}>
                                                         <Typography variant="small" color="blue-gray" className="font-normal text-xs">
                                                             {asset250.office}

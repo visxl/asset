@@ -1,9 +1,9 @@
 import { Typography } from '@material-tailwind/react';
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Asset250Service from '../../Service/Asset250Service';
 import { Button } from 'flowbite-react';
-import { HiArrowCircleLeft, HiSave } from 'react-icons/hi';
+import { HiArrowCircleLeft, HiChevronRight, HiHome, HiSave } from 'react-icons/hi';
 
 
 export const AddAsset250 = () => {
@@ -101,7 +101,35 @@ const saveAndupdateAsset250 = (e) => {
     }
 
     return (
-        <div className='p-4 xxs:w-full md:w-full mt-5'>
+        <div className='xxs:w-full md:w-full'>
+            {/* <!-- Breadcrumb --> */}
+            <nav className="flex px-5 py-3 mb-5 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+                <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li className="inline-flex items-center">
+                        <Link to="/" className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                            <HiHome className='mr-2'/>
+                            Home
+                        </Link>
+                    </li>
+                    <li>
+                        <div className="flex items-center">
+                            <HiChevronRight className='w-5 h-5 text-gray-700 dark:text-gray-400'/>
+                            <Link to="/asset250" className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                                Asset Under 250
+                            </Link>
+                        </div>
+                    </li>
+                    <li aria-current="page">
+                        <div className="flex items-center">
+                            <HiChevronRight className='w-5 h-5 text-gray-700 dark:text-gray-400'/>
+                            <Link to="/add-asset250" className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                                Create
+                            </Link>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+            {/* <!-- End Breadcrumb --> */}
         {error && (
         <Typography className="text-red-500 mb-4">
           {error}
@@ -113,7 +141,7 @@ const saveAndupdateAsset250 = (e) => {
             {
                 title()
             }
-        <form className="xxs:w-80 md:p-5 md:w-screen h-full grid xxs:grid-cols-1 md:grid-cols-3 gap-3">
+        <form className="xxs:w-full md:p-5 md:w-full h-full grid xxs:grid-cols-1 md:grid-cols-3 gap-3">
             <div className="xxs:col-span-3 md:col-span-1">
                 <Typography className="text-lg mb-1 text-black dark:text-gray-200">
                     Name:
@@ -362,14 +390,14 @@ const saveAndupdateAsset250 = (e) => {
             </div>
             
             <div className="flex xxs:justify-between md:justify-start align-middle col-span-3 mt-5">
-                <Button className='text-black dark:text-gray-200 text-sm xxs:w-32 md:w-20 mb-2' 
+                <Button className='text-black dark:text-gray-200 text-sm w-32 mb-2 mr-2' 
                     href='/add-asset250'
                     onClick={(e) => saveAndupdateAsset250(e)}
                 >
                     <HiSave className="mr-2 h-5 w-5" />
                     Save
                 </Button>
-                <Button className='text-black dark:text-gray-200 text-sm xxs:w-32 md:w-20 mb-2' 
+                <Button className='text-black dark:text-gray-200 text-sm w-32 mb-2' 
                     href='/asset250'
                 >
                     <HiArrowCircleLeft className="mr-2 h-5 w-5" />

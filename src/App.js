@@ -5,8 +5,6 @@ import Asset from './components/Main/Asset';
 import AddAsset from './components/Create And Edit/AddAsset';
 import Asset250 from './components/Main/Asset250';
 import AddAsset250 from './components/Create And Edit/AddAsset250';
-import Customer from './components/Main/Customer';
-import AddCustomer from './components/Create And Edit/AddCustomer';
 import Users from './components/Main/Users';
 import UserSetting from './components/Main/UserSetting';
 import AssetDetail from './components/View/AssetDetail';
@@ -19,7 +17,6 @@ import Task from './components/Main/Task';
 import AddTask from './components/Create And Edit/AddTask';
 import UserReport from './components/Report/UserReport';
 import Supplier from './components/Main/Supplier';
-import Sidebar from './components/shared/Sidebar';
 import AddSupplier from './components/Create And Edit/AddSupplier';
 import TaskReport from './components/Report/TaskReport';
 import UserProfile from './components/Main/UserProfile';
@@ -29,11 +26,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path='test' element={<Sidebar />} />
-        <Route path='/login' element={<Login />}/>
+
+        <Route  path='/login' element={<Login />}/>
         <Route path='asset/report' element={<AssetReport/>}/>
         <Route path='asset250/report' element={<Asset250Report/>}/>
-        
         <Route path='task/report' element={<TaskReport/>}/>
         <Route path='user/report' element={<UserReport/>}/>
         
@@ -60,10 +56,6 @@ function App() {
           <Route path='add-asset250' element={<AddAsset250 />}/>
           <Route path='edit-asset250/:id' element={<AddAsset250/>}/>
           <Route path='asset250/view/:id' element={<Asset250Detail/>}/>
-
-          <Route path='customer' element={<Customer />}/>
-          <Route path='add-customer' element={<AddCustomer/>}/>
-          <Route path='edit-customer/:id' element={<AddCustomer/>}/>
 
           <Route path='task' element={<Task />}/>
           <Route path='add-task' element={<AddTask />}/>

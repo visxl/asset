@@ -100,7 +100,7 @@ const Line = () => {
         chart.render();
       }
   return (
-    <div class=" w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 mb-20">
+    <div class=" w-full bg-white rounded-lg shadow dark:bg-gray-700 p-4 mb-20">
             <div class="flex justify-between border-gray-200 border-b dark:border-gray-700 pb-3">
               <dl>
                 <dt class="text-base font-normal text-gray-500 dark:text-gray-400 pb-1">Profit</dt>

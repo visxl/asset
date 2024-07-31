@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { Typography } from "@material-tailwind/react";
 import LOGOJPG from '../asset/Banner.jpg'
 import Asset250Service from '../../Service/Asset250Service';
+import { Link } from 'react-router-dom';
+import { HiChevronRight, HiHome } from 'react-icons/hi';
 
     // Table thead
     const TABLE_HEAD = ["ID", "Name", "Model", "Brand", "Code", "Price($)", "Value", "Purchase Date", "Condition", "User", "Office","Department"];
@@ -25,6 +27,36 @@ import Asset250Service from '../../Service/Asset250Service';
     []);
 
     return (
+        <>
+        {/* <!-- Breadcrumb --> */}
+        <nav className="flex px-5 py-3 mb-10 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+                <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li className="inline-flex items-center">
+                        <Link to="/" className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                            <HiHome className='mr-2'/>
+                            Home
+                        </Link>
+                    </li>
+                    <li>
+                        <div className="flex items-center">
+                            <HiChevronRight className='w-5 h-5 text-gray-700 dark:text-gray-400'/>
+                            <Link to="/asset250" className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                                Asset Under 250
+                            </Link>
+                        </div>
+                    </li>
+                    <li aria-current="page">
+                        <div className="flex items-center">
+                            <HiChevronRight className='w-5 h-5 text-gray-700 dark:text-gray-400'/>
+                            <Link to="/asset250/report" className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                                Preview
+                            </Link>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+            {/* <!-- End Breadcrumb --> */}
+        
             <div className="relative p-5">
                 <img src={LOGOJPG} alt='logo'/>
                 <Typography className='text-center text-2xl font-semibold ' >
@@ -124,6 +156,7 @@ import Asset250Service from '../../Service/Asset250Service';
                     </tbody>
                 </table>
             </div>
+        </>
     );
 }
 
