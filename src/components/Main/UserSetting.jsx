@@ -23,7 +23,6 @@ const UserSetting = () => {
     const [startDate, setStartDate] = useState('')
     const [maritalStatus, setMaritalStatus] = useState('')
 
-
     const [skill1, setSkill1] = useState('');
     const [skill2, setSkill2] = useState('');
     const [skill3, setSkill3] = useState('');
